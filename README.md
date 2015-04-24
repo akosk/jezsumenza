@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/akosk/jezsumenza.png?label=ready&title=Ready)](https://waffle.io/akosk/jezsumenza)
 Yii 2 Basic Application Template
 ================================
 
