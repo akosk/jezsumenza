@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\ArChangeLog;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -49,6 +50,23 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
+        Yii::info('ArChangeBehavior teszt.','user');
+        $test = new \app\models\Test;
+        $behav = new \app\components\ArChangeLoggerBehavior;
+        $behav->relations=[];
+
+        $test->attachBehavior('ArChangeLoggerBehavior', $behav);
+
+        $test->name = "hello";
+        $test->value = 1;
+        $test->save();
+
+        $test->name="halló";
+        $test->value=2;
+        $test->save();
+
+        $test->delete();
+
         return $this->render('index');
     }
 

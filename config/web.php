@@ -35,6 +35,10 @@ $config = [
                     'class' => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
+                [
+                    'class' => 'yii\log\DbTarget',
+                    'levels' => ['error', 'warning', 'info'],
+                ],
             ],
         ],
         'db' => require(__DIR__ . '/db.php'),
