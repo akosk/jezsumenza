@@ -9,7 +9,8 @@ class m150422_050120_ArChangeLoggerBehavior extends Migration
     {
         $q="CREATE TABLE `ar_change_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `editor_id` int(11) NOT NULL,
+  `action_hash` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
+  `editor_id` int(11) DEFAULT NULL,
   `classname` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
   `item_id` int(11) NOT NULL,
   `property` varchar(255) COLLATE utf8_hungarian_ci NOT NULL,
@@ -19,6 +20,15 @@ class m150422_050120_ArChangeLoggerBehavior extends Migration
   PRIMARY KEY (`id`),
   KEY `editor_id` (`editor_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;";
+        $this->execute($q);
+
+        $q="CREATE TABLE `test` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `value` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_hungarian_ci;";
+
         $this->execute($q);
     }
 
