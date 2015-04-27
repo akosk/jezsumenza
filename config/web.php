@@ -6,6 +6,16 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'modules'=>[
+        'user' => [
+            'class' => 'dektrium\user\Module',
+            'enableConfirmation'=>false,
+            'admins'=>['akosk'],
+        ],
+        'rbac' => [
+            'class' => 'dektrium\rbac\Module',
+        ],
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -15,6 +25,9 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
+            'identityClass'   => 'app\models\User',
+            'enableAutoLogin' => true,
+
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
         ],
@@ -41,6 +54,24 @@ $config = [
                 ],
             ],
         ],
+
+        'authManager'          => [
+            'class'        => 'yii\rbac\DbManager',
+            'defaultRoles' => ['guest'],
+        ],
+        'urlManager'           => [
+            'enablePrettyUrl'     => true,
+            'showScriptName'      => true,
+//            'enableStrictParsing' => false,
+//            'rules'               => [
+//                '<module:\w+>/<controller:\w+>/<action:[\w-]+>/<id:\d+>' => '<module>/<controller>/<action>',
+//                '<module:\w+>/<controller:\w+>/<action:\w+>'          => '<module>/<controller>/<action>',
+//                '<controller:\w+>/<action:\w+>/<id:\d+>'              => '<controller>/<action>',
+//                '<controller:\w+>/<action:\w+>'                       => '<controller>/<action>',
+//                ''                                                    => '/site/index',
+//            ],
+        ],
+
         'db' => require(__DIR__ . '/db.php'),
     ],
     'params' => $params,
