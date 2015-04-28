@@ -11,6 +11,10 @@ $config = [
             'class' => 'dektrium\user\Module',
             'enableConfirmation'=>false,
             'admins'=>['akosk'],
+            'modelMap' => [
+                'User' => 'app\models\User',
+                'Profile' => 'app\models\Profile',
+            ],
         ],
         'rbac' => [
             'class' => 'dektrium\rbac\Module',
@@ -28,8 +32,7 @@ $config = [
             'identityClass'   => 'app\models\User',
             'enableAutoLogin' => true,
 
-            'identityClass' => 'app\models\User',
-            'enableAutoLogin' => true,
+
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',

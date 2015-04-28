@@ -3,11 +3,11 @@
 namespace app\models;
 
 use app\components\ArChangeLoggerBehavior;
-use dektrium\user\models\User as BaseUser;
+use dektrium\user\models\Profile as BaseProfile;
 use Yii;
 use yii\helpers\ArrayHelper;
 
-class User extends BaseUser
+class Profile extends BaseProfile
 {
 
     public function behaviors()
@@ -17,8 +17,11 @@ class User extends BaseUser
             parent::behaviors(), [
                 [
                     'class'   => ArChangeLoggerBehavior::className(),
-                    'logClassName' => 'felhasználó',
-                    'logNameProperty' => 'username',
+                    'primaryKey' => 'user_id',
+                    'logClassName' => 'felhasználó profil',
+                    'logNameProperty' => function(){
+                        return $this->user->username;
+                    },
                 ],
 
             ]
