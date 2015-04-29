@@ -38,6 +38,7 @@ AppAsset::register($this);
                     ['label' => 'Home', 'url' => ['/site/index']],
                     ['label' => 'Felhasználók', 'url' => ['/user/admin']],
                     ['label' => 'Rbac', 'url' => ['/rbac/role']],
+                    ['label' => 'Osztályok', 'url' => ['/school-class']],
                     Yii::$app->user->isGuest ?
                         ['label' => 'Sign in', 'url' => ['/user/security/login']] :
                         ['label' => 'Sign out (' . Yii::$app->user->identity->username . ')',

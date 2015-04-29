@@ -36,7 +36,7 @@ class m150422_050120_ArChangeLoggerBehavior extends Migration
     {
         $this->execute('DROP TABLE  ar_change_log');
 
-        return false;
+
     }
     
     /*
