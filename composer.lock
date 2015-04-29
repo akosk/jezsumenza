@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e8e6dd42c7ee30efa40b22be101a6c8c",
+    "hash": "9e74742a2bee295dc409accaa5085780",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -276,6 +276,51 @@
             "time": "2015-03-06 05:21:16"
         },
         {
+            "name": "creocoder/yii2-translateable",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/creocoder/yii2-translateable.git",
+                "reference": "7ff9d04ae629b37b6d4921e6c91efb1d74dc367d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/creocoder/yii2-translateable/zipball/7ff9d04ae629b37b6d4921e6c91efb1d74dc367d",
+                "reference": "7ff9d04ae629b37b6d4921e6c91efb1d74dc367d",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "~2.0.0"
+            },
+            "require-dev": {
+                "phpunit/dbunit": "~1.0",
+                "phpunit/phpunit": "~4.0"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "creocoder\\translateable\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Kochetov",
+                    "email": "creocoder@gmail.com"
+                }
+            ],
+            "description": "The translateable behavior for the Yii framework",
+            "keywords": [
+                "translateable",
+                "translation",
+                "yii2"
+            ],
+            "time": "2015-03-20 10:54:34"
+        },
+        {
             "name": "dektrium/yii2-rbac",
             "version": "dev-master",
             "source": {
@@ -428,6 +473,45 @@
                 "html"
             ],
             "time": "2013-11-30 08:25:19"
+        },
+        {
+            "name": "filsh/yii2-flags",
+            "version": "dev-master",
+            "target-dir": "yii/flags",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Filsh/yii2-flags.git",
+                "reference": "fe0c0ab73c4a0ccb3e49d4b59a93a8549cfed42d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Filsh/yii2-flags/zipball/fe0c0ab73c4a0ccb3e49d4b59a93a8549cfed42d",
+                "reference": "fe0c0ab73c4a0ccb3e49d4b59a93a8549cfed42d",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "yii\\flags\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Igor Maliy",
+                    "email": "imaliy.filsh@gmail.com"
+                }
+            ],
+            "description": "Flags widget for yii2 framework",
+            "keywords": [
+                "flags",
+                "widget",
+                "yii"
+            ],
+            "time": "2015-01-05 23:37:12"
         },
         {
             "name": "kartik-v/bootstrap-fileinput",
@@ -2280,7 +2364,9 @@
         "dektrium/yii2-rbac": 20,
         "kartik-v/yii2-widget-activeform": 20,
         "kartik-v/yii2-builder": 20,
-        "kartik-v/yii2-widgets": 20
+        "kartik-v/yii2-widgets": 20,
+        "creocoder/yii2-translateable": 20,
+        "filsh/yii2-flags": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
