@@ -28,6 +28,7 @@ class m150429_145706_food extends Migration
     public function down()
     {
         $this->execute('DROP TABLE  `food`');
+        $this->execute('DROP TABLE  `food_translation`');
     }
     
     /*
