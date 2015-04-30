@@ -27,4 +27,30 @@ class Profile extends BaseProfile
             ]
         );
     }
+
+    public function rules()
+    {
+        return ArrayHelper::merge(
+            parent::rules(),
+            [
+                [['dina_id'], 'string'],
+            ]
+
+
+        );
+    }
+
+    public function attributeLabels()
+    {
+        return ArrayHelper::merge(
+            parent::attributeLabels(), [
+                [
+                    'dina_id'           => \Yii::t('user', 'Dina id'),
+                ],
+
+            ]
+        );
+
+    }
+
 }
