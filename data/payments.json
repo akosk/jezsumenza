@@ -1,0 +1,34 @@
+[
+  {
+    "tanulo_dina_azonosito": "12345ABC",
+    "ev" : 2015,
+    "honap" : 4,
+    "befizetes" : "5200",
+    "jogosult_napok" : [
+      {
+        "day" : 1,
+        "status": "igen"
+      },
+      {
+        "day" : 3,
+        "status": "igen"
+      }
+    ]
+  },
+  {
+    "tanulo_dina_azonosito": "789DFGH",
+    "ev" : 2015,
+    "honap" : 4,
+    "befizetes" : "5200",
+    "jogosult_napok" : [
+      {
+        "day" : 1,
+        "status": "igen"
+      },
+      {
+        "day" : 3,
+        "status": "igen"
+      }
+    ]
+  }
+]
