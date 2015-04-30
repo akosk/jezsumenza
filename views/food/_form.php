@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Language;
 use yii\flags\Flags;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -14,45 +15,38 @@ use yii\widgets\ActiveForm;
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs text-center" role="tablist">
-        <li onclick="show('hu');" class="active"><a href="#profile" role="tab" data-toggle="tab">
-                <?=Flags::widget([
-                    'flag' => 'HU',
-                    'type' => Flags::FLAT_48,
-                    'useSprite' => false // use sprite image? default is false
-                ]); ?><br/> Magyar</a>
-        </li>
-        <li onclick="show('en');"><a href="#profile" role="tab" data-toggle="tab">
-                <?=Flags::widget([
-                    'flag' => 'GB',
-                    'type' => Flags::FLAT_48,
-                    'useSprite' => false // use sprite image? default is false
-                ]); ?><br/> Angol</a></li>
-        <li onclick="show('hu');"><a href="#messages" role="tab" data-toggle="tab">
-                <?=Flags::widget([
-                    'flag' => 'DE',
-                    'type' => Flags::FLAT_48,
-                    'useSprite' => false // use sprite image? default is false
-                ]); ?><br/> Német</a></li>
-        <li onclick="show('fr');"><a href="#settings" role="tab" data-toggle="tab">
-                <?=Flags::widget([
-                    'flag' => 'FR',
-                    'type' => Flags::FLAT_48,
-                    'useSprite' => false // use sprite image? default is false
-                ]); ?><br/> Francia</a></li>
-        <li onclick="show('hu');"><a href="#settings" role="tab" data-toggle="tab">
-                <?=Flags::widget([
-                    'flag' => 'IT',
-                    'type' => Flags::FLAT_48,
-                    'useSprite' => false // use sprite image? default is false
-                ]); ?><br/> Olasz</a></li>
+
+        <?php foreach (Language::$languages as $key => $language) { ?>
+            <li class="<?= Yii::$app->language == $language['code'] ? 'active' : '' ?>">
+                <a href="#panel-<?= $key ?>" aria-controls="home" role="tab" data-toggle="tab">
+                    <?= Flags::widget([
+                        'flag'      => $key,
+                        'type'      => Flags::FLAT_48,
+                        'useSprite' => false // use sprite image? default is false
+                    ]); ?><br/> <?= $language['name'] ?></a>
+            </li>
+        <?php } ?>
     </ul>
 
     <div class="food-form">
 
         <?php $form = ActiveForm::begin(); ?>
 
-        <?= $form->field($model->translate('de_DE'), "name")->textInput() ?>
-        <?= $form->field($model->translate('de_DE'), "description")->textarea() ?>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <?php foreach (Language::$languages as $key => $language) {
+                $code = $language['code'];
+                ?>
+
+                <div role="tabpanel" class="tab-pane <?= Yii::$app->language == $language['code'] ? 'active' : '' ?>"
+                     id="panel-<?= $key ?>">
+                    <?= $form->field($model->translate($code), "[$code]name")->textInput() ?>
+                    <?= $form->field($model->translate($code), "[$code]description")->textarea() ?>
+                </div>
+            <?php } ?>
+
+        </div>
+
 
         <?= $form->field($model, 'category')->dropDownList(['MAIN_COURSE' => 'MAIN COURSE', 'SOUP' => 'SOUP',], ['prompt' => '']) ?>
 
@@ -66,10 +60,3 @@ use yii\widgets\ActiveForm;
 
 
 </div>
-
-<script>
-    function show(lang) {
-        alert(lang);
-        console.log($('ul'));
-    }
-</script>

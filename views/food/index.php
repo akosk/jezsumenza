@@ -25,6 +25,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
+            [
+                'label'  => 'Étel',
+                'value'  => function ($data, $id, $index, $dataColumn) {
+                    return $data->translate('hu-HU')->name;
+                },
+                'format' => 'raw',
+            ],
+
             'id',
             'category',
 

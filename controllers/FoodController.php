@@ -63,6 +63,12 @@ class FoodController extends Controller
     {
         $model = new Food();
 
+        foreach (Yii::$app->request->post('FoodTranslation', []) as $language => $data) {
+            foreach ($data as $attribute => $translation) {
+                $model->translate($language)->$attribute = $translation;
+            }
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -81,6 +87,16 @@ class FoodController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+        if ($model === null) {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+
+        foreach (Yii::$app->request->post('FoodTranslation', []) as $language => $data) {
+            foreach ($data as $attribute => $translation) {
+                $model->translate($language)->$attribute = $translation;
+            }
+        }
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -113,7 +129,7 @@ class FoodController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Food::findOne($id)) !== null) {
+        if (($model = Food::find()->with('translations')->where(['id' => $id])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
