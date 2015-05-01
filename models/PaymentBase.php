@@ -11,7 +11,8 @@ use Yii;
  * @property integer $user_id
  * @property integer $year
  * @property integer $month
- * @property integer $amounth
+ * @property integer $amount
+ * @property string $create_time
  *
  * @property User $user
  */
@@ -31,8 +32,9 @@ class PaymentBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'year', 'month', 'amounth'], 'required'],
-            [['user_id', 'year', 'month', 'amounth'], 'integer']
+            [['user_id', 'year', 'month', 'amount', 'create_time'], 'required'],
+            [['user_id', 'year', 'month', 'amount'], 'integer'],
+            [['create_time'], 'safe']
         ];
     }
 
@@ -46,7 +48,8 @@ class PaymentBase extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'year' => 'Year',
             'month' => 'Month',
-            'amounth' => 'Amounth',
+            'amount' => 'Amount',
+            'create_time' => 'Create Time',
         ];
     }
 

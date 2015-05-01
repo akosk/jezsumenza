@@ -9,8 +9,9 @@ use Yii;
  *
  * @property integer $id
  * @property integer $user_id
- * @property integer $lunch_date
+ * @property string $lunch_date
  * @property string $status
+ * @property string $create_time
  *
  * @property User $user
  */
@@ -30,8 +31,9 @@ class LunchRightBase extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'lunch_date'], 'required'],
-            [['user_id', 'lunch_date'], 'integer'],
+            [['user_id', 'lunch_date', 'create_time'], 'required'],
+            [['user_id'], 'integer'],
+            [['lunch_date', 'create_time'], 'safe'],
             [['status'], 'string']
         ];
     }
@@ -46,6 +48,7 @@ class LunchRightBase extends \yii\db\ActiveRecord
             'user_id' => 'User ID',
             'lunch_date' => 'Lunch Date',
             'status' => 'Status',
+            'create_time' => 'Create Time',
         ];
     }
 
