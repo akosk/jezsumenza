@@ -10,8 +10,9 @@ class m150430_133311_payment extends Migration
 $q="CREATE TABLE `lunch_right` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) NOT NULL,
-  `lunch_date` int(11) NOT NULL,
+  `lunch_date` date NOT NULL,
   `status` enum('FULL') COLLATE utf8_hungarian_ci DEFAULT NULL,
+  `create_time` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `lunch_right_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
@@ -23,7 +24,8 @@ $q="CREATE TABLE `lunch_right` (
   `user_id` int(11) NOT NULL,
   `year` int(11) NOT NULL,
   `month` int(11) NOT NULL,
-  `amounth` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `create_time` datetime NOT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `payment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
