@@ -128,7 +128,7 @@ class ArChangeLoggerBehavior extends Behavior
         $change->action_hash = Yii::$app->getSecurity()->generateRandomString();
         $change->editor_id = \Yii::$app->user->id;
         $change->classname = get_class($owner);
-        $change->item_id = $owner->id;
+        $change->item_id = $owner->$primaryKey;
         $change->property = self::DELETED;
         $change->create_time = new Expression('NOW()');
         $change->save();

@@ -63,4 +63,35 @@ class LunchMenu extends LunchMenuBase
 
         parent::afterSave($insert, $changedAttributes);
     }
+
+    /**
+     * @param $lastMonday
+     * @param $nextSunday
+     * @return array|\yii\db\ActiveRecord[]
+     */
+    public static function getLunchMenusByDay($lastMonday, $nextSunday)
+    {
+        $lunchMenus = LunchMenu::find()->where('date BETWEEN :date1 AND :date2',
+            [
+                ':date1' => $lastMonday,
+                ':date2' => $nextSunday,
+            ])->orderBy('date')->all();
+
+        $data = array_reduce($lunchMenus, function ($carry, $item) {
+            if (!isset($carry[$item->date])) {
+                $carry[$item->date] = [];
+            }
+            $carry[$item->date][] = $item;
+            return $carry;
+        }, []);
+        return $data;
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getUsers()
+    {
+        return $this->hasMany(LunchChoice::className(), ['lunch_menu_id' => 'id']);
+    }
 }

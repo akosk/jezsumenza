@@ -41,6 +41,7 @@ AppAsset::register($this);
                     ['label' => 'Osztályok', 'url' => ['/school-class']],
                     ['label' => 'Ételek', 'url' => ['/food']],
                     ['label' => 'Ebéd menü', 'url' => ['/lunch-menu']],
+                    ['label' => 'Menü választó', 'url' => ['/lunch-choice']],
                     Yii::$app->user->isGuest ?
                         ['label' => 'Sign in', 'url' => ['/user/security/login']] :
                         ['label' => 'Sign out (' . Yii::$app->user->identity->username . ')',
