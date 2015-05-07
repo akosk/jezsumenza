@@ -35,6 +35,7 @@ class Profile extends BaseProfile
             [
                 [['dina_id'], 'string'],
                 [['school_class_id'], 'integer'],
+                [['eating_time_start', 'eating_time_end'], 'safe'],
             ]
 
         );
@@ -47,6 +48,8 @@ class Profile extends BaseProfile
                 [
                     'dina_id'         => \Yii::t('user', 'Dina id'),
                     'school_class_id' => \Yii::t('user', 'Osztály'),
+                    'eating_time_start' => 'Eating Time Start',
+                    'eating_time_end' => 'Eating Time End',
                 ],
 
             ]
