@@ -16,10 +16,10 @@ class Profile extends BaseProfile
         return ArrayHelper::merge(
             parent::behaviors(), [
                 [
-                    'class'   => ArChangeLoggerBehavior::className(),
-                    'primaryKey' => 'user_id',
-                    'logClassName' => 'felhasználó profil',
-                    'logNameProperty' => function(){
+                    'class'           => ArChangeLoggerBehavior::className(),
+                    'primaryKey'      => 'user_id',
+                    'logClassName'    => 'felhasználó profil',
+                    'logNameProperty' => function () {
                         return $this->user->username;
                     },
                 ],
@@ -34,8 +34,8 @@ class Profile extends BaseProfile
             parent::rules(),
             [
                 [['dina_id'], 'string'],
+                [['school_class_id'], 'integer'],
             ]
-
 
         );
     }
@@ -45,12 +45,11 @@ class Profile extends BaseProfile
         return ArrayHelper::merge(
             parent::attributeLabels(), [
                 [
-                    'dina_id'           => \Yii::t('user', 'Dina id'),
+                    'dina_id'         => \Yii::t('user', 'Dina id'),
+                    'school_class_id' => \Yii::t('user', 'Osztály'),
                 ],
 
             ]
         );
-
     }
-
 }
