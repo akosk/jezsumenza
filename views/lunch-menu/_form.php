@@ -43,13 +43,24 @@ echo Form::widget([
         'formFoods[0]' => [
             'type'        => Form::INPUT_WIDGET,
             'widgetClass' => '\kartik\widgets\Select2',
-            'options'     => ['data' => $foods],
+
+            'options'     => [
+                'data'    => $foods,
+                'options' => [
+                    'placeholder' => 'Válasszon ételt...',
+                ]
+            ],
             'hint'        => 'Válassz az ételek közül'
         ],
         'formFoods[1]' => [
             'type'        => Form::INPUT_WIDGET,
             'widgetClass' => '\kartik\widgets\Select2',
-            'options'     => ['data' => $foods],
+            'options'     => [
+                'data'    => $foods,
+                'options' => [
+                    'placeholder' => 'Válasszon ételt...',
+                ]
+            ],
             'hint'        => 'Válassz az ételek közül'
         ],
 

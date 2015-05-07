@@ -3,11 +3,17 @@
 namespace app\controllers;
 
 use app\models\Food;
+use app\models\LunchChoice;
 use app\models\LunchMenuFood;
+use app\models\User;
 use Yii;
 use app\models\LunchMenu;
 use yii\data\ActiveDataProvider;
+use yii\db\Expression;
+use yii\helpers\ArrayHelper;
 use yii\helpers\BaseArrayHelper;
+use yii\helpers\Json;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -27,6 +33,79 @@ class LunchMenuController extends Controller
                 ],
             ],
         ];
+    }
+
+    public function actionUsers($id)
+    {
+        $model = LunchMenu::findOne($id);
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => LunchChoice::find()->where(['lunch_menu_id' => $id])
+        ]);
+
+        return $this->render('users', [
+            'model'        => $model,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionBulkDelete($ids)
+    {
+        LunchMenu::deleteAll([
+            'id' => explode(',', $ids),
+        ]);
+
+        $this->redirect(Url::toRoute('/lunch-menu/index'));
+    }
+
+    public function actionBulkDeleteChoices($lunch_menu_id, $user_ids)
+    {
+        LunchChoice::deleteAll([
+            'user_id'       => explode(',', $user_ids),
+            'lunch_menu_id' => $lunch_menu_id,
+        ]);
+
+        $this->redirect(Url::toRoute('/lunch-menu/index'));
+    }
+
+    public function actionSearchUsers()
+    {
+        $users = User::find()
+            ->innerJoinWith(['profile'])
+            ->where('profile.name LIKE :q', [':q' => '%' . $_GET['q'] . '%'])
+            ->limit(10)
+            ->asArray()
+            ->all();
+        $data = array_reduce($users, function ($carry, $item) {
+            $carry[] = [
+                'id' => $item['id'],
+                'name' => $item['profile']['name'],
+                'username'=>$item['username']
+            ];
+            return $carry;
+        }, []);
+        $json = Json::encode($data);
+        echo $json;
+    }
+
+    public function actionAddUserToMenu($id)
+    {
+        if (isset($_POST['User'])) {
+            $lunchChoice = new LunchChoice();
+            $lunchChoice->user_id = $_POST['User']['id'];
+            $lunchChoice->lunch_menu_id = $id;
+            $lunchChoice->user_selected = 0;
+            $lunchChoice->create_time = new Expression('NOW()');
+            if ($lunchChoice->save()) {
+                $this->redirect(Url::toRoute(['/lunch-menu/users', 'id' => $id]));
+                Yii::$app->end();
+            }
+        }
+
+        $model = new User();
+        return $this->render('add_user_to_menu', [
+            'model' => $model
+        ]);
     }
 
     /**
@@ -69,11 +148,9 @@ class LunchMenuController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
 
-            $foods=BaseArrayHelper::map(Food::find()->all(),'id',function($data){
+            $foods = BaseArrayHelper::map(Food::find()->all(), 'id', function ($data) {
                 return $data->translate(Yii::$app->language)->name;
             });
-
-
 
             return $this->render('create', [
                 'model' => $model,
@@ -95,14 +172,13 @@ class LunchMenuController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
-            $foods=BaseArrayHelper::map(Food::find()->all(),'id',function($data){
+            $foods = BaseArrayHelper::map(Food::find()->all(), 'id', function ($data) {
                 return $data->translate(Yii::$app->language)->name;
             });
 
-
             return $this->render('update', [
                 'model' => $model,
-                'foods'=>$foods
+                'foods' => $foods
             ]);
         }
     }
@@ -134,5 +210,14 @@ class LunchMenuController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    public function actionDeleteSelection($user_id, $lunch_menu_id)
+    {
+        LunchChoice::deleteAll('user_id=:user_id AND lunch_menu_id=:lunch_menu_id', [
+            ':user_id'       => $user_id,
+            ':lunch_menu_id' => $lunch_menu_id,
+        ]);
+        return $this->redirect(['lunch-menu/users', 'id' => $lunch_menu_id]);
     }
 }

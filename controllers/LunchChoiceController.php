@@ -72,4 +72,5 @@ class LunchChoiceController extends \yii\web\Controller
             throw new ServerErrorHttpException('Model validation errors:' . $errors);
         }
     }
+
 }
