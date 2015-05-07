@@ -47,3 +47,4 @@ use yii\helpers\ArrayHelper;
     ]
 ]);?>
 
+<?= $form->field($profile, 'barcode') ?>

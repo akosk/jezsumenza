@@ -33,7 +33,7 @@ class Profile extends BaseProfile
         return ArrayHelper::merge(
             parent::rules(),
             [
-                [['dina_id'], 'string'],
+                [['dina_id', 'barcode'], 'string'],
                 [['school_class_id'], 'integer'],
                 [['eating_time_start', 'eating_time_end'], 'safe'],
             ]
@@ -50,6 +50,7 @@ class Profile extends BaseProfile
                     'school_class_id' => \Yii::t('user', 'Osztály'),
                     'eating_time_start' => 'Eating Time Start',
                     'eating_time_end' => 'Eating Time End',
+                    'barcode' => 'Vonalkód',
                 ],
 
             ]
