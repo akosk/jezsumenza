@@ -1,0 +1,32 @@
+<div class="row">
+    <div class="col-md-2">
+        <div>
+            <div>
+                <button ng-class="isFocused?'btn btn-success disabled':'btn btn-danger disabled'">Fókusz</button>
+            </div>
+
+            <ul>
+                <li ng-repeat="item in items  track by $index">
+                    {{item}}
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-10">
+
+        <div class="row" ng-repeat="gateEvent in dataService.getGateEvents()  track by $index">
+            <div ng-if="gateEvent.error===undefined">
+                <div class="col-md-1">{{gateEvent.time}}</div>
+                <div class="col-md-2">{{gateEvent.user_name}}</div>
+                <div class="col-md-2">{{gateEvent.barcode}}</div>
+                <div class="col-md-1">{{gateEvent.lunch_menu}}</div>
+                <div class="col-md-5">{{getFoodName(gateEvent)}}</div>
+                <div class="col-md-1">{{gateEvent.paid}}</div>
+            </div>
+            <div ng-if="gateEvent.error!==undefined">
+                <div class="col-md-12">{{gateEvent.error}}</div>
+            </div>
+
+        </div>
+    </div>
+</div>

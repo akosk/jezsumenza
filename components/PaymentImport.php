@@ -32,7 +32,7 @@ class PaymentImport extends Component
             ];
 
             foreach ($arr as $item) {
-                $profile = Profile::find()->where('dina_id=:id', [':id' => $item['tanulo_dina_azonosito']])->one();
+                $profile = Profile::find()->where('dina_id=:id', [':id' => $item['tanulo_azonosito']])->one();
                 if ($profile && strlen($profile->dina_id) > 0) {
                     $payment = Payment::find()->where('user_id=:user_id AND year=:year AND month=:month', [
                         ':user_id' => $profile->user_id,

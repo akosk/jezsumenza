@@ -5,6 +5,6 @@
 (function () {
    "use strict";
 
-   angular.module("attendance", ['ngRoute']);
+   angular.module("gate", ['ngRoute']);
 
 })();

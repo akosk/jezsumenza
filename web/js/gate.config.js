@@ -5,22 +5,28 @@
 (function () {
    "use strict";
 
-   angular.module('attendance')
-      .config(attendanceConfig);
+   angular.module('gate')
+      .config(gateConfig);
 
-   function attendanceConfig($routeProvider) {
-      var $template = $('#attendance-template').html();
+   function gateConfig($routeProvider) {
 
-      $routeProvider.when("/", {
-         controller: "AttendanceController",
-         template  : $template
+      $routeProvider.when("/gateone", {
+         controller : "GateoneController",
+         templateUrl: TEMPLATE_URL + 'gateone.html'
       });
-      $routeProvider.when("/year/:year/month/:month", {
-         controller: "AttendanceController",
-         template  : $template
+      $routeProvider.when("/gatetwo", {
+         controller : "GateoneController",
+         templateUrl: TEMPLATE_URL + 'gatetwo.html'
       });
 
-      $routeProvider.otherwise("/");
+      switch (GATE_ID) {
+         case 1:
+            $routeProvider.otherwise("/gateone");
+            break;
+         case 2:
+            $routeProvider.otherwise("/gatetwo");
+            break;
+      }
    }
 
 })();

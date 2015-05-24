@@ -56,4 +56,9 @@ class Profile extends BaseProfile
             ]
         );
     }
+
+    public function getSchoolClass()
+    {
+        return $this->hasOne(SchoolClass::className(), ['id' => 'school_class_id']);
+    }
 }

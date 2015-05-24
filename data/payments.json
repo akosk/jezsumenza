@@ -1,6 +1,6 @@
 [
   {
-    "tanulo_dina_azonosito": "12345ABC",
+    "tanulo_azonosito": "12345ABC",
     "ev" : 2015,
     "honap" : 4,
     "befizetes" : "5200",
@@ -16,7 +16,7 @@
     ]
   },
   {
-    "tanulo_dina_azonosito": "789DFGH",
+    "tanulo_azonosito": "789DFGH",
     "ev" : 2015,
     "honap" : 4,
     "befizetes" : "5200",

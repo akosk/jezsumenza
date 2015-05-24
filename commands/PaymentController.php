@@ -15,6 +15,7 @@ class PaymentController extends Controller
     {
         try {
             $json = file_get_contents($path);
+            $json=iconv('ISO-8859-2', 'UTF-8', $json);
             $result = PaymentImport::processJson($json);
         } catch (Exception $e) {
             $this->stdout("Hiba történt az importálás során.\n", Console::BG_RED);
