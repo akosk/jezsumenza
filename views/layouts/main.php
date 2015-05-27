@@ -44,6 +44,7 @@ AppAsset::register($this);
                  ['label' => 'Ebéd menü', 'url' => ['/lunch-menu']],
                  ['label' => 'Első kapu', 'url' => ['/gate/gate-one']],
                  ['label' => 'Második kapu', 'url' => ['/gate/gate-two']],
+                 ['label' => 'Napló', 'url' => ['/log']],
 
              ]
             ],

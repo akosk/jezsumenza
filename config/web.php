@@ -52,7 +52,7 @@ $config = [
                     'levels' => ['error', 'warning'],
                 ],
                 [
-                    'class' => 'yii\log\DbTarget',
+                    'class' => 'app\components\DbTarget',
                     'levels' => ['error', 'warning', 'info'],
                 ],
             ],
