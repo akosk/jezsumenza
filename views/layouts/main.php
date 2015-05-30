@@ -35,19 +35,31 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items'   => [
-            ['label' => 'Adminisztráció',
-             'items' => [
-                 ['label' => 'Felhasználók', 'url' => ['/user/admin']],
-                 ['label' => 'Rbac', 'url' => ['/rbac/role']],
-                 ['label' => 'Osztályok', 'url' => ['/school-class']],
-                 ['label' => 'Ételek', 'url' => ['/food']],
-                 ['label' => 'Ebéd menü', 'url' => ['/lunch-menu']],
-                 ['label' => 'Első kapu', 'url' => ['/gate/gate-one']],
-                 ['label' => 'Második kapu', 'url' => ['/gate/gate-two']],
-                 ['label' => 'Napló', 'url' => ['/log']],
+            [
+                'label' => 'Adminisztráció',
+                'items' => [
+                    ['label' => 'Felhasználók', 'url' => ['/user/admin']],
+                    ['label' => 'Rbac', 'url' => ['/rbac/role']],
+                    ['label' => 'Osztályok', 'url' => ['/school-class']],
+                    ['label' => 'Ételek', 'url' => ['/food']],
+                    ['label' => 'Ebéd menü', 'url' => ['/lunch-menu']],
+                    ['label' => 'Első kapu', 'url' => ['/gate/gate-one']],
+                    ['label' => 'Második kapu', 'url' => ['/gate/gate-two']],
+                    ['label' => 'Napló', 'url' => ['/log']],
 
-             ]
+                ]
             ],
+            [
+                'label' => 'Statisztika',
+                'items' => [
+                    ['label' => 'Ételek listája', 'url' => ['/statistics/foods']],
+                    ['label' => 'Problémás tanulók', 'url' => ['/statistics/problematic-students']],
+                    ['label' => 'Menüt rendelő, de nem fogyasztó tanulók', 'url' => ['/statistics/missed-lunch']],
+                    ['label' => 'Menüt nem rendelő tanulók', 'url' => ['/statistics/no-order']],
+
+                ]
+            ],
+
             ['label' => 'Menü választó', 'url' => ['/lunch-choice']],
             Yii::$app->user->isGuest ?
                 ['label' => 'Sign in', 'url' => ['/user/security/login']] :

@@ -24,7 +24,9 @@
         "kartik-v/yii2-builder": "dev-master",
         "kartik-v/yii2-widgets": "dev-master",
         "creocoder/yii2-translateable": "dev-master",
-        "filsh/yii2-flags": "dev-master"
+        "filsh/yii2-flags": "dev-master",
+        "kartik-v/yii2-mpdf": "@dev",
+        "kartik-v/yii2-date-range": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
