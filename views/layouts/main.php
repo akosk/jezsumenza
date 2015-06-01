@@ -46,6 +46,7 @@ AppAsset::register($this);
                     ['label' => 'Első kapu', 'url' => ['/gate/gate-one']],
                     ['label' => 'Második kapu', 'url' => ['/gate/gate-two']],
                     ['label' => 'Napló', 'url' => ['/log']],
+                    ['label' => 'Befizetések importálása', 'url' => ['/import']],
 
                 ]
             ],
@@ -66,7 +67,6 @@ AppAsset::register($this);
                 ['label'       => 'Sign out (' . Yii::$app->user->identity->username . ')',
                  'url'         => ['/user/security/logout'],
                  'linkOptions' => ['data-method' => 'post']],
-            ['label' => 'Register', 'url' => ['/user/registration/register'], 'visible' => Yii::$app->user->isGuest]
         ],
     ]);
     NavBar::end();

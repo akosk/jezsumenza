@@ -1,0 +1,46 @@
+<?php
+/* @var $this yii\web\View */
+
+use kartik\widgets\ActiveForm;
+use kartik\widgets\AlertBlock;
+use kartik\widgets\FileInput;
+use yii\grid\GridView;
+
+?>
+
+
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Befizetések importálása
+    </div>
+    <div class="panel-body">
+        <?php
+
+        $form1 = ActiveForm::begin([
+            'options' => ['enctype' => 'multipart/form-data'] // important
+        ]);
+
+        echo FileInput::widget([
+            'name'          => 'attachment',
+            'pluginOptions' => [
+                'removeLabel'   => 'Eltávolítás',
+                'browseLabel'   => 'Tallózás',
+                'uploadLabel'   => 'Feltöltés',
+                'elCaptionText' => '#customCaption'
+            ]
+        ]);
+
+        ActiveForm::end();
+        ?>
+    </div>
+</div>
+
+
+<?php
+echo AlertBlock::widget([
+    'useSessionFlash' => true,
+    'delay'           => false,
+    'type'            => AlertBlock::TYPE_ALERT
+]);
+?>
+
