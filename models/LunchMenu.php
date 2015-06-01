@@ -94,4 +94,9 @@ class LunchMenu extends LunchMenuBase
     {
         return $this->hasMany(LunchChoice::className(), ['lunch_menu_id' => 'id']);
     }
+
+    public function getUsersCount()
+    {
+        return $this->hasMany(LunchChoice::className(), ['lunch_menu_id' => 'id'])->count();
+    }
 }

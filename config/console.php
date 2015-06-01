@@ -30,6 +30,10 @@ return [
                 ],
             ],
         ],
+        'user' => [
+            'class'=>'app\components\ConsoleUser',
+
+        ],
         'authManager'          => [
             'class'        => 'yii\rbac\DbManager',
             'defaultRoles' => ['guest'],
