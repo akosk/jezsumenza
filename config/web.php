@@ -15,6 +15,7 @@ $config = [
             'modelMap' => [
                 'User' => 'app\models\User',
                 'Profile' => 'app\models\Profile',
+                'UserSearch'       => 'app\models\UserSearch',
             ],
         ],
         'rbac' => [

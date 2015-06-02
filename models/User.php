@@ -48,4 +48,8 @@ class User extends BaseUser
     {
         return $this->hasOne(LunchRight::className(), ['user_id' => 'id'])->onCondition(['lunch_date' => $date]);
     }
+
+    public function getRole() {
+        return $this->hasOne(AuthAssignment::className(), ['user_id' => 'id']);
+    }
 }

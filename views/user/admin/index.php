@@ -41,22 +41,47 @@ $this->params['breadcrumbs'][] = $this->title;
     ],
     'columns' => [
         'username',
-        'email:email',
         [
-            'attribute' => 'registration_ip',
-            'value' => function ($model) {
-                    return $model->registration_ip == null
-                        ? '<span class="not-set">' . Yii::t('user', '(not set)') . '</span>'
-                        : $model->registration_ip;
-                },
-            'format' => 'html',
-        ],
-        [
-            'attribute' => 'created_at',
-            'value' => function ($model) {
-                return Yii::t('user', '{0, date, MMMM dd, YYYY HH:mm}', [$model->created_at]);
+            'label'     => 'Név',
+            'attribute' => 'profile_name',
+            'value'     => function ($model, $key, $index, $column) {
+                return $model->profile->name;
             }
         ],
+        'email:email',
+        [
+            'label'     => 'Szerepkör',
+            'attribute' => 'role_name',
+            'filterType'=>GridView::FILTER_SELECT2,
+            'filterWidgetOptions'=>[
+                'data' => [
+                    ''=>'Nincs szűrés',
+                    'admin'=>'Adminisztrátor',
+                    'kitchener'=>'Konyhafőnök',
+                    'student'=>'Tanuló',
+                ],
+                'options' => ['multiple' => false]
+            ],
+            'value'     => function ($model, $key, $index, $column) {
+                return Yii::t('app', $model->role->itemName->description);
+            }
+        ],
+
+//        [
+//            'attribute' => 'registration_ip',
+//            'value' => function ($model) {
+//                    return $model->registration_ip == null
+//                        ? '<span class="not-set">' . Yii::t('user', '(not set)') . '</span>'
+//                        : $model->registration_ip;
+//                },
+//            'format' => 'html',
+//        ],
+//        [
+//            'attribute' => 'created_at',
+//            'value' => function ($model) {
+//                return Yii::t('user', '{0, date, MMMM dd, YYYY HH:mm}', [$model->created_at]);
+//            }
+//        ],
         [
             'header' => Yii::t('user', 'Confirmation'),
             'value' => function ($model) {
