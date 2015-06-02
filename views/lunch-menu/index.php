@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
@@ -18,6 +18,10 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'panel'        => [
+            'type'    => GridView::TYPE_PRIMARY,
+            'heading' => 'Ebéd menük',
+        ],
         'columns'      => [
             ['class' => 'yii\grid\CheckboxColumn'],
             ['class' => 'yii\grid\SerialColumn'],

@@ -10,7 +10,7 @@
  */
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
 /**
@@ -35,6 +35,10 @@ $this->params['breadcrumbs'][] = $this->title;
     'dataProvider' => $dataProvider,
     'filterModel'  => $searchModel,
     'layout'  => "{items}\n{pager}",
+    'panel'        => [
+        'type'    => GridView::TYPE_PRIMARY,
+        'heading' => 'Felhasználók',
+    ],
     'columns' => [
         'username',
         'email:email',
