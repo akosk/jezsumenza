@@ -12,12 +12,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="food-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <h1><?= Html::a('Étel létrehozása', ['create'], ['class' => 'btn btn-success']) ?></h1>
 
-    <p>
-        <?= Html::a('Create Food', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

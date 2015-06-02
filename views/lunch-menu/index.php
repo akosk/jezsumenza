@@ -12,12 +12,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lunch-menu-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h1><?= Html::a('Ebéd menü létrehozása', ['create'], ['class' => 'btn btn-success']) ?>
+        <button onclick="deleteSelected()" class="btn btn-danger">Kijelöltek törlése</button></h1>
 
-    <p>
-        <?= Html::a('Create Lunch Menu', ['create'], ['class' => 'btn btn-success']) ?>
-        <button onclick="deleteSelected()" class="btn btn-danger">Kijelöltek törlése</button>
-    </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

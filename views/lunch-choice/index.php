@@ -13,7 +13,6 @@ $this->registerJsFile(\yii\helpers\Url::base(true) . '\js\lunch-choice-index.js'
     'position' => \yii\web\View::POS_END
 ]);
 ?>
-    <h1>lunch-choice/index</h1>
 
     <div class="row">
         <div class="col-xs-6 text-left">

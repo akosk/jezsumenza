@@ -12,12 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="school-class-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-    <p>
-        <?= Html::a('Create School Class', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <h1><?= Html::a('Osztály létrehozása', ['create'], ['class' => 'btn btn-success']) ?></h1>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

@@ -14,7 +14,6 @@ $this->params['breadcrumbs'][] = 'Módosítás';
 ?>
 <div class="lunch-menu-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', $_params_) ?>
 
