@@ -78,6 +78,10 @@ class PaymentImport extends Component
                             throw new Exception('Az ebédhez való jogosultság mentése nem sikerült. ' . implode(',', $errors));
                         }
                     }
+                } else {
+                    Yii::info("Befizetések importálása során nem található az alábbi tanuló:
+                    {$item['nev']} (id:{$item['tanulo_azonosito']}) ",
+                        ArChangeLoggerBehavior::LOG_CATEGORY);
                 }
             }
 
