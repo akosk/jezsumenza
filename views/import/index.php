@@ -6,6 +6,8 @@ use kartik\widgets\AlertBlock;
 use kartik\widgets\FileInput;
 use yii\grid\GridView;
 
+$this->title = 'Befizetések importálása';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 
 

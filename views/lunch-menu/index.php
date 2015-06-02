@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Lunch Menus';
+$this->title = 'Ebéd menük';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lunch-menu-index">

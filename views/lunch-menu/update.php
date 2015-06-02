@@ -5,10 +5,12 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\LunchMenu */
 
-$this->title = 'Update Lunch Menu: ' . ' ' . $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Lunch Menus', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->title = 'Módosítás';
+$this->params['breadcrumbs'][] = ['label' => 'Ebéd menük', 'url' => ['index']];
+$this->params['breadcrumbs'][] = [
+    'label' => "$model->date '$model->letter' menü",
+    'url'   => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = 'Módosítás';
 ?>
 <div class="lunch-menu-update">
 

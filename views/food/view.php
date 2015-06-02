@@ -6,8 +6,9 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Food */
 
-$this->title = $model->id;
+$this->title = 'Megtekintés';
 $this->params['breadcrumbs'][] = ['label' => 'Foods', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $model->name;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="food-view">

@@ -6,9 +6,11 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\SchoolClass */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'School Classes', 'url' => ['index']];
+$this->title = 'Megtekintés';
+$this->params['breadcrumbs'][] = ['label' => 'Osztályok', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $model->name;
 $this->params['breadcrumbs'][] = $this->title;
+
 ?>
 <div class="school-class-view">
 

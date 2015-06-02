@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\LogSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Logs';
+$this->title = 'Napló';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="log-index">

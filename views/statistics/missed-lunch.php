@@ -4,6 +4,10 @@
 use kartik\grid\GridView;
 use yii\helpers\Html;
 
+$this->title = 'Menüt rendelő, de nem fogyasztó tanulók';
+$this->params['breadcrumbs'][] = 'Statisztika';
+$this->params['breadcrumbs'][] = $this->title;
+
 echo GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel'  => $searchModel,

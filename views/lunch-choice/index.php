@@ -3,6 +3,9 @@
 
 use yii\helpers\Url;
 
+$this->title = 'Menü választó';
+$this->params['breadcrumbs'][] = $this->title;
+
 $this->registerJs('var baseUrl="' . \yii\helpers\Url::home(true) . '";', \yii\web\View::POS_HEAD);
 $this->registerJs('var selectUrl="' . \yii\helpers\Url::toRoute('select') . '";', \yii\web\View::POS_HEAD);
 $this->registerJsFile(\yii\helpers\Url::base(true) . '\js\lunch-choice-index.js', [

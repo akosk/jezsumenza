@@ -6,8 +6,11 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\LunchMenu */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Lunch Menus', 'url' => ['index']];
+$this->title = 'Megtekintés';
+$this->params['breadcrumbs'][] = ['label' => 'Ebéd menük', 'url' => ['index']];
+$this->params['breadcrumbs'][] = [
+    'label' => "$model->date '$model->letter' menü",
+    'url'   => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lunch-menu-view">
