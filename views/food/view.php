@@ -1,7 +1,7 @@
 <?php
 
+use kartik\detail\DetailView;
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Food */
@@ -16,18 +16,32 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::a('Módosítás', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Törlés', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
-            'data' => [
+            'data'  => [
                 'confirm' => 'Biztosan törölni szeretné?',
-                'method' => 'post',
+                'method'  => 'post',
             ],
         ]) ?></h1>
 
 
     <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
+        'model'          => $model,
+        'condensed'      => true,
+        'hover'          => true,
+        'enableEditMode' => false,
+        'mode'           => DetailView::MODE_VIEW,
+        'panel'          => [
+            'heading' => 'Étel - ' . $model->name,
+            'type'    => DetailView::TYPE_PRIMARY,
+        ],
+        'attributes'     => [
             'id',
-            'category',
+            [
+                'attribute' => 'category',
+                'value'     => Yii::t('app', $model->category)
+
+            ],
+            'name',
+            'description',
         ],
     ]) ?>
 

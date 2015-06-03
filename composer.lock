@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "94e25b56252f19b4c0a30895dd55b739",
+    "hash": "729fd4a57b1e688155411a5b014839df",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -326,16 +326,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dektrium/yii2-rbac.git",
-                "reference": "3ca744799ab8eb88e49fe82936c684512ca2a117"
+                "reference": "f8958a258775bdfad9cd4790d87dc8876b513086"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dektrium/yii2-rbac/zipball/3ca744799ab8eb88e49fe82936c684512ca2a117",
-                "reference": "3ca744799ab8eb88e49fe82936c684512ca2a117",
+                "url": "https://api.github.com/repos/dektrium/yii2-rbac/zipball/f8958a258775bdfad9cd4790d87dc8876b513086",
+                "reference": "f8958a258775bdfad9cd4790d87dc8876b513086",
                 "shasum": ""
             },
             "require": {
-                "kartik-v/yii2-widget-select2": "2.0.*",
+                "kartik-v/yii2-widget-select2": "*",
                 "yiisoft/yii2": "2.0.*"
             },
             "type": "yii2-extension",
@@ -368,7 +368,7 @@
                 "yii2",
                 "yii2-rbac"
             ],
-            "time": "2015-05-29 18:47:24"
+            "time": "2015-06-02 19:08:17"
         },
         {
             "name": "dektrium/yii2-user",
@@ -741,12 +741,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kartik-v/yii2-date-range.git",
-                "reference": "fcfd163d5c1e2f299eb5f47e1aa487a86dfe56bd"
+                "reference": "8ecc6506d96ca5a7376f12dd897dbda83723c6bc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kartik-v/yii2-date-range/zipball/fcfd163d5c1e2f299eb5f47e1aa487a86dfe56bd",
-                "reference": "fcfd163d5c1e2f299eb5f47e1aa487a86dfe56bd",
+                "url": "https://api.github.com/repos/kartik-v/yii2-date-range/zipball/8ecc6506d96ca5a7376f12dd897dbda83723c6bc",
+                "reference": "8ecc6506d96ca5a7376f12dd897dbda83723c6bc",
                 "shasum": ""
             },
             "require": {
@@ -782,7 +782,55 @@
                 "widget",
                 "yii2"
             ],
-            "time": "2015-05-22 15:26:20"
+            "time": "2015-05-30 11:29:13"
+        },
+        {
+            "name": "kartik-v/yii2-detail-view",
+            "version": "v1.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-detail-view.git",
+                "reference": "028414cc99fab4e640cb19d28ff97132fdbe79ed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-detail-view/zipball/028414cc99fab4e640cb19d28ff97132fdbe79ed",
+                "reference": "028414cc99fab4e640cb19d28ff97132fdbe79ed",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-helpers": "*",
+                "kartik-v/yii2-krajee-base": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\detail\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Various enhancements to the Yii 2 Detail View with ability to edit data and manage Bootstrap 3 styles.",
+            "homepage": "https://github.com/kartik-v/yii2-detail-view",
+            "keywords": [
+                "detail",
+                "detail view",
+                "extension",
+                "form",
+                "grid",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-05-22 18:11:59"
         },
         {
             "name": "kartik-v/yii2-grid",
@@ -827,6 +875,52 @@
                 "yii2"
             ],
             "time": "2015-05-10 19:41:47"
+        },
+        {
+            "name": "kartik-v/yii2-helpers",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-helpers.git",
+                "reference": "379b5f20d511fe13b1c579a33adffe6dd2b6f560"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-helpers/zipball/379b5f20d511fe13b1c579a33adffe6dd2b6f560",
+                "reference": "379b5f20d511fe13b1c579a33adffe6dd2b6f560",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2-bootstrap": "*"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\helpers\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD 3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "A collection of useful helper functions for Yii Framework 2.0",
+            "homepage": "https://github.com/kartik-v/yii2-helpers",
+            "keywords": [
+                "bootstrap",
+                "extension",
+                "helper",
+                "utilities",
+                "yii",
+                "yii2"
+            ],
+            "time": "2015-01-27 18:55:13"
         },
         {
             "name": "kartik-v/yii2-krajee-base",

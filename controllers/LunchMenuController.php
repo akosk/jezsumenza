@@ -90,6 +90,11 @@ class LunchMenuController extends Controller
 
     public function actionAddUserToMenu($id)
     {
+
+        $lunchMenu=LunchMenu::findOne($id);
+        if (!$lunchMenu) {
+            throw new NotFoundHttpException('Nincs ilyen azonosítójú ebéd menü');
+        }
         if (isset($_POST['User'])) {
             $lunchChoice = new LunchChoice();
             $lunchChoice->user_id = $_POST['User']['id'];
@@ -104,7 +109,8 @@ class LunchMenuController extends Controller
 
         $model = new User();
         return $this->render('add_user_to_menu', [
-            'model' => $model
+            'model' => $model,
+            'lunchMenu'=>$lunchMenu
         ]);
     }
 

@@ -44,19 +44,19 @@ $config = [
 
 
         ],
-//        'i18n' => [
-//            'translations' => [
-//                'user*' => [
-//                    'class' => 'yii\i18n\PhpMessageSource',
-//                    //'basePath' => '@app/messages',
-//                    //'sourceLanguage' => 'en-US',
-//                    'fileMap' => [
-//                        'app' => 'app.php',
-//                        'app/error' => 'error.php',
-//                    ],
-//                ],
-//            ],
-//        ],
+        'i18n' => [
+            'translations' => [
+                'user*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    //'basePath' => '@app/messages',
+                    //'sourceLanguage' => 'en-US',
+                    'fileMap' => [
+                        'app' => 'app.php',
+                        'app/error' => 'error.php',
+                    ],
+                ],
+            ],
+        ],
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],

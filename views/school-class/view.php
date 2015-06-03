@@ -1,7 +1,7 @@
 <?php
 
+use kartik\detail\DetailView;
 use yii\helpers\Html;
-use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\SchoolClass */
@@ -27,6 +27,14 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+        'condensed'=>true,
+        'hover'=>true,
+        'enableEditMode'=>false,
+        'mode'=>DetailView::MODE_VIEW,
+        'panel'=>[
+            'heading'=>'Osztály - '.$model->name,
+            'type'=>DetailView::TYPE_PRIMARY,
+        ],
         'attributes' => [
             'id',
             'name',

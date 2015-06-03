@@ -99,4 +99,22 @@ class LunchMenu extends LunchMenuBase
     {
         return $this->hasMany(LunchChoice::className(), ['lunch_menu_id' => 'id'])->count();
     }
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'Azonosító',
+            'letter' => 'Betű-kód',
+            'date' => 'Dátum',
+            'create_time' => 'Létrehozás dátuma',
+        ];
+    }
+
+    public function getFoodsSorted()
+    {
+        return $this->hasMany(Food::className(), ['id' => 'food_id'])
+            ->viaTable('lunch_menu_food', ['lunch_menu_id' => 'id'])
+            ->addOrderBy(['category' => SORT_DESC]);
+    }
+
 }

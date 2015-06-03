@@ -13,5 +13,14 @@ use yii\db\ActiveRecord;
 
 class SchoolClass extends SchoolClassBase{
 
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'Azonosító',
+            'name' => 'Név',
+            'eating_time_start' => 'Étkezési idősáv kezdete',
+            'eating_time_end' => 'Étkezési idősáv vége',
+        ];
+    }
 
 }

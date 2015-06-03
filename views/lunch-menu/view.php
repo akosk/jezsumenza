@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use kartik\detail\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\LunchMenu */
@@ -27,10 +27,27 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= DetailView::widget([
         'model' => $model,
+        'condensed'      => true,
+        'hover'          => true,
+        'enableEditMode' => false,
+        'mode'           => DetailView::MODE_VIEW,
+        'panel'          => [
+            'heading' => "Ebéd menü - {$model->date} '{$model->letter}' menü",
+            'type'    => DetailView::TYPE_PRIMARY,
+        ],
+
         'attributes' => [
             'id',
             'letter',
             'date',
+            [
+                'label'=>'Ételek',
+                'format'=>'raw',
+                'value'=> implode(', ',array_map ( function($item) {
+                    return $item->name;
+                },$model->foodsSorted)),
+
+            ],
             'create_time',
         ],
     ]) ?>

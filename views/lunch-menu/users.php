@@ -7,26 +7,31 @@
 
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Lunch Menus';
+$this->title = 'Menüt választó felhasználók';
+$this->params['breadcrumbs'][] = ['label' => 'Ebéd menük', 'url' => ['index']];
+$this->params['breadcrumbs'][] = [
+    'label' => "$model->date '$model->letter' menü",
+    'url'   => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lunch-menu-index">
 
-    <h1><?=$model->date?> '<?=$model->letter?>' menü</h1>
+    <h1><?= Html::a('Felhasználó hozzáadása', ['add-user-to-menu', 'id'=>$model->id], ['class' => 'btn btn-success']) ?>
+        <button onclick="deleteSelected()" class="btn btn-danger">Kijelöltek törlése</button></h1>
 
-    <p>
-        <?= Html::a('Felhasználó hozzáadása', ['add-user-to-menu', 'id'=>$model->id], ['class' => 'btn btn-success']) ?>
-        <button onclick="deleteSelected()" class="btn btn-danger">Kijelöltek törlése</button>
-    </p>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'panel'        => [
+            'type'    => GridView::TYPE_PRIMARY,
+            'heading' => "$model->date '$model->letter' menü-t választó felhasználók",
+        ],
         'columns'      => [
             ['class' => 'yii\grid\CheckboxColumn'],
             ['class' => 'yii\grid\SerialColumn'],
