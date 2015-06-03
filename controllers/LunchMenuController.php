@@ -149,6 +149,7 @@ class LunchMenuController extends Controller
     public function actionCreate()
     {
         $model = new LunchMenu();
+        $model->date=date('Y-m-d');
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);

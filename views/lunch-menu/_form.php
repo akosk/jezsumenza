@@ -24,7 +24,7 @@ echo Form::widget([
             'widgetClass' => '\kartik\widgets\DatePicker',
             'hint'        => 'A menü dátuma (év-hónap-nap)',
             'options'     => [
-                'value'         => date('Y-M-d', strtotime('+2 days')),
+                'value'         => date('Y-m-d', strtotime('+2 days')),
                 'options'       => ['placeholder' => 'Adja meg a menü dátumát ...'],
                 'pluginOptions' => [
                     'format'         => 'yyyy-mm-dd',
