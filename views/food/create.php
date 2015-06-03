@@ -12,9 +12,17 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="food-create">
 
+    <div class="panel panel-primary">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+        <div class="panel-heading">
+            Étel létrehozása
+        </div>
 
+        <div class="panel-body">
+            <?= $this->render('_form', [
+                'model' => $model,
+            ]) ?>
+
+        </div>
+    </div>
 </div>

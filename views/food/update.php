@@ -12,10 +12,18 @@ $this->params['breadcrumbs'][] = 'Módosítás';
 ?>
 <div class="food-update">
 
+    <div class="panel panel-primary">
 
+        <div class="panel-heading">
+            Étel módosítása - <?=$model->name?>
+        </div>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+        <div class="panel-body">
 
+            <?= $this->render('_form', [
+                'model' => $model,
+            ]) ?>
+
+        </div>
+    </div>
 </div>

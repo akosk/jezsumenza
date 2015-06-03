@@ -61,7 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'btn btn-primary btn-sm']) ?>
+                    <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'btn btn-success btn-sm']) ?>
                     <?php if (!$user->getIsConfirmed()): ?>
                         <?= Html::a(Yii::t('user', 'Confirm'), ['confirm', 'id' => $user->id, 'back' => 'update'], ['class' => 'btn btn-success btn-sm', 'data-method' => 'post']) ?>
                     <?php endif; ?>
@@ -73,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
 
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <?= Html::encode($this->title) ?>
                 </div>
@@ -82,9 +82,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
             </div>
 
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <?= Yii::t('user', 'Update user profile') ?>
+                    Felhasználói profil módosítása
                 </div>
                 <div class="panel-body">
                     <?= $this->render('@dektrium/user/views/admin/_profile', ['form' => $form, 'profile' => $profile]) ?>
@@ -94,7 +94,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'btn btn-primary btn-sm']) ?>
+                    <?= Html::submitButton(Yii::t('user', 'Save'), ['class' => 'btn btn-success btn-sm']) ?>
                     <?php if (!$user->getIsConfirmed()): ?>
                         <?= Html::a(Yii::t('user', 'Confirm'), ['confirm', 'id' => $user->id, 'back' => 'update'], ['class' => 'btn btn-success btn-sm', 'data-method' => 'post']) ?>
                     <?php endif; ?>
@@ -110,7 +110,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         </div>
         <div role="tabpanel" class="tab-pane fade" id="rbac">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     Szerepkörök
                 </div>

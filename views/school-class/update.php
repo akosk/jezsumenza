@@ -12,9 +12,18 @@ $this->params['breadcrumbs'][] = 'Módosítás';
 ?>
 <div class="school-class-update">
 
+    <div class="panel panel-primary">
 
-    <?= $this->render('_form', [
-        'model' => $model,
-    ]) ?>
+        <div class="panel-heading">
+            Osztály módosítása - <?=$model->name?>
+        </div>
+
+        <div class="panel-body">
+
+            <?= $this->render('_form', [
+                'model' => $model,
+            ]) ?>
+        </div>
+    </div>
 
 </div>

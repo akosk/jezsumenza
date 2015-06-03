@@ -43,7 +43,7 @@ echo Form::widget([
         'formFoods[0]' => [
             'type'        => Form::INPUT_WIDGET,
             'widgetClass' => '\kartik\widgets\Select2',
-
+            'label'=>'Étel 1.',
             'options'     => [
                 'data'    => $foods,
                 'options' => [
@@ -55,6 +55,7 @@ echo Form::widget([
         'formFoods[1]' => [
             'type'        => Form::INPUT_WIDGET,
             'widgetClass' => '\kartik\widgets\Select2',
+            'label'=>'Étel 2.',
             'options'     => [
                 'data'    => $foods,
                 'options' => [
@@ -72,7 +73,8 @@ echo Form::widget([
 
 ?>
 <div class="form-group">
-    <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <?= Html::submitButton($model->isNewRecord ? 'Mentés' : 'Mentés', ['class' => $model->isNewRecord ? 'btn
+    btn-success' : 'btn btn-success']) ?>
 </div>
 <?php
 ActiveForm::end();

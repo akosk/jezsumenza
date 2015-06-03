@@ -48,10 +48,13 @@ use yii\widgets\ActiveForm;
         </div>
 
 
-        <?= $form->field($model, 'category')->dropDownList(['MAIN_COURSE' => 'MAIN COURSE', 'SOUP' => 'SOUP',], ['prompt' => '']) ?>
+        <?= $form->field($model, 'category')->dropDownList(['MAIN_COURSE' => 'Főétel', 'SOUP' => 'Leves',], ['prompt'
+                                                                                                             =>
+                                                                                                           '']) ?>
 
         <div class="form-group">
-            <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+            <?= Html::submitButton($model->isNewRecord ? 'Mentés' : 'Mentés', ['class' => $model->isNewRecord ?
+                'btn btn-success' : 'btn btn-success']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>

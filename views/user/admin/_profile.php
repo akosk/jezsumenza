@@ -23,7 +23,7 @@ use yii\helpers\ArrayHelper;
 <?= $form->field($profile, 'public_email') ?>
 <?= $form->field($profile, 'website') ?>
 <?= $form->field($profile, 'location') ?>
-<?= $form->field($profile, 'gravatar_email') ?>
+
 <?= $form->field($profile, 'dina_id') ?>
 <?= $form->field($profile, 'bio')->textarea() ?>
 <?= $form->field($profile, 'school_class_id')
@@ -31,15 +31,16 @@ use yii\helpers\ArrayHelper;
         ['prompt' => 'Válasszon osztályt...']) ?>
 
 
-<label>Eating Start Time</label>
+<label>Egyéni étkezési idősáv kezdete</label>
 <?= TimePicker::widget([
     'name'          => 'Profile[eating_time_start]',
+
     'pluginOptions' => [
         'showSeconds' => false
     ]
 ]);?>
 
-<label>Eating End Time</label>
+<label>Egyéni étkezési idősáv vége</label>
 <?= TimePicker::widget([
     'name'          => 'Profile[eating_time_end]',
     'pluginOptions' => [

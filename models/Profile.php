@@ -43,18 +43,19 @@ class Profile extends BaseProfile
 
     public function attributeLabels()
     {
-        return ArrayHelper::merge(
-            parent::attributeLabels(), [
+        $merged = ArrayHelper::merge(
+            parent::attributeLabels(),
                 [
-                    'dina_id'         => \Yii::t('user', 'Dina id'),
-                    'school_class_id' => \Yii::t('user', 'Osztály'),
-                    'eating_time_start' => 'Eating Time Start',
-                    'eating_time_end' => 'Eating Time End',
-                    'barcode' => 'Vonalkód',
-                ],
+                    'dina_id'           => \Yii::t('user', 'Dina id'),
+                    'school_class_id'   => \Yii::t('user', 'Osztály'),
+                    'eating_time_start' => 'Egyéni étkezési idősáv kezdete',
+                    'eating_time_end'   => 'Egyéni étkezési idősáv vége',
+                    'barcode'           => 'Vonalkód',
+                ]
 
-            ]
+
         );
+        return $merged;
     }
 
     public function getSchoolClass()

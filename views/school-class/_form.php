@@ -11,18 +11,18 @@ use kartik\builder\Form;
 ?>
 
 
+
+
 <?php
-
-
-$form = ActiveForm::begin(['type'=>ActiveForm::TYPE_VERTICAL]);
+$form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL]);
 echo Form::widget([
     'model'      => $model,
     'form'       => $form,
     'columns'    => 2,
     'attributes' => [
-        'name' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Osztály neve...']],
-        'time_range'=>[
-            'label'      => 'Time Range',
+        'name'       => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Osztály neve...']],
+        'time_range' => [
+            'label'      => 'Étkezési idősáv',
             'attributes' => [
                 'eating_time_start' => [
                     'type'        => Form::INPUT_WIDGET,
@@ -41,7 +41,8 @@ echo Form::widget([
 
 ?>
 <div class="form-group">
-    <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    <?= Html::submitButton($model->isNewRecord ? 'Mentés' : 'Mentés', ['class' => $model->isNewRecord ? 'btn
+    btn-success' : 'btn btn-success']) ?>
 </div>
 <?php
 ActiveForm::end();

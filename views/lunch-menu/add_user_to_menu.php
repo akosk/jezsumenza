@@ -25,54 +25,65 @@ $this->params['breadcrumbs'][] = [
     'label' => "Menüt választó felhasználók",
     'url'   => ['users', 'id' => $lunchMenu->id]];
 $this->params['breadcrumbs'][] = $this->title;
+?>
+<div class="panel panel-primary">
 
-$form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL]);
+    <div class="panel-heading">
+          <?= "{$this->title} - $lunchMenu->date '$lunchMenu->letter' menü" ?>
+    </div>
 
-echo Form::widget([
-    'model'      => $model,
-    'form'       => $form,
-    'columns'    => 2,
-    'attributes' => [
-        'id' => [
-            'type'        => Form::INPUT_WIDGET,
-            'widgetClass' => '\kartik\widgets\Select2',
-            'label'=>'Felhasználó',
+    <div class="panel-body">
 
-            'options'     => [
-                'data'          => [],
-                'options'       => [
-                    'placeholder' => 'Válasszon felhasználót...',
-                ],
-                'pluginOptions' => [
-                    'allowClear'         => true,
-                    'minimumInputLength' => 3,
-                    'ajax'               => [
-                        'url'      => Url::toRoute(['/lunch-menu/search-users']),
-                        'dataType' => 'json',
-                        'data'     => new JsExpression('function(term,page) { return {q:term}; }'),
-                        'results'  => new JsExpression('function(data,page) { return {results:data}; }'),
-                    ],
-                    'formatResult'=>new JsExpression('function(repo) { return "<div><strong>"+repo.name+"</strong> ("+repo.username+")</div>"; }'),
-                    'formatSelection'=>new JsExpression('function(repo) { return repo.name; }'),
+        <?php
+        $form = ActiveForm::begin(['type' => ActiveForm::TYPE_VERTICAL]);
+
+        echo Form::widget([
+            'model'      => $model,
+            'form'       => $form,
+            'columns'    => 2,
+            'attributes' => [
+                'id' => [
+                    'type'        => Form::INPUT_WIDGET,
+                    'widgetClass' => '\kartik\widgets\Select2',
+                    'label'       => 'Felhasználó',
+
+                    'options'     => [
+                        'data'          => [],
+                        'options'       => [
+                            'placeholder' => 'Válasszon felhasználót...',
+                        ],
+                        'pluginOptions' => [
+                            'allowClear'         => true,
+                            'minimumInputLength' => 3,
+                            'ajax'               => [
+                                'url'      => Url::toRoute(['/lunch-menu/search-users']),
+                                'dataType' => 'json',
+                                'data'     => new JsExpression('function(term,page) { return {q:term}; }'),
+                                'results'  => new JsExpression('function(data,page) { return {results:data}; }'),
+                            ],
+                            'formatResult'       => new JsExpression('function(repo) { return "<div><strong>"+repo.name+"</strong> ("+repo.username+")</div>"; }'),
+                            'formatSelection'    => new JsExpression('function(repo) { return repo.name; }'),
 //                    'initSelection' => new JsExpression($initScript)
-                ]
+                        ]
+                    ]
+                ],
+
             ]
-        ],
 
-    ]
-
-]);
+        ]);
 
 
 
-?>
-<div class="form-group">
-    <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        ?>
+        <div class="form-group">
+            <?= Html::submitButton($model->isNewRecord ? 'Mentés' : 'Mentés', ['class' => $model->isNewRecord ? 'btn
+            btn-success' : 'btn btn-success']) ?>
+        </div>
+        <?php
+        ActiveForm::end();
+        ?>
+    </div>
 </div>
-<?php
-ActiveForm::end();
-?>
-
 
 
 

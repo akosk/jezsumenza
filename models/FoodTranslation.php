@@ -58,10 +58,10 @@ class FoodTranslation extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'food_id' => 'Food ID',
-            'language' => 'Language',
-            'name' => 'Name',
-            'description' => 'Description',
+            'food_id' => 'Azonosító',
+            'language' => 'Nyelv',
+            'name' => 'Név',
+            'description' => 'Leírás',
         ];
     }
 }
