@@ -33,18 +33,21 @@ use yii\helpers\ArrayHelper;
 
 <label>Egyéni étkezési idősáv kezdete</label>
 <?= TimePicker::widget([
-    'name'          => 'Profile[eating_time_start]',
-
+    'model' => $profile,
+    'attribute' => 'eating_time_start',
     'pluginOptions' => [
-        'showSeconds' => false
+        'showSeconds' => false,
+        'showMeridian'=> false,
     ]
 ]);?>
 
 <label>Egyéni étkezési idősáv vége</label>
 <?= TimePicker::widget([
-    'name'          => 'Profile[eating_time_end]',
+    'model' => $profile,
+    'attribute' => 'eating_time_end',
     'pluginOptions' => [
-        'showSeconds' => false
+        'showSeconds' => false,
+        'showMeridian'=> false,
     ]
 ]);?>
 

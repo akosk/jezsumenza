@@ -20,7 +20,7 @@ class LogSearch extends Log
         return [
             [['id', 'level'], 'integer'],
             [['category', 'prefix', 'message'], 'safe'],
-            [['log_time'], 'number'],
+            [['log_time'], 'string'],
         ];
     }
 
@@ -59,9 +59,20 @@ class LogSearch extends Log
         $query->andFilterWhere([
             'id' => $this->id,
             'level' => $this->level,
-            'log_time' => $this->log_time,
             'category'=>'public'
         ]);
+
+        if (strlen($this->log_time)>0) {
+            list($from,$to)=explode(' - ',$this->log_time);
+            if (strlen($from)>0) {
+                $from=strtotime($from);
+                $query->andFilterWhere(['>=', 'log_time', $from]);
+            }
+            if (strlen($to)>0) {
+                $to=strtotime($to);
+                $query->andFilterWhere(['<=', 'log_time', $to]);
+            }
+        }
 
         $query->andFilterWhere(['like', 'category', $this->category])
             ->andFilterWhere(['like', 'prefix', $this->prefix])

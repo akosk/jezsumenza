@@ -27,12 +27,26 @@ echo Form::widget([
                 'eating_time_start' => [
                     'type'        => Form::INPUT_WIDGET,
                     'widgetClass' => '\kartik\widgets\TimePicker',
-                    'options'     => ['options' => ['placeholder' => 'Időponttól...']],
+
+                    'options'     => [
+                        'options'       => ['placeholder' => 'Időponttól...',
+                        ],
+                        'pluginOptions' => [
+                            'showSeconds'  => false,
+                            'showMeridian' => false,
+                        ]
+
+                    ],
                 ],
                 'eating_time_end'   => [
                     'type'        => Form::INPUT_WIDGET,
                     'widgetClass' => '\kartik\widgets\TimePicker',
-                    'options'     => ['options' => ['placeholder' => 'Időpontig...']]
+                    'options'     => [
+                        'options'       => ['placeholder' => 'Időpontig...'],
+                        'pluginOptions' => [
+                            'showSeconds'  => false,
+                            'showMeridian' => false,
+                        ]]
                 ],
             ]
         ]

@@ -27,6 +27,15 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'attribute' => 'log_time',
                 'label'     => 'Időpont',
+                'filterType'=>GridView::FILTER_DATE_RANGE,
+                'filterWidgetOptions'=>[
+                    'convertFormat'=>true,
+                    'pluginOptions'=>[
+                        'timePicker'=>true,
+                        'timePickerIncrement'=>30,
+                        'format'=>'Y-m-d h:i'
+                    ]
+                ],
                 'value'     => function ($data, $id, $index, $dataColumn) {
                     $time = new DateTime();
                     $time->setTimestamp(explode('.', $data->log_time)[0]);
