@@ -16,20 +16,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'filterModel'  => $searchModel,
         'responsive'   => true,
         'hover'        => true,
         'panel'        => [
             'type'    => GridView::TYPE_PRIMARY,
             'heading' => 'Osztályok',
         ],
-        'columns' => [
+        'columns'      => [
             ['class' => 'yii\grid\SerialColumn'],
 
             'id',
             'name',
             'eating_time_start',
             'eating_time_end',
+            [
+                'label' => 'Tanulók száma',
+                'value' => function ($model, $key, $index, $column) {
+                    return $model->profilesCount;
+                }
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

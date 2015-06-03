@@ -23,4 +23,8 @@ class SchoolClass extends SchoolClassBase{
         ];
     }
 
+    public function getProfilesCount()
+    {
+        return $this->hasMany(Profile::className(), ['school_class_id' => 'id'])->count();
+    }
 }

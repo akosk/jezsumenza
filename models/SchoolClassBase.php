@@ -11,6 +11,8 @@ use Yii;
  * @property string $name
  * @property string $eating_time_start
  * @property string $eating_time_end
+ *
+ * @property Profile[] $profiles
  */
 class SchoolClassBase extends \yii\db\ActiveRecord
 {
@@ -45,5 +47,13 @@ class SchoolClassBase extends \yii\db\ActiveRecord
             'eating_time_start' => 'Eating Time Start',
             'eating_time_end' => 'Eating Time End',
         ];
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getProfiles()
+    {
+        return $this->hasMany(Profile::className(), ['school_class_id' => 'id']);
     }
 }
