@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
+            'id',
             [
                 'label'  => 'Étel',
                 'value'  => function ($data, $id, $index, $dataColumn) {
@@ -33,8 +33,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'format' => 'raw',
             ],
 
-            'id',
-            'category',
+
+            [
+                'attribute'=>'category',
+                'value'=>function ($data, $id, $index, $dataColumn) {
+                    return Yii::t('app',$data->category);
+                },
+            ],
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
