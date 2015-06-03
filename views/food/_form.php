@@ -3,11 +3,14 @@
 use app\models\Language;
 use yii\flags\Flags;
 use yii\helpers\Html;
+use yii\web\JsExpression;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Food */
 /* @var $form yii\widgets\ActiveForm */
+
+
 ?>
 
 
@@ -18,7 +21,7 @@ use yii\widgets\ActiveForm;
 
         <?php foreach (Language::$languages as $key => $language) { ?>
             <li class="<?= Yii::$app->language == $language['code'] ? 'active' : '' ?>">
-                <a href="#panel-<?= $key ?>" aria-controls="home" role="tab" data-toggle="tab">
+                <a href="#panel-<?= $key ?>" aria-controls="home" role="tab" data-toggle="tab" data-tab="panel-<?= $key ?>">
                     <?= Flags::widget([
                         'flag'      => $key,
                         'type'      => Flags::FLAT_48,
@@ -30,7 +33,9 @@ use yii\widgets\ActiveForm;
 
     <div class="food-form">
 
-        <?php $form = ActiveForm::begin(); ?>
+        <?php $form = ActiveForm::begin([
+
+        ]); ?>
 
         <!-- Tab panes -->
         <div class="tab-content">
@@ -63,3 +68,11 @@ use yii\widgets\ActiveForm;
 
 
 </div>
+
+<?php
+$this->registerJsFile(\yii\helpers\Url::base(true) . '\js\food-form.js', [
+    'depends'  => ['yii\web\YiiAsset'],
+    'position' => \yii\web\View::POS_END
+]);
+
+?>
