@@ -39,7 +39,7 @@ AppAsset::register($this);
                 'label' => 'Adminisztráció',
                 'items' => [
                     ['label' => 'Felhasználók', 'url' => ['/user/admin']],
-                    ['label' => 'Rbac', 'url' => ['/rbac/role']],
+//                    ['label' => 'Rbac', 'url' => ['/rbac/role']],
                     ['label' => 'Osztályok', 'url' => ['/school-class']],
                     ['label' => 'Ételek', 'url' => ['/food']],
                     ['label' => 'Ebéd menü', 'url' => ['/lunch-menu']],
