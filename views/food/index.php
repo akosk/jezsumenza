@@ -17,27 +17,36 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'filterModel'  => $searchModel,
         'panel'        => [
             'type'    => GridView::TYPE_PRIMARY,
             'heading' => 'Ételek',
         ],
-        'columns' => [
+        'columns'      => [
             ['class' => 'yii\grid\SerialColumn'],
             'id',
             [
-                'label'  => 'Étel',
-                'value'  => function ($data, $id, $index, $dataColumn) {
+                'attribute' => 'name',
+                'label'     => 'Étel',
+                'value'     => function ($data, $id, $index, $dataColumn) {
                     return $data->translate('hu-HU')->name;
                 },
-                'format' => 'raw',
+                'format'    => 'raw',
             ],
 
-
             [
-                'attribute'=>'category',
-                'value'=>function ($data, $id, $index, $dataColumn) {
-                    return Yii::t('app',$data->category);
+                'attribute'           => 'category',
+                'filterType'          => GridView::FILTER_SELECT2,
+                'filterWidgetOptions' => [
+                    'data'    => [
+                        ' ' => 'Nincs szűrés',
+                        'MAIN_COURSE' => Yii::t('app','MAIN_COURSE'),
+                        'SOUP' =>Yii::t('app','SOUP')
+                    ],
+                    'options' => ['multiple' => false, 'placeholder' => 'Válasszon kategóriát ...']
+                ],
+                'value'               => function ($data, $id, $index, $dataColumn) {
+                    return Yii::t('app', $data->category);
                 },
             ],
 

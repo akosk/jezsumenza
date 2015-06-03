@@ -49,6 +49,10 @@ class Food extends FoodBase{
     {
         return $this->hasMany(FoodTranslation::className(), ['food_id' => 'id']);
     }
+    public function getHuTranslations()
+    {
+        return $this->hasMany(FoodTranslation::className(), ['food_id' => 'id'])->where(['language'=>'hu-HU']);
+    }
 
     public function afterSave($insert, $changedAttributes)
     {

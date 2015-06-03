@@ -16,6 +16,7 @@ class FoodSearch extends Food
 
     public $name;
 
+
     /**
      * @inheritdoc
      */
@@ -50,6 +51,12 @@ class FoodSearch extends Food
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'       => [
+                'attributes' => [
+                    'id',
+                    'name',
+                ],
+            ],
         ]);
 
         $this->load($params);
@@ -60,11 +67,13 @@ class FoodSearch extends Food
             return $dataProvider;
         }
 
+        $query->joinWith(['huTranslations']);
         $query->andFilterWhere([
             'id' => $this->id,
         ]);
 
         $query->andFilterWhere(['like', 'category', $this->category]);
+        $query->andFilterWhere(['like', 'food_translation.name', $this->name]);
 
         return $dataProvider;
     }
