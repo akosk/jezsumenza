@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * LogController implements the CRUD actions for Log model.
  */
-class LogController extends Controller
+class LogController extends ControllerBase
 {
     public function behaviors()
     {

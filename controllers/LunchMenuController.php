@@ -21,7 +21,7 @@ use yii\filters\VerbFilter;
 /**
  * LunchMenuController implements the CRUD actions for LunchMenu model.
  */
-class LunchMenuController extends Controller
+class LunchMenuController extends ControllerBase
 {
     public function behaviors()
     {

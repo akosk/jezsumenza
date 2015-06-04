@@ -8,7 +8,7 @@ use app\models\NoOrder;
 use app\models\ProblematicStudent;
 use Yii;
 
-class StatisticsController extends \yii\web\Controller
+class StatisticsController extends ControllerBase
 {
     public function actionFoods()
     {

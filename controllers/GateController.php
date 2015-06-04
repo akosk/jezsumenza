@@ -12,7 +12,7 @@ use yii\db\Expression;
 use yii\helpers\Json;
 use yii\web\HttpException;
 
-class GateController extends \yii\web\Controller
+class GateController extends ControllerBase
 {
     public function actionGateOne()
     {

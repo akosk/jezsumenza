@@ -5,12 +5,13 @@ namespace app\controllers;
 use app\models\ArChangeLog;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 
-class SiteController extends Controller
+class SiteController extends ControllerBase
 {
     public function behaviors()
     {
@@ -19,14 +20,14 @@ class SiteController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['logout','index'],
-                        'allow' => true,
-                        'roles' => ['@'],
+                        'actions' => ['logout', 'index'],
+                        'allow'   => true,
+                        'roles'   => ['@'],
                     ],
                 ],
             ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
+            'verbs'  => [
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
                 ],
@@ -37,11 +38,11 @@ class SiteController extends Controller
     public function actions()
     {
         return [
-            'error' => [
+            'error'   => [
                 'class' => 'yii\web\ErrorAction',
             ],
             'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
+                'class'           => 'yii\captcha\CaptchaAction',
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
@@ -49,7 +50,9 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-
+        if (Yii::$app->user->can('student')) {
+            $this->redirect(Url::toRoute('/lunch-choice/index'));
+        }
         return $this->render('index');
     }
 
@@ -59,7 +62,6 @@ class SiteController extends Controller
         if (!\Yii::$app->user->isGuest) {
             return $this->goHome();
         }
-
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {

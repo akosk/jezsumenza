@@ -10,7 +10,7 @@ use yii\db\Expression;
 use yii\web\NotFoundHttpException;
 use yii\web\ServerErrorHttpException;
 
-class LunchChoiceController extends \yii\web\Controller
+class LunchChoiceController extends ControllerBase
 {
     public function actionIndex($date = null)
     {

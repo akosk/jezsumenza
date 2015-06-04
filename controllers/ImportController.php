@@ -6,7 +6,7 @@ use app\components\PaymentImport;
 use Exception;
 use Yii;
 
-class ImportController extends \yii\web\Controller
+class ImportController extends ControllerBase
 {
     public function actionIndex()
     {

@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * FoodController implements the CRUD actions for Food model.
  */
-class FoodController extends Controller
+class FoodController extends ControllerBase
 {
     public function behaviors()
     {
