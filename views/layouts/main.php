@@ -39,8 +39,9 @@ AppAsset::register($this);
         'items'   => [
             [
                 'label' => 'Adminisztráció',
+                'visible' => Yii::$app->user->can('admin'),
                 'items' => [
-                    ['label' => 'Felhasználók', 'url' => ['/user/admin']],
+                    ['label' => 'Felhasználók', 'url' => ['/user/admin'] ],
 //                    ['label' => 'Rbac', 'url' => ['/rbac/role']],
                     ['label' => 'Osztályok', 'url' => ['/school-class']],
                     ['label' => 'Ételek', 'url' => ['/food']],
@@ -54,6 +55,7 @@ AppAsset::register($this);
             ],
             [
                 'label' => 'Statisztika',
+                'visible' => Yii::$app->user->can('admin'),
                 'items' => [
                     ['label' => 'Ételek listája', 'url' => ['/statistics/foods']],
                     ['label' => 'Problémás tanulók', 'url' => ['/statistics/problematic-students']],
@@ -63,10 +65,10 @@ AppAsset::register($this);
                 ]
             ],
 
-            ['label' => 'Menü választó', 'url' => ['/lunch-choice']],
+            ['label' => 'Menü választó', 'url' => ['/lunch-choice'], 'visible' => Yii::$app->user->can('student'),],
             Yii::$app->user->isGuest ?
-                ['label' => 'Sign in', 'url' => ['/user/security/login']] :
-                ['label'       => 'Sign out (' . Yii::$app->user->identity->username . ')',
+                ['label' => 'Bejelentkezés', 'url' => ['/user/security/login']] :
+                ['label'       => 'Kijelentkezés (' . Yii::$app->user->identity->username . ')',
                  'url'         => ['/user/security/logout'],
                  'linkOptions' => ['data-method' => 'post']],
         ],
