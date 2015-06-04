@@ -12,6 +12,24 @@ use DateInterval;
 class DateHelper
 {
 
+    private static $MONTH_NAMES = ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július',
+        'Augusztus', 'Szeptember', 'Október', 'November', 'December'];
+
+    private static $DAY_NAMES = ['Vasárnap','Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat'];
+
+    public static function getMonthName($i)
+    {
+        return self::$MONTH_NAMES[$i - 1];
+    }
+
+    public static function getDayWithDayName($date) {
+        $dw = date( "w", strtotime($date));
+
+
+        return $date.", ".self::$DAY_NAMES[intval($dw)%7];
+    }
+
+
     public static function getLastMonday($date)
     {
         if (!$date) {
@@ -34,5 +52,10 @@ class DateHelper
         $day = 7 - $date->format('N');
         $date = $date->add(new DateInterval("P{$day}D"))->format('Y-m-d');
         return $date;
+    }
+
+    public function getDayName($date)
+    {
+
     }
 }
