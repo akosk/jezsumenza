@@ -22,10 +22,12 @@ AppAsset::register($this);
     <?php $this->head() ?>
 
     <style>
-        body {
-            background-image: url('/images/bg.jpg');
-            background-position: left bottom;
-            background-repeat: repeat-x
+        @media screen and (min-device-height:600px) {
+            body {
+                background-image: url('/images/bg.jpg');
+                background-position: left bottom;
+                background-repeat: repeat-x
+            }
         }
     </style>
 </head>
@@ -50,6 +52,9 @@ AppAsset::register($this);
             <i class="glyphicon glyphicon-question-sign"></i> Ha kérdésed van, keresd Kovács Attilát!
         </div>
     </div>
+
+    <br/>
+    <br/>
 </div>
 
 
