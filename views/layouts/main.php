@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
+use yii\helpers\Url;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 
@@ -30,7 +31,7 @@ AppAsset::register($this);
         'brandLabel' => '<i class="glyphicon glyphicon-cutlery"></i> Menza',
         'brandUrl'   => Yii::$app->homeUrl,
         'options'    => [
-            'class' => 'navbar-inverse navbar-fixed-top',
+            'class' => 'navbar-default  navbar-fixed-top navbar-inverse cbp-af-header',
         ],
     ]);
     echo Nav::widget([
@@ -89,6 +90,11 @@ AppAsset::register($this);
 </footer>
 
 <?php $this->endBody() ?>
+
+<script src="<?=Url::base();?>/js/classie.js" type="text/javascript"></script>
+<script src="<?=Url::base();?>/js/cbpAnimatedHeader.min.js" type="text/javascript"></script>
+
+
 </body>
 </html>
 <?php $this->endPage() ?>
