@@ -60,7 +60,7 @@ class GateController extends ControllerBase
             throw new HttpException(500,'Nem választott menüt.');
         }
 
-        $respone = [
+        $response = [
             'gate'               => $gate,
             'timestamp'          => $currentDateTime->getTimestamp(),
             'date'               => $currentDate,
@@ -82,6 +82,6 @@ class GateController extends ControllerBase
 
         ];
 
-        return Json::encode($respone);
+        return Json::encode($response);
     }
 }
