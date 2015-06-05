@@ -1,15 +1,9 @@
-<div ng-show="!isFocused" class="jumbotron alert alert-danger">
-    <h1><i class="glyphicon glyphicon-alert"></i> Üzemen kívül!</h1>
+<div ng-include="getTemplate('focus.html')"></div>
 
-    <p>A böngésző elvesztette a fókuszt, így a kártyák feldolgozása nem lehetséges.</p>
-
-    <p><strong>Helyezze a böngészőt fókuszba!</strong></p>
-
-</div>
 
 <div ng-show="isFocused" class="row">
     <div class="col-md-12">
-        <table class="table">
+        <table class="table table-condensed" style="font-size: 120%">
             <tr>
                 <th>Időpont</th>
                 <th>Tanuló</th>
@@ -18,19 +12,26 @@
                 <th>Idősáv</th>
                 <th>Fizetve</th>
                 <th>Idősávban</th>
+                <th>Hiba</th>
             </tr>
-            <tr class="row" ng-repeat="gateEvent in dataService.getGateEvents()  track by $index">
-                <td ng-if="gateEvent.error===undefined">{{gateEvent.time}}</td>
-                <td ng-if="gateEvent.error===undefined">{{gateEvent.user_name}}</td>
-                <td ng-if="gateEvent.error===undefined">{{gateEvent.barcode}}</td>
-                <td ng-if="gateEvent.error===undefined">{{gateEvent.school_class}}</td>
-                <td ng-if="gateEvent.error===undefined">
+            <tr ng-class="gateEvent.error!==undefined || !gateEvent.within_eating_time || !gateEvent.paid ? 'danger':''" ng-repeat="gateEvent in dataService.getGateEvents()  track by $index">
+                <td>{{gateEvent.time}}</td>
+                <td>{{gateEvent.user_name}}</td>
+                <td>{{gateEvent.barcode}}</td>
+                <td>{{gateEvent.school_class}}</td>
+                <td>
                     {{gateEvent.eating_time_start}}-{{gateEvent.eating_time_end}}
                 </td>
-                <td ng-if="gateEvent.error===undefined">{{gateEvent.paid}}</td>
-                <td ng-if="gateEvent.error===undefined">{{gateEvent.within_eating_time}}</td>
+                <td>
+                    <i ng-show="gateEvent.paid" class="glyphicon glyphicon-ok" style="color:#008000"></i>
+                    <i ng-show="!gateEvent.paid" class="glyphicon glyphicon-remove" style="color:darkred"></i>
+                </td>
+                <td>
+                    <i ng-show="gateEvent.within_eating_time" class="glyphicon glyphicon-ok" style="color:#008000"></i>
+                    <i ng-show="!gateEvent.within_eating_time" class="glyphicon glyphicon-remove" style="color:darkred"></i>
+                </td>
 
-                <td ng-if="gateEvent.error!==undefined" class="danger" colspan="7">{{gateEvent.error}}</td>
+                <td>{{gateEvent.error}}</td>
             </tr>
         </table>
     </div>

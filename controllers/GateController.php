@@ -30,7 +30,24 @@ class GateController extends ControllerBase
 
     public function actionGateEvent($gate, $barcode)
     {
+
+        $currentDateTime = new \DateTime();
+        $currentTime = $currentDateTime->format('H:i:s');
+        $currentDate = $currentDateTime->format('Y-m-d');
+
+
         $profile = Profile::find()->where('barcode=:barcode', [':barcode' => $barcode])->one();
+        if (!$profile) {
+            $response = [
+                'gate'               => $gate,
+                'timestamp'          => $currentDateTime->getTimestamp(),
+                'date'               => $currentDate,
+                'time'               => $currentTime,
+                'barcode'            => $barcode,
+                'error'              => "A vonalkódhoz nincs felhasználó rendelve"
+            ];
+            return Json::encode($response);
+        }
 
         $gateEvent = new GateEvent();
         $gateEvent->user_id = $profile->user_id;
@@ -45,9 +62,6 @@ class GateController extends ControllerBase
         $eatingTimeStart = $user->getEatingTimeStart();
         $eatingTimeEnd = $user->getEatingTimeEnd();
 
-        $currentDateTime = new \DateTime();
-        $currentTime = $currentDateTime->format('H:i:s');
-        $currentDate = $currentDateTime->format('Y-m-d');
         $lunchChoice = LunchChoice::find()
             ->joinWith('lunchMenu')
             ->where('lunch_menu.date=:date AND user_id=:userId', [
@@ -57,30 +71,43 @@ class GateController extends ControllerBase
             ->one();
 
         if (!$lunchChoice) {
-            throw new HttpException(500,'Nem választott menüt.');
+            $response = [
+                'gate'               => $gate,
+                'timestamp'          => $currentDateTime->getTimestamp(),
+                'date'               => $currentDate,
+                'time'               => $currentTime,
+                'user_name'          => $profile->name,
+                'barcode'            => $barcode,
+                'school_class'       => $profile->schoolClass->name,
+                'eating_time_start'  => $eatingTimeStart,
+                'eating_time_end'    => $eatingTimeEnd,
+                'paid'               => $user->getLunchRight($currentDate)->one() != null,
+                'within_eating_time' => $user->isWithinEatingTime($eatingTimeStart, $eatingTimeEnd, $currentTime),
+                'error'              => "Nem választott menüt"
+            ];
+        } else {
+            $response = [
+                'gate'               => $gate,
+                'timestamp'          => $currentDateTime->getTimestamp(),
+                'date'               => $currentDate,
+                'time'               => $currentTime,
+                'user_name'          => $profile->name,
+                'barcode'            => $barcode,
+                'school_class'       => $profile->schoolClass->name,
+                'eating_time_start'  => $eatingTimeStart,
+                'eating_time_end'    => $eatingTimeEnd,
+                'paid'               => $user->getLunchRight($currentDate)->one() != null,
+                'within_eating_time' => $user->isWithinEatingTime($eatingTimeStart, $eatingTimeEnd, $currentTime),
+                'lunch_menu'         => $lunchChoice->lunchMenu->letter,
+                'lunch_menu_food'    => array_map(function ($item) {
+                    return [
+                        'category' => $item->category,
+                        'name'     => $item->translate(Yii::$app->language)->name,
+                    ];
+                }, $lunchChoice->lunchMenu->foods),
+
+            ];
         }
-
-        $response = [
-            'gate'               => $gate,
-            'timestamp'          => $currentDateTime->getTimestamp(),
-            'date'               => $currentDate,
-            'time'               => $currentTime,
-            'user_name'          => $profile->name,
-            'barcode'            => $barcode,
-            'school_class'       => $profile->schoolClass->name,
-            'eating_time_start'  => $eatingTimeStart,
-            'eating_time_end'    => $eatingTimeEnd,
-            'paid'               => $user->getLunchRight($currentDate)->one() != null,
-            'within_eating_time' => $user->isWithinEatingTime($eatingTimeStart, $eatingTimeEnd, $currentTime),
-            'lunch_menu'         => $lunchChoice->lunchMenu->letter,
-            'lunch_menu_food'    => array_map(function ($item) {
-                return [
-                    'category' => $item->category,
-                    'name' => $item->translate(Yii::$app->language)->name,
-                ];
-            }, $lunchChoice->lunchMenu->foods),
-
-        ];
 
         return Json::encode($response);
     }

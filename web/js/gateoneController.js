@@ -40,6 +40,7 @@
 
       $scope.getFoodName = function (gateEvent) {
          var foods = gateEvent.lunch_menu_food;
+         if (foods===undefined) return '';
          foods.sort(
             function (a, b) {
                if (a.category < b.category) {
@@ -85,6 +86,10 @@
          });
       });
 
+
+      $scope.getTemplate = function (template) {
+         return TEMPLATE_URL + template;
+      };
 
    }
 

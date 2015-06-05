@@ -1,20 +1,40 @@
-<div class="row">
-    <div class="col-md-2">
-        <div>
-            <div>
-                <button ng-class="isFocused?'btn btn-success disabled':'btn btn-danger disabled'">Fókusz</button>
-            </div>
+<div ng-include="getTemplate('focus.html')"></div>
 
-            <ul>
-                <li ng-repeat="item in items  track by $index">
-                    {{item}}
-                </li>
-            </ul>
-        </div>
+
+<div ng-show="isFocused" class="row">
+    <div class="col-md-12">
+        <table class="table table-condensed" style="font-size: 120%">
+            <tr>
+                <th>Időpont</th>
+                <th>Tanuló</th>
+                <th>Vonalkód</th>
+                <th>Menü</th>
+                <th>Étel</th>
+                <th>Fizetve</th>
+                <th>Hiba</th>
+            </tr>
+            <tr ng-class="gateEvent.error!==undefined || !gateEvent.within_eating_time || !gateEvent.paid ? 'danger':''" ng-repeat="gateEvent in dataService.getGateEvents()  track by $index">
+                <td>{{gateEvent.time}}</td>
+                <td>{{gateEvent.user_name}}</td>
+                <td>{{gateEvent.barcode}}</td>
+                <td><strong>{{gateEvent.lunch_menu}}</strong></td>
+                <td>
+                    {{getFoodName(gateEvent)}}
+                </td>
+                <td>
+                    <i ng-show="gateEvent.paid" class="glyphicon glyphicon-ok" style="color:#008000"></i>
+                    <i ng-show="!gateEvent.paid" class="glyphicon glyphicon-remove" style="color:darkred"></i>
+                </td>
+
+                <td>{{gateEvent.error}}</td>
+            </tr>
+        </table>
     </div>
-    <div class="col-md-10">
+</div>
 
-        <div class="row" ng-repeat="gateEvent in dataService.getGateEvents()  track by $index">
+
+
+
             <div ng-if="gateEvent.error===undefined">
                 <div class="col-md-1">{{gateEvent.time}}</div>
                 <div class="col-md-2">{{gateEvent.user_name}}</div>
@@ -23,10 +43,3 @@
                 <div class="col-md-5">{{getFoodName(gateEvent)}}</div>
                 <div class="col-md-1">{{gateEvent.paid}}</div>
             </div>
-            <div ng-if="gateEvent.error!==undefined">
-                <div class="col-md-12">{{gateEvent.error}}</div>
-            </div>
-
-        </div>
-    </div>
-</div>
