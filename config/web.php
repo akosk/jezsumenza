@@ -9,15 +9,15 @@ $config = [
     'bootstrap'  => ['log'],
     'modules'    => [
         'user'     => [
-            'class'                  => 'dektrium\user\Module',
-            'enableConfirmation'     => false,
-            'admins'                 => ['akosk'],
+            'class'              => 'dektrium\user\Module',
+            'enableConfirmation' => false,
+            'admins'             => ['akosk'],
 
-            'controllerMap'          => [
+            'controllerMap'      => [
                 'security' => 'app\controllers\SecurityController',
             ],
 
-            'modelMap'               => [
+            'modelMap'           => [
                 'User'       => 'app\models\User',
                 'Profile'    => 'app\models\Profile',
                 'UserSearch' => 'app\models\UserSearch',
@@ -27,12 +27,16 @@ $config = [
             'class' => 'dektrium\rbac\Module',
         ],
         'gridview' => [
-            'class' => '\kartik\grid\Module'
+            'class' => '\kartik\grid\Module',
             // enter optional module parameters below - only if you need to
             // use your own export download action or custom translation
             // message source
             // 'downloadAction' => 'gridview/export/download',
-            // 'i18n' => []
+            'i18n'  => [
+                'class'            => 'yii\i18n\PhpMessageSource',
+                'basePath'         => '@app/messages',
+                'forceTranslation' => true
+            ]
         ]
     ],
     'components' => [
