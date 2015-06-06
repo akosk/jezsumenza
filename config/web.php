@@ -3,25 +3,30 @@
 $params = require(__DIR__ . '/params.php');
 
 $config = [
-    'id' => 'basic',
-    'basePath' => dirname(__DIR__),
+    'id'         => 'basic',
+    'basePath'   => dirname(__DIR__),
     'language'   => 'hu-HU',
-    'bootstrap' => ['log'],
-    'modules'=>[
-        'user' => [
-            'class' => 'dektrium\user\Module',
-            'enableConfirmation'=>false,
-            'admins'=>['akosk'],
-            'modelMap' => [
-                'User' => 'app\models\User',
-                'Profile' => 'app\models\Profile',
-                'UserSearch'       => 'app\models\UserSearch',
+    'bootstrap'  => ['log'],
+    'modules'    => [
+        'user'     => [
+            'class'                  => 'dektrium\user\Module',
+            'enableConfirmation'     => false,
+            'admins'                 => ['akosk'],
+
+            'controllerMap'          => [
+                'security' => 'app\controllers\SecurityController',
+            ],
+
+            'modelMap'               => [
+                'User'       => 'app\models\User',
+                'Profile'    => 'app\models\Profile',
+                'UserSearch' => 'app\models\UserSearch',
             ],
         ],
-        'rbac' => [
+        'rbac'     => [
             'class' => 'dektrium\rbac\Module',
         ],
-        'gridview' =>  [
+        'gridview' => [
             'class' => '\kartik\grid\Module'
             // enter optional module parameters below - only if you need to
             // use your own export download action or custom translation
@@ -31,27 +36,26 @@ $config = [
         ]
     ],
     'components' => [
-        'request' => [
+        'request'      => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'IDNNZc7GCYB-O3Dz_2v-NVLddUvecZNQ',
         ],
-        'cache' => [
+        'cache'        => [
             'class' => 'yii\caching\FileCache',
         ],
-        'user' => [
+        'user'         => [
             'identityClass'   => 'app\models\User',
             'enableAutoLogin' => true,
 
-
         ],
-        'i18n' => [
+        'i18n'         => [
             'translations' => [
                 'user*' => [
-                    'class' => 'yii\i18n\PhpMessageSource',
+                    'class'   => 'yii\i18n\PhpMessageSource',
                     //'basePath' => '@app/messages',
                     //'sourceLanguage' => 'en-US',
                     'fileMap' => [
-                        'app' => 'app.php',
+                        'app'       => 'app.php',
                         'app/error' => 'error.php',
                     ],
                 ],
@@ -60,34 +64,34 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
+        'mailer'       => [
+            'class'            => 'yii\swiftmailer\Mailer',
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
             'useFileTransport' => true,
         ],
-        'log' => [
+        'log'          => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
+            'targets'    => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    'class'  => 'yii\log\FileTarget',
                     'levels' => ['error', 'warning'],
                 ],
                 [
-                    'class' => 'app\components\DbTarget',
+                    'class'  => 'app\components\DbTarget',
                     'levels' => ['error', 'warning', 'info'],
                 ],
             ],
         ],
 
-        'authManager'          => [
+        'authManager'  => [
             'class'        => 'yii\rbac\DbManager',
             'defaultRoles' => ['guest'],
         ],
-        'urlManager'           => [
-            'enablePrettyUrl'     => true,
-            'showScriptName'      => true,
+        'urlManager'   => [
+            'enablePrettyUrl' => true,
+            'showScriptName'  => true,
 //            'enableStrictParsing' => false,
 //            'rules'               => [
 //                '<module:\w+>/<controller:\w+>/<action:[\w-]+>/<id:\d+>' => '<module>/<controller>/<action>',
@@ -97,7 +101,7 @@ $config = [
 //                ''                                                    => '/site/index',
 //            ],
         ],
-        'view'                 => [
+        'view'         => [
             'theme' => [
                 'pathMap' => [
                     '@dektrium/user/views' => '@app/views/user'
@@ -105,9 +109,9 @@ $config = [
             ],
         ],
 
-        'db' => require(__DIR__ . '/db.php'),
+        'db'           => require(__DIR__ . '/db.php'),
     ],
-    'params' => $params,
+    'params'     => $params,
 ];
 
 if (YII_ENV_DEV) {
