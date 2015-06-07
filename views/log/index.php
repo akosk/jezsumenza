@@ -22,7 +22,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'heading' => 'Napló',
         ],
         'columns'      => [
-            ['class' => 'yii\grid\SerialColumn'],
 
             [
                 'attribute' => 'log_time',

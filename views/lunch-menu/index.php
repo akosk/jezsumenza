@@ -24,8 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'columns'      => [
             ['class' => 'yii\grid\CheckboxColumn'],
-            ['class' => 'yii\grid\SerialColumn'],
-            'id',
+
             'letter',
             'date',
             'create_time',

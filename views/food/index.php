@@ -23,8 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'heading' => 'Ételek',
         ],
         'columns'      => [
-            ['class' => 'yii\grid\SerialColumn'],
-            'id',
+
             [
                 'attribute' => 'name',
                 'label'     => 'Étel',

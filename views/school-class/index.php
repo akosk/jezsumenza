@@ -24,9 +24,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'heading' => 'Osztályok',
         ],
         'columns'      => [
-            ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
             'name',
             'eating_time_start',
             'eating_time_end',
