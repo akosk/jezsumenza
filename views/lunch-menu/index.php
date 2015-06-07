@@ -19,6 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel'  => $searchModel,
         'panel'        => [
             'type'    => GridView::TYPE_PRIMARY,
             'heading' => 'Ebéd menük',
@@ -26,7 +27,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns'      => [
             ['class' => 'yii\grid\CheckboxColumn'],
 
-            'date',
+            [
+                'label'     => 'Időpont',
+                'attribute' => 'date',
+                'filterType'=>GridView::FILTER_DATE_RANGE,
+                'filterWidgetOptions'=>[
+                    'convertFormat'=>true,
+                    'pluginOptions'=>[
+                        'timePicker'=>false,
+                        'format'=>'Y-m-d'
+                    ]
+                ],
+                'value'     => function ($model, $key, $index, $column) {
+                    return $model['date'];
+                }
+            ],
 
             'letter',
 

@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Food;
 use app\models\LunchChoice;
 use app\models\LunchMenuFood;
+use app\models\LunchMenuSearch;
 use app\models\User;
 use Yii;
 use app\models\LunchMenu;
@@ -120,17 +121,24 @@ class LunchMenuController extends ControllerBase
      */
     public function actionIndex()
     {
-        $dataProvider = new ActiveDataProvider([
-            'query' => LunchMenu::find()->innerJoinWith(['foodsSorted']),
-            'sort'       => [
-                'attributes' => [
-                    'date',
-                    'letter',
-                ],
-            ],
-        ]);
+//        $lunchMenu = new LunchMenu;
+//
+//        $query = LunchMenu::find()->innerJoinWith(['foodsSorted']);
+//
+//        $dataProvider = new ActiveDataProvider([
+//            'query' => $query,
+//            'sort'       => [
+//                'attributes' => [
+//                    'date',
+//                    'letter',
+//                ],
+//            ],
+//        ]);
 
+        $searchModel = new LunchMenuSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', [
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
