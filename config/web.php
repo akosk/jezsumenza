@@ -14,6 +14,7 @@ $config = [
             'admins'             => ['akosk'],
 
             'controllerMap'      => [
+                'admin' => 'app\controllers\AdminController',
                 'security' => 'app\controllers\SecurityController',
             ],
 
