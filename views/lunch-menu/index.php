@@ -13,7 +13,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="lunch-menu-index">
 
     <h1><?= Html::a('Ebéd menü létrehozása', ['create'], ['class' => 'btn btn-success']) ?>
-        <button onclick="deleteSelected()" class="btn btn-danger">Kijelöltek törlése</button></h1>
+        <button onclick="deleteSelected()" class="btn btn-danger">Kijelöltek törlése</button>
+    </h1>
 
 
     <?= GridView::widget([
@@ -25,9 +26,20 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns'      => [
             ['class' => 'yii\grid\CheckboxColumn'],
 
-            'letter',
             'date',
-            'create_time',
+
+            'letter',
+
+            [
+                'attribute'=>'foodsSorted',
+                'label' => "Ételek",
+                'value' => function ($data, $id, $index, $dataColumn) {
+                    return implode(', ',
+                        array_map(function ($item) {
+                            return $item->name;
+                        }, $data->foodsSorted));
+                },
+            ],
 
             [
                 'class'          => 'yii\grid\ActionColumn',
@@ -56,6 +68,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
     function deleteSelected() {
         var ids = getSelectedRows();
-        window.location.href='<?php echo Url::to(['/lunch-menu/bulk-delete']); ?>?ids='+ids.join();
+        window.location.href = '<?php echo Url::to(['/lunch-menu/bulk-delete']); ?>?ids=' + ids.join();
     }
 </script>

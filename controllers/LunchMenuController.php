@@ -121,7 +121,13 @@ class LunchMenuController extends ControllerBase
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => LunchMenu::find(),
+            'query' => LunchMenu::find()->innerJoinWith(['foodsSorted']),
+            'sort'       => [
+                'attributes' => [
+                    'date',
+                    'letter',
+                ],
+            ],
         ]);
 
         return $this->render('index', [
