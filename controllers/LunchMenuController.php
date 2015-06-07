@@ -7,6 +7,7 @@ use app\models\LunchChoice;
 use app\models\LunchMenuFood;
 use app\models\LunchMenuSearch;
 use app\models\User;
+use Exception;
 use Yii;
 use app\models\LunchMenu;
 use yii\data\ActiveDataProvider;
@@ -79,9 +80,9 @@ class LunchMenuController extends ControllerBase
             ->all();
         $data = array_reduce($users, function ($carry, $item) {
             $carry[] = [
-                'id' => $item['id'],
-                'name' => $item['profile']['name'],
-                'username'=>$item['username']
+                'id'       => $item['id'],
+                'name'     => $item['profile']['name'],
+                'username' => $item['username']
             ];
             return $carry;
         }, []);
@@ -92,7 +93,7 @@ class LunchMenuController extends ControllerBase
     public function actionAddUserToMenu($id)
     {
 
-        $lunchMenu=LunchMenu::findOne($id);
+        $lunchMenu = LunchMenu::findOne($id);
         if (!$lunchMenu) {
             throw new NotFoundHttpException('Nincs ilyen azonosítójú ebéd menü');
         }
@@ -110,8 +111,8 @@ class LunchMenuController extends ControllerBase
 
         $model = new User();
         return $this->render('add_user_to_menu', [
-            'model' => $model,
-            'lunchMenu'=>$lunchMenu
+            'model'     => $model,
+            'lunchMenu' => $lunchMenu
         ]);
     }
 
@@ -138,7 +139,7 @@ class LunchMenuController extends ControllerBase
         $searchModel = new LunchMenuSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -163,21 +164,30 @@ class LunchMenuController extends ControllerBase
     public function actionCreate()
     {
         $model = new LunchMenu();
-        $model->date=date('Y-m-d');
+        $model->date = date('Y-m-d');
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        try {
+            if ($model->load(Yii::$app->request->post()) && $model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
+        } catch (Exception $e) {
+            $errorMsg = (count($model->formFoods) !== count(array_unique($model->formFoods))) ?
+                "Egy étel csak egyszer szerepelhet a menüben."
+                :
+                "Már létezik a megadott napra ilyen betű-kódú menü";
 
-            $foods = BaseArrayHelper::map(Food::find()->all(), 'id', function ($data) {
-                return $data->translate(Yii::$app->language)->name;
-            });
+            Yii::$app->getSession()->setFlash('error', "<strong>Hiba!</strong> $errorMsg");
 
-            return $this->render('create', [
-                'model' => $model,
-                'foods' => $foods,
-            ]);
         }
+
+        $foods = BaseArrayHelper::map(Food::find()->all(), 'id', function ($data) {
+            return $data->translate(Yii::$app->language)->name;
+        });
+
+        return $this->render('create', [
+            'model' => $model,
+            'foods' => $foods,
+        ]);
     }
 
     /**

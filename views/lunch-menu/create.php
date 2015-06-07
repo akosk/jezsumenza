@@ -1,5 +1,6 @@
 <?php
 
+use kartik\widgets\AlertBlock;
 use yii\helpers\Html;
 
 
@@ -10,6 +11,15 @@ $this->title = 'Ebéd menü létrehozása';
 $this->params['breadcrumbs'][] = ['label' => 'Ebéd menük', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
+<?php
+echo AlertBlock::widget([
+    'useSessionFlash' => true,
+    'delay'           => false,
+    'type'            => AlertBlock::TYPE_ALERT
+]);
+?>
+
 <div class="lunch-menu-create">
 
     <div class="panel panel-primary">
