@@ -22,14 +22,14 @@ class AdminController extends BaseAdminController
     public function behaviors()
     {
         return [
-            'verbs'  => [
-                'class'   => VerbFilter::className(),
-                'actions' => [
-                    'delete'  => ['post'],
-                    'confirm' => ['post'],
-                    'block'   => ['post']
-                ],
-            ],
+//            'verbs'  => [
+//                'class'   => VerbFilter::className(),
+//                'actions' => [
+//                    'delete'  => ['post'],
+//                    'confirm' => ['post'],
+//                    'block'   => ['post']
+//                ],
+//            ],
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
