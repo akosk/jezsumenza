@@ -57,7 +57,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'data' => [
                     ''=>'Nincs szűrés',
                     'admin'=>'Adminisztrátor',
+                    'economic'=>'Gazdasági csoport',
                     'kitchener'=>'Konyhafőnök',
+                    'teacher'=>'Tanár',
                     'student'=>'Tanuló',
                 ],
                 'options' => ['multiple' => false]
