@@ -43,7 +43,25 @@ class AdminController extends BaseAdminController
         ];
     }
 
+    public function actionCreate()
+    {
+        /** @var User $user */
+        $user = \Yii::createObject([
+            'class'    => User::className(),
+            'scenario' => 'create',
+        ]);
 
+        $this->performAjaxValidation($user);
+
+        if ($user->load(\Yii::$app->request->post()) && $user->create()) {
+            \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'User has been created'));
+            return $this->redirect(['update','id'=>$user->id]);
+        }
+
+        return $this->render('create', [
+            'user' => $user
+        ]);
+    }
 
 
 }
