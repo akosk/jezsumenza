@@ -33,7 +33,7 @@ class Profile extends BaseProfile
         return ArrayHelper::merge(
             parent::rules(),
             [
-                [['dina_id', 'barcode'], 'string'],
+                [['yami_id', 'barcode'], 'string'],
                 [['school_class_id'], 'integer'],
                 [['eating_time_start', 'eating_time_end'], 'safe'],
             ]
@@ -46,7 +46,7 @@ class Profile extends BaseProfile
         $merged = ArrayHelper::merge(
             parent::attributeLabels(),
                 [
-                    'dina_id'           => \Yii::t('user', 'Dina id'),
+                    'yami_id'           => \Yii::t('user', 'Yami azonosító'),
                     'school_class_id'   => \Yii::t('user', 'Osztály'),
                     'eating_time_start' => 'Egyéni étkezési idősáv kezdete',
                     'eating_time_end'   => 'Egyéni étkezési idősáv vége',

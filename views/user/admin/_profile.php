@@ -24,7 +24,7 @@ use yii\helpers\ArrayHelper;
 <?= $form->field($profile, 'website') ?>
 <?= $form->field($profile, 'location') ?>
 
-<?= $form->field($profile, 'dina_id') ?>
+<?= $form->field($profile, 'yami_id') ?>
 <?= $form->field($profile, 'bio')->textarea() ?>
 <?= $form->field($profile, 'school_class_id')
     ->dropDownList(ArrayHelper::map(SchoolClass::find()->orderBy('name')->all(), 'id', 'name'),
