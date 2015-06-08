@@ -113,3 +113,8 @@ a.desc:after {
 .navbar-brand {
     color:wheat !important;
 }
+
+.menu-widget {
+    /*padding: 15px;*/
+    /*margin:5px;*/
+}

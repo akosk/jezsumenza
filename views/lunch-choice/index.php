@@ -53,25 +53,36 @@ $this->registerJsFile(\yii\helpers\Url::base(true) . '\js\lunch-choice-index.js'
                             $userSelected = in_array($menu->id, $userChoices);
                             ?>
                             <div class="col-xs-6 col-sm-4  text-center">
-                                <h4> '<?= $menu->letter ?>' menü</h4>
-                                <?php foreach ($menu->foods as $food) { ?>
-                                    <h5><?= $food->translate(Yii::$app->language)->name ?></h5>
-                                <?php } ?>
-
-                                <?php if ($key > date('Y-m-d')) { ?>
-                                    <button data-user-selected="<?= $userSelected ? 1 : 0 ?>"
-                                            data-menu-date="<?= $menu->date ?>"
-                                            data-menu-id="<?= $menu->id ?>"
-                                            class="btn btn-primary <?= $userSelected ? 'disabled' : '' ?>">
-                                        <?= $userSelected ? 'Kiválasztva' : 'Ezt választom!' ?>
-                                    </button>
-                                <?php } else {
-                                    if ($userSelected) {
+                                <button data-user-selected="<?= $userSelected ? 1 : 0 ?>"
+                                        data-menu-date="<?= $menu->date ?>"
+                                        data-menu-id="<?= $menu->id ?>"
+                                        class="menu-widget btn btn-primary <?= $userSelected || ($key <= date('Y-m-d'))
+                                            ? 'disabled' : '' ?>">
+                                    <h3>
+                                        <?php if ($userSelected) {?>
+                                            <i class="glyphicon glyphicon-ok" style="color:deepskyblue"></i>
+                                        <?php } ?>
+                                        <strong><?= $menu->letter ?></strong></h3>
+                                    <?php
+                                    $description="";
+                                    foreach ($menu->foods as $food) {
+                                        $description.="<h4>{$food->name}</h4> <em>{$food->description}</em>"
                                         ?>
-                                        <h3><span class="label label-primary">Kiválasztva</span></h3>
-                                    <?php }
-                                } ?>
+                                        <h5><?= $food->translate(Yii::$app->language)->name ?></h5>
+                                    <?php } ?>
+                                    <a   onclick="
+                                    event.preventDefault();
+                                    event.stopPropagation();
+                                    $('#modal-body').html('<?=$description?>');
+                                    $('#myModal').modal({});"><h3
+                                            style="cursor:pointer;margin:0px;
+                                    padding:0px;">
+                                            <i class="glyphicon glyphicon-question-sign" style="color:white"></i>
+                                        </h3></a>
+                                </button>
 
+                                <div>
+                                </div>
                             </div>
                         <?php } ?>
                     </div>
@@ -91,3 +102,21 @@ $this->registerJsFile(\yii\helpers\Url::base(true) . '\js\lunch-choice-index.js'
     </div>
 
 <?php }
+?>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Ételek leírása</h4>
+            </div>
+            <div id="modal-body" class="modal-body">
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Bezárás</button>
+            </div>
+        </div>
+    </div>
+</div>
