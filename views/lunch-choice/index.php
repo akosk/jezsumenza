@@ -20,17 +20,17 @@ $this->registerJsFile(\yii\helpers\Url::base(true) . '\js\lunch-choice-index.js'
     <div class="row" style="margin-bottom:20px">
         <div class="col-xs-6 col-md-2 text-left">
             <a class="btn btn-primary" style="width:100%"
-                   href="<?= Url::toRoute(['/lunch-choice/index', 'date' => $previousWeek], true) ?>">
-                    <i class="glyphicon glyphicon-arrow-left"></i>
-                    Előző hét
-                </a>
+               href="<?= Url::toRoute(['/lunch-choice/index', 'date' => $previousWeek], true) ?>">
+                <i class="glyphicon glyphicon-arrow-left"></i>
+                Előző hét
+            </a>
         </div>
         <div class="col-xs-6 col-md-2 col-md-offset-8 text-right">
             <a class="btn btn-primary" style="width:100%"
-                   href="<?= Url::toRoute(['/lunch-choice/index', 'date' => $nextWeek], true) ?>">
-                    Következő hét
-                    <i class="glyphicon glyphicon-arrow-right"></i>
-                </a>
+               href="<?= Url::toRoute(['/lunch-choice/index', 'date' => $nextWeek], true) ?>">
+                Következő hét
+                <i class="glyphicon glyphicon-arrow-right"></i>
+            </a>
         </div>
     </div>
 
@@ -57,12 +57,21 @@ $this->registerJsFile(\yii\helpers\Url::base(true) . '\js\lunch-choice-index.js'
                                 <?php foreach ($menu->foods as $food) { ?>
                                     <h5><?= $food->translate(Yii::$app->language)->name ?></h5>
                                 <?php } ?>
-                                <button data-user-selected="<?= $userSelected ? 1 : 0 ?>"
-                                        data-menu-date="<?= $menu->date ?>"
-                                        data-menu-id="<?= $menu->id ?>"
-                                        class="btn btn-primary <?= $userSelected ? 'disabled' : '' ?>">
-                                    <?= $userSelected ? 'Kiválasztva' : 'Ezt választom!' ?>
-                                </button>
+
+                                <?php if ($key > date('Y-m-d')) { ?>
+                                    <button data-user-selected="<?= $userSelected ? 1 : 0 ?>"
+                                            data-menu-date="<?= $menu->date ?>"
+                                            data-menu-id="<?= $menu->id ?>"
+                                            class="btn btn-primary <?= $userSelected ? 'disabled' : '' ?>">
+                                        <?= $userSelected ? 'Kiválasztva' : 'Ezt választom!' ?>
+                                    </button>
+                                <?php } else {
+                                    if ($userSelected) {
+                                        ?>
+                                        <h3><span class="label label-primary">Kiválasztva</span></h3>
+                                    <?php }
+                                } ?>
+
                             </div>
                         <?php } ?>
                     </div>
