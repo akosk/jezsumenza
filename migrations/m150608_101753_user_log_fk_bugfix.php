@@ -7,8 +7,10 @@ class m150608_101753_user_log_fk_bugfix extends Migration
 {
     public function up()
     {
+        $fkName=Yii::$app->db->createCommand("SELECT CONSTRAINT_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+where table_name='log' AND referenced_table_name='user'")->queryScalar();
         $q="ALTER TABLE `log`
-DROP FOREIGN KEY `log_ibfk_2`";
+DROP FOREIGN KEY `{$fkName}`";
         $this->execute($q);
     }
 
