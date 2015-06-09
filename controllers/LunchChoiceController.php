@@ -7,11 +7,30 @@ use app\models\LunchChoice;
 use app\models\LunchMenu;
 use DateInterval;
 use yii\db\Expression;
+use yii\filters\AccessControl;
 use yii\web\NotFoundHttpException;
 use yii\web\ServerErrorHttpException;
 
 class LunchChoiceController extends ControllerBase
 {
+
+    public function behaviors()
+    {
+        return [
+
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index', 'select'],
+                        'allow'   => true,
+                        'roles'   => ['student'],
+                    ],
+                ]
+            ]
+        ];
+    }
+
     public function actionIndex($date = null)
     {
         $lastMonday = DateHelper::getLastMonday($date);
