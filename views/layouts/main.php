@@ -36,9 +36,10 @@ AppAsset::register($this);
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
+        'encodeLabels' => false,
         'items'   => [
             [
-                'label' => 'Adminisztráció',
+                'label' => '<i class="glyphicon glyphicon-cog"></i> Adminisztráció',
                 'visible' => Yii::$app->user->can('admin'),
                 'items' => [
                     ['label' => 'Felhasználók', 'url' => ['/user/admin'] ],
@@ -54,7 +55,7 @@ AppAsset::register($this);
                 ]
             ],
             [
-                'label' => 'Statisztika',
+                'label' => '<i class="glyphicon glyphicon-stats"></i> Statisztika',
                 'visible' => Yii::$app->user->can('admin'),
                 'items' => [
                     ['label' => 'Ételek listája', 'url' => ['/statistics/foods']],
@@ -65,10 +66,10 @@ AppAsset::register($this);
                 ]
             ],
 
-            ['label' => 'Menü választó', 'url' => ['/lunch-choice'], 'visible' => Yii::$app->user->can('student'),],
+
             Yii::$app->user->isGuest ?
-                ['label' => 'Bejelentkezés', 'url' => ['/user/security/login']] :
-                ['label'       => 'Kijelentkezés (' . Yii::$app->user->identity->username . ')',
+                ['label' => '<i class="glyphicon glyphicon-log-in"></i> Bejelentkezés', 'url' => ['/user/security/login']] :
+                ['label'       => '<i class="glyphicon glyphicon-off"></i> Kijelentkezés (' . Yii::$app->user->identity->username . ')',
                  'url'         => ['/user/security/logout'],
                  'linkOptions' => ['data-method' => 'post']],
         ],

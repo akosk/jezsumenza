@@ -36,13 +36,14 @@ AppAsset::register($this);
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
+        'encodeLabels' => false,
         'items'   => [
 
 
-            ['label' => 'Menü választó', 'url' => ['/lunch-choice'], 'visible' => Yii::$app->user->can('student'),],
+            ['label' => '<i class="glyphicon glyphicon-list"></i> Menü választó', 'url' => ['/lunch-choice'], 'visible' => Yii::$app->user->can('student'),],
             Yii::$app->user->isGuest ?
-                ['label' => 'Bejelentkezés', 'url' => ['/user/security/login']] :
-                ['label'       => 'Kijelentkezés (' . Yii::$app->user->identity->username . ')',
+                ['label' => '<i class="glyphicon glyphicon-log-in"></i> Bejelentkezés', 'url' => ['/user/security/login']] :
+                ['label'       => '<i class="glyphicon glyphicon-off"></i> Kijelentkezés (' . Yii::$app->user->identity->username . ')',
                  'url'         => ['/user/security/logout'],
                  'linkOptions' => ['data-method' => 'post']],
         ],
