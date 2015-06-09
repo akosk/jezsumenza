@@ -22,7 +22,9 @@ use yii\widgets\Pjax;
 $this->title = Yii::t('user', 'Manage users');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Html::a(Yii::t('user', 'Create a user account'), ['create'], ['class' => 'btn btn-success']) ?></h1>
+<h1><?= Html::a('<i class="glyphicon glyphicon-plus"></i> Felhasználó létrehozása', ['create'], ['class' => 'btn
+btn-success']) ?></h1>
+
 
 
 <?= $this->render('/_alert', [
@@ -110,7 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         'data-confirm' => Yii::t('user', 'Are you sure to unblock this user?')
                     ]);
                 } else {
-                    return Html::a(Yii::t('user', 'Block'), ['block', 'id' => $model->id], [
+                    return Html::a('<i class="glyphicon glyphicon-ban-circle"></i> Tiltás', ['block', 'id' => $model->id], [
                         'class' => 'btn btn-xs btn-danger btn-block',
                         'data-method' => 'post',
                         'data-confirm' => Yii::t('user', 'Are you sure to block this user?')

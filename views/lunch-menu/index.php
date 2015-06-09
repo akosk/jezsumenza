@@ -12,8 +12,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lunch-menu-index">
 
-    <h1><?= Html::a('Ebéd menü létrehozása', ['create'], ['class' => 'btn btn-success']) ?>
-        <button onclick="deleteSelected()" class="btn btn-danger">Kijelöltek törlése</button>
+    <h1><?= Html::a('<i class="glyphicon glyphicon-plus"></i> Ebéd menü létrehozása', ['create'], ['class' => 'btn btn-success']) ?>
+        <button onclick="deleteSelected()" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>
+            Kijelöltek törlése</button>
     </h1>
 
 

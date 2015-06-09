@@ -39,7 +39,7 @@ AppAsset::register($this);
         'encodeLabels' => false,
         'items'   => [
             [
-                'label' => '<i class="glyphicon glyphicon-cog"></i> Adminisztráció',
+                'label' => '<i class="glyphicon glyphicon-wrench"></i> Adminisztráció',
                 'visible' => Yii::$app->user->can('admin'),
                 'items' => [
                     ['label' => 'Felhasználók', 'url' => ['/user/admin'] ],

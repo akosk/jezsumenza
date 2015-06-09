@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lunch-menu-view">
 
-    <h1> <?= Html::a('Módosítás', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Törlés', ['delete', 'id' => $model->id], [
+    <h1> <?= Html::a('<i class="glyphicon glyphicon-pencil"></i> Módosítás', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('<i class="glyphicon glyphicon-trash"></i> Törlés', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Biztosan törölni szeretné?',

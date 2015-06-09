@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="school-class-index">
 
-    <h1><?= Html::a('Osztály létrehozása', ['create'], ['class' => 'btn btn-success']) ?></h1>
+    <h1><?= Html::a('<i class="glyphicon glyphicon-plus"></i> Osztály létrehozása', ['create'], ['class' => 'btn btn-success']) ?></h1>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,

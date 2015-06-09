@@ -22,8 +22,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lunch-menu-index">
 
-    <h1><?= Html::a('Felhasználó hozzáadása', ['add-user-to-menu', 'id'=>$model->id], ['class' => 'btn btn-success']) ?>
-        <button onclick="deleteSelected()" class="btn btn-danger">Kijelöltek törlése</button></h1>
+    <h1><?= Html::a('<i class="glyphicon glyphicon-plus"></i> Felhasználó hozzáadása', ['add-user-to-menu', 'id'=>$model->id], ['class' => 'btn btn-success']) ?>
+        <button onclick="deleteSelected()" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Kijelöltek
+            törlése</button></h1>
 
 
     <?= GridView::widget([
