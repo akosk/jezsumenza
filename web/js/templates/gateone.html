@@ -6,7 +6,7 @@
         <table class="table table-condensed" style="font-size: 120%">
             <tr>
                 <th>Időpont</th>
-                <th>Tanuló</th>
+                <th>Tanuló/Tanár</th>
                 <th>Vonalkód</th>
                 <th>Osztály</th>
                 <th>Idősáv</th>
@@ -14,6 +14,7 @@
                 <th>Idősávban</th>
                 <th>Hiba</th>
             </tr>
+
             <tr ng-class="gateEvent.error!==undefined || !gateEvent.within_eating_time || !gateEvent.paid ? 'danger':''" ng-repeat="gateEvent in dataService.getGateEvents()  track by $index">
                 <td>{{gateEvent.time}}</td>
                 <td>{{gateEvent.user_name}}</td>

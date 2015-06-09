@@ -25,8 +25,16 @@ class User extends BaseUser
         );
     }
 
+    public static function hasRole($user_id, $role){
+        $hasRole=\Yii::$app->authManager->checkAccess($user_id,$role);
+        return $hasRole;
+    }
+
     public function getEatingTimeStart()
     {
+        if (self::hasRole($this->id,'teacher')) {
+            return null;
+        }
         return $this->profile->eating_time_start != null ?
             $this->profile->eating_time_start :
             $this->profile->schoolClass->eating_time_start;
@@ -34,6 +42,9 @@ class User extends BaseUser
 
     public function getEatingTimeEnd()
     {
+        if (self::hasRole($this->id,'teacher')) {
+            return null;
+        }
         return $this->profile->eating_time_end != null ?
             $this->profile->eating_time_end :
             $this->profile->schoolClass->eating_time_end;
@@ -41,6 +52,10 @@ class User extends BaseUser
 
     public function isWithinEatingTime($timeFrom, $timeTo, $time)
     {
+        if (self::hasRole($this->id,'teacher')) {
+            return true;
+        }
+
         return $time >= $timeFrom && $time < $timeTo;
     }
 

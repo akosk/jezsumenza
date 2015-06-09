@@ -50,7 +50,7 @@ class SiteController extends ControllerBase
 
     public function actionIndex()
     {
-        if (Yii::$app->user->can('student')) {
+        if (Yii::$app->user->can('student') || Yii::$app->user->can('teacher')) {
             $this->redirect(Url::toRoute('/lunch-choice/index'));
         }
         return $this->render('index');

@@ -16,7 +16,7 @@ class ControllerBase extends Controller
 {
     public function beforeAction($action)
     {
-        if (Yii::$app->user->can('student')) {
+        if (Yii::$app->user->can('student') || Yii::$app->user->can('teacher')) {
             $this->layout='student';
         }
 

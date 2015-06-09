@@ -35,12 +35,15 @@ AppAsset::register($this);
         ],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
+        'options'      => ['class' => 'navbar-nav navbar-right'],
         'encodeLabels' => false,
-        'items'   => [
+        'items'        => [
 
-
-            ['label' => '<i class="glyphicon glyphicon-list"></i> Menü választó', 'url' => ['/lunch-choice'], 'visible' => Yii::$app->user->can('student'),],
+            [
+                'label'   => '<i class="glyphicon glyphicon-list"></i> Menü választó',
+                'url'     => ['/lunch-choice'],
+                'visible' => Yii::$app->user->can('student') || Yii::$app->user->can('teacher'),
+            ],
             Yii::$app->user->isGuest ?
                 ['label' => '<i class="glyphicon glyphicon-log-in"></i> Bejelentkezés', 'url' => ['/user/security/login']] :
                 ['label'       => '<i class="glyphicon glyphicon-off"></i> Kijelentkezés (' . Yii::$app->user->identity->username . ')',
@@ -53,7 +56,7 @@ AppAsset::register($this);
 
     <div class="container">
         <?= Breadcrumbs::widget([
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= $content ?>
     </div>
@@ -68,8 +71,8 @@ AppAsset::register($this);
 
 <?php $this->endBody() ?>
 
-<script src="<?=Url::base();?>/js/classie.js" type="text/javascript"></script>
-<script src="<?=Url::base();?>/js/cbpAnimatedHeader.min.js" type="text/javascript"></script>
+<script src="<?= Url::base(); ?>/js/classie.js" type="text/javascript"></script>
+<script src="<?= Url::base(); ?>/js/cbpAnimatedHeader.min.js" type="text/javascript"></script>
 
 
 </body>
