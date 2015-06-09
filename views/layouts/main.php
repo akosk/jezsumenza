@@ -40,23 +40,24 @@ AppAsset::register($this);
         'items'   => [
             [
                 'label' => '<i class="glyphicon glyphicon-wrench"></i> Adminisztráció',
-                'visible' => Yii::$app->user->can('admin'),
+                'visible' => Yii::$app->user->can('admin') || Yii::$app->user->can('kitchener'),
                 'items' => [
-                    ['label' => 'Felhasználók', 'url' => ['/user/admin'] ],
+                    ['label' => 'Felhasználók', 'url' => ['/user/admin'], 'visible' => Yii::$app->user->can('admin') ],
 //                    ['label' => 'Rbac', 'url' => ['/rbac/role']],
-                    ['label' => 'Osztályok', 'url' => ['/school-class']],
-                    ['label' => 'Ételek', 'url' => ['/food']],
-                    ['label' => 'Ebéd menü', 'url' => ['/lunch-menu']],
-                    ['label' => 'Első kapu', 'url' => ['/gate/gate-one']],
-                    ['label' => 'Második kapu', 'url' => ['/gate/gate-two']],
-                    ['label' => 'Napló', 'url' => ['/log']],
-                    ['label' => 'Befizetések importálása', 'url' => ['/import']],
+                    ['label' => 'Osztályok', 'url' => ['/school-class'], 'visible' => Yii::$app->user->can('admin')],
+                    ['label' => 'Ételek', 'url' => ['/food'],'visible' => Yii::$app->user->can('admin') || Yii::$app->user->can('kitchener')],
+                    ['label' => 'Ebéd menü', 'url' => ['/lunch-menu'], 'visible' => Yii::$app->user->can('admin') || Yii::$app->user->can('kitchener')],
+                    ['label' => 'Első kapu', 'url' => ['/gate/gate-one'], 'visible' => Yii::$app->user->can('admin')],
+                    ['label' => 'Második kapu', 'url' => ['/gate/gate-two'],'visible' => Yii::$app->user->can('admin')],
+                    ['label' => 'Napló', 'url' => ['/log'], 'visible' => Yii::$app->user->can('admin')],
+                    ['label' => 'Befizetések importálása', 'url' => ['/import'],
+                     'visible' => Yii::$app->user->can('admin')],
 
                 ]
             ],
             [
                 'label' => '<i class="glyphicon glyphicon-stats"></i> Statisztika',
-                'visible' => Yii::$app->user->can('admin'),
+                'visible' => Yii::$app->user->can('admin') || Yii::$app->user->can('kitchener'),
                 'items' => [
                     ['label' => 'Ételek listája', 'url' => ['/statistics/foods']],
                     ['label' => 'Problémás tanulók', 'url' => ['/statistics/problematic-students']],
