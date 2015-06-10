@@ -14,19 +14,19 @@ $this->params['breadcrumbs'][] = [
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lunch-menu-view">
-
-    <h1> <?= Html::a('<i class="glyphicon glyphicon-pencil"></i> Módosítás', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('<i class="glyphicon glyphicon-trash"></i> Törlés', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Biztosan törölni szeretné?',
-                'method' => 'post',
-            ],
-        ]) ?></h1>
-
+    <?php if (Yii::$app->user->can('admin')) { ?>
+        <h1> <?= Html::a('<i class="glyphicon glyphicon-pencil"></i> Módosítás', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('<i class="glyphicon glyphicon-trash"></i> Törlés', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data'  => [
+                    'confirm' => 'Biztosan törölni szeretné?',
+                    'method'  => 'post',
+                ],
+            ]) ?></h1>
+    <?php } ?>
 
     <?= DetailView::widget([
-        'model' => $model,
+        'model'          => $model,
         'condensed'      => true,
         'hover'          => true,
         'enableEditMode' => false,
@@ -36,16 +36,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'type'    => DetailView::TYPE_PRIMARY,
         ],
 
-        'attributes' => [
+        'attributes'     => [
             'id',
             'letter',
             'date',
             [
-                'label'=>'Ételek',
-                'format'=>'raw',
-                'value'=> implode(', ',array_map ( function($item) {
+                'label'  => 'Ételek',
+                'format' => 'raw',
+                'value'  => implode(', ', array_map(function ($item) {
                     return $item->name;
-                },$model->foodsSorted)),
+                }, $model->foodsSorted)),
 
             ],
             'create_time',

@@ -12,7 +12,9 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="school-class-index">
 
-    <h1><?= Html::a('<i class="glyphicon glyphicon-plus"></i> Osztály létrehozása', ['create'], ['class' => 'btn btn-success']) ?></h1>
+    <?php if (Yii::$app->user->can('admin')) { ?>
+        <h1><?= Html::a('<i class="glyphicon glyphicon-plus"></i> Osztály létrehozása', ['create'], ['class' => 'btn btn-success']) ?></h1>
+    <?php } ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -35,7 +37,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'class'    => 'yii\grid\ActionColumn',
+                'template' => Yii::$app->user->can('admin') ? '{view} {update} {delete}' : '{view}',
+            ],
         ],
     ]); ?>
 

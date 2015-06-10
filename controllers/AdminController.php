@@ -36,7 +36,7 @@ class AdminController extends BaseAdminController
                     [
                         'actions' => ['index', 'create', 'update', 'delete', 'block', 'confirm'],
                         'allow'   => true,
-                        'roles'   => ['admin'],
+                        'roles'   => ['admin', 'economic'],
                     ],
                 ]
             ]

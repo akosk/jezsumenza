@@ -21,11 +21,11 @@ $this->params['breadcrumbs'][] = [
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lunch-menu-index">
-
+    <?php if (Yii::$app->user->can('admin')) { ?>
     <h1><?= Html::a('<i class="glyphicon glyphicon-plus"></i> Felhasználó hozzáadása', ['add-user-to-menu', 'id'=>$model->id], ['class' => 'btn btn-success']) ?>
         <button onclick="deleteSelected()" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> Kijelöltek
             törlése</button></h1>
-
+    <?php } ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -40,7 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'user.profile.name',
             [
                 'class'    => 'yii\grid\ActionColumn',
-                'template' => '{delete}',
+                'template' => Yii::$app->user->can('admin') ? '{delete}':'',
                 'buttons'  => [
                     'delete' => function ($url, $model) {
                         $url = \yii\helpers\Url::to(

@@ -12,11 +12,12 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lunch-menu-index">
 
+    <?php if (Yii::$app->user->can('admin')) { ?>
     <h1><?= Html::a('<i class="glyphicon glyphicon-plus"></i> Ebéd menü létrehozása', ['create'], ['class' => 'btn btn-success']) ?>
         <button onclick="deleteSelected()" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>
             Kijelöltek törlése</button>
     </h1>
-
+    <?php } ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -60,6 +61,7 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class'          => 'yii\grid\ActionColumn',
                 'template'       => '{users} {view} {update} {delete}',
+                'template' => Yii::$app->user->can('admin') ? '{users} {view} {update} {delete}':'{users} {view}',
                 'contentOptions' => ['style' => 'min-width: 69px;'],
                 'buttons'        => [
                     'users' => function ($url, $model) {

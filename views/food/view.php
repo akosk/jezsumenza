@@ -7,12 +7,13 @@ use yii\helpers\Html;
 /* @var $model app\models\Food */
 
 $this->title = 'Megtekintés';
-$this->params['breadcrumbs'][] = ['label' => 'Foods', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Ételek', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $model->name;
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="food-view">
 
+    <?php if (Yii::$app->user->can('admin')) { ?>
     <h1><?= Html::a('<i class="glyphicon glyphicon-pencil"></i> Módosítás', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('<i class="glyphicon glyphicon-trash"></i> Törlés', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -21,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method'  => 'post',
             ],
         ]) ?></h1>
-
+    <?php } ?>
 
     <?= DetailView::widget([
         'model'          => $model,

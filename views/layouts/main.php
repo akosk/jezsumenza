@@ -35,38 +35,83 @@ AppAsset::register($this);
         ],
     ]);
     echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
+        'options'      => ['class' => 'navbar-nav navbar-right'],
         'encodeLabels' => false,
-        'items'   => [
+        'items'        => [
             [
-                'label' => '<i class="glyphicon glyphicon-wrench"></i> Adminisztráció',
-                'visible' => Yii::$app->user->can('admin') || Yii::$app->user->can('kitchener'),
-                'items' => [
-                    ['label' => 'Felhasználók', 'url' => ['/user/admin'], 'visible' => Yii::$app->user->can('admin') ],
+                'label'   => '<i class="glyphicon glyphicon-wrench"></i> Adminisztráció',
+                'visible' => Yii::$app->user->can('admin') || Yii::$app->user->can('kitchener') ||
+                    Yii::$app->user->can('economic'),
+                'items'   => [
+                    [
+                        'label'   => 'Felhasználók',
+                        'url'     => ['/user/admin'],
+                        'visible' => Yii::$app->user->can('admin') || Yii::$app->user->can('economic')],
 //                    ['label' => 'Rbac', 'url' => ['/rbac/role']],
-                    ['label' => 'Osztályok', 'url' => ['/school-class'], 'visible' => Yii::$app->user->can('admin')],
-                    ['label' => 'Ételek', 'url' => ['/food'],'visible' => Yii::$app->user->can('admin') || Yii::$app->user->can('kitchener')],
-                    ['label' => 'Ebéd menü', 'url' => ['/lunch-menu'], 'visible' => Yii::$app->user->can('admin') || Yii::$app->user->can('kitchener')],
-                    ['label' => 'Első kapu', 'url' => ['/gate/gate-one'], 'visible' => Yii::$app->user->can('admin')],
-                    ['label' => 'Második kapu', 'url' => ['/gate/gate-two'],'visible' => Yii::$app->user->can('admin')],
-                    ['label' => 'Napló', 'url' => ['/log'], 'visible' => Yii::$app->user->can('admin')],
-                    ['label' => 'Befizetések importálása', 'url' => ['/import'],
-                     'visible' => Yii::$app->user->can('admin')],
+                    [
+                        'label'   => 'Osztályok',
+                        'url'     => ['/school-class'],
+                        'visible' => Yii::$app->user->can('admin') || Yii::$app->user->can('economic')
+                    ],
+                    [
+                        'label'   => 'Ételek',
+                        'url'     => ['/food'],
+                        'visible' => Yii::$app->user->can('admin') || Yii::$app->user->can('kitchener') ||
+                            Yii::$app->user->can('economic')
+                    ],
+                    [
+                        'label'   => 'Ebéd menü',
+                        'url'     => ['/lunch-menu'],
+                        'visible' => Yii::$app->user->can('admin') || Yii::$app->user->can('kitchener')
+                            || Yii::$app->user->can('economic')
+                    ],
+                    [
+                        'label'   => 'Első kapu',
+                        'url'     => ['/gate/gate-one'],
+                        'visible' => Yii::$app->user->can('admin')
+                    ],
+                    [
+                        'label'   => 'Második kapu',
+                        'url'     => ['/gate/gate-two'],
+                        'visible' => Yii::$app->user->can('admin')
+                    ],
+                    [
+                        'label'   => 'Napló',
+                        'url'     => ['/log'],
+                        'visible' => Yii::$app->user->can('admin') || Yii::$app->user->can('economic')
+                    ],
+                    [
+                        'label'   => 'Befizetések importálása',
+                        'url'     => ['/import'],
+                        'visible' => Yii::$app->user->can('admin')
+                    ],
 
                 ]
             ],
             [
-                'label' => '<i class="glyphicon glyphicon-stats"></i> Statisztika',
-                'visible' => Yii::$app->user->can('admin') || Yii::$app->user->can('kitchener'),
-                'items' => [
-                    ['label' => 'Ételek listája', 'url' => ['/statistics/foods']],
-                    ['label' => 'Problémás tanulók', 'url' => ['/statistics/problematic-students']],
-                    ['label' => 'Menüt rendelő, de nem fogyasztó tanulók', 'url' => ['/statistics/missed-lunch']],
-                    ['label' => 'Menüt nem rendelő tanulók', 'url' => ['/statistics/no-order']],
+                'label'   => '<i class="glyphicon glyphicon-stats"></i> Statisztika',
+                'visible' => Yii::$app->user->can('admin') || Yii::$app->user->can('kitchener') ||
+                    Yii::$app->user->can('economic'),
+                'items'   => [
+                    [
+                        'label' => 'Ételek listája',
+                        'url' => ['/statistics/foods']
+                    ],
+                    [
+                        'label' => 'Problémás tanulók',
+                        'url' => ['/statistics/problematic-students']
+                    ],
+                    [
+                        'label' => 'Menüt rendelő, de nem fogyasztó tanulók',
+                        'url' => ['/statistics/missed-lunch']
+                    ],
+                    [
+                        'label' => 'Menüt nem rendelő tanulók',
+                        'url' => ['/statistics/no-order']
+                    ],
 
                 ]
             ],
-
 
             Yii::$app->user->isGuest ?
                 ['label' => '<i class="glyphicon glyphicon-log-in"></i> Bejelentkezés', 'url' => ['/user/security/login']] :
@@ -95,8 +140,8 @@ AppAsset::register($this);
 
 <?php $this->endBody() ?>
 
-<script src="<?=Url::base();?>/js/classie.js" type="text/javascript"></script>
-<script src="<?=Url::base();?>/js/cbpAnimatedHeader.min.js" type="text/javascript"></script>
+<script src="<?= Url::base(); ?>/js/classie.js" type="text/javascript"></script>
+<script src="<?= Url::base(); ?>/js/cbpAnimatedHeader.min.js" type="text/javascript"></script>
 
 
 </body>

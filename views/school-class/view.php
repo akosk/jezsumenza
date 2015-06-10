@@ -13,29 +13,30 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ?>
 <div class="school-class-view">
+    <?php if (Yii::$app->user->can('admin')) { ?>
 
-    <h1><?= Html::a('<i class="glyphicon glyphicon-pencil"></i> Módosítás', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('<i class="glyphicon glyphicon-trash"></i> Törlés', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Biztosan törölni szeretné?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </h1>
-
+        <h1><?= Html::a('<i class="glyphicon glyphicon-pencil"></i> Módosítás', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('<i class="glyphicon glyphicon-trash"></i> Törlés', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data'  => [
+                    'confirm' => 'Biztosan törölni szeretné?',
+                    'method'  => 'post',
+                ],
+            ]) ?>
+        </h1>
+    <?php } ?>
 
     <?= DetailView::widget([
-        'model' => $model,
-        'condensed'=>true,
-        'hover'=>true,
-        'enableEditMode'=>false,
-        'mode'=>DetailView::MODE_VIEW,
-        'panel'=>[
-            'heading'=>'Osztály - '.$model->name,
-            'type'=>DetailView::TYPE_PRIMARY,
+        'model'          => $model,
+        'condensed'      => true,
+        'hover'          => true,
+        'enableEditMode' => false,
+        'mode'           => DetailView::MODE_VIEW,
+        'panel'          => [
+            'heading' => 'Osztály - ' . $model->name,
+            'type'    => DetailView::TYPE_PRIMARY,
         ],
-        'attributes' => [
+        'attributes'     => [
             'id',
             'name',
             'eating_time_start',
