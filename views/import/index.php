@@ -16,6 +16,10 @@ $this->params['breadcrumbs'][] = $this->title;
         Befizetések importálása
     </div>
     <div class="panel-body">
+
+        <div class="alert alert-info">Az importáláshoz tallóza ki a befizetéseket tartalmazó JSON fájlt.
+            Mindig az utoljára importált fájl tartalma a mérvadó.</div>
+
         <?php
 
         $form1 = ActiveForm::begin([
