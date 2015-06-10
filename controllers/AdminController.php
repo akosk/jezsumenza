@@ -7,6 +7,8 @@
 
 namespace app\controllers;
 
+use app\models\Payment;
+use app\models\PaymentSearch;
 use Yii;
 use yii\base\InlineAction;
 use app\models\User;
@@ -34,7 +36,7 @@ class AdminController extends BaseAdminController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'create', 'update', 'delete', 'block', 'confirm'],
+                        'actions' => ['index', 'create', 'update', 'delete', 'block', 'confirm', 'payment','view'],
                         'allow'   => true,
                         'roles'   => ['admin', 'economic'],
                     ],
@@ -55,13 +57,44 @@ class AdminController extends BaseAdminController
 
         if ($user->load(\Yii::$app->request->post()) && $user->create()) {
             \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'User has been created'));
-            return $this->redirect(['update','id'=>$user->id]);
+            return $this->redirect(['update', 'id' => $user->id]);
         }
 
         return $this->render('create', [
             'user' => $user
         ]);
     }
+
+    public function actionPayment($id)
+    {
+        $user = User::findOne($id);
+
+        $searchModel = new PaymentSearch();
+        $searchModel->user_id = $id;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('payment', [
+            'searchModel'  => $searchModel,
+            'dataProvider' => $dataProvider,
+            'user'         => $user
+        ]);
+    }
+
+
+//    public function actionView($id)
+//    {
+//        $user = User::findOne($id);
+//
+//        $searchModel = new PaymentSearch();
+//        $searchModel->user_id = $id;
+//        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+//
+//        return $this->render('payment', [
+//            'searchModel'  => $searchModel,
+//            'dataProvider' => $dataProvider,
+//            'user'         => $user
+//        ]);
+//    }
 
 
 }

@@ -128,12 +128,15 @@ btn-success']) ?></h1>
         ],
         [
             'class'    => 'yii\grid\ActionColumn',
-            'template' => Yii::$app->user->can('admin') ? '{update} {delete}':'',
-//            'buttons'=> [
-//                'delete'=>  function ($url, $model, $key) {
-//                     return '';
-//                 }
-//            ]
+            'template' => Yii::$app->user->can('admin') ? '{payment} {update} {delete}':'{payment}',
+            'buttons' => [
+                'payment'=>  function ($url, $model, $key) {
+                    return Html::a('<i class="glyphicon glyphicon-usd"></i>', $url, [
+                        'title' => 'Befizetések',
+                    ]);
+
+                }
+            ]
         ],
     ],
 ]); ?>
