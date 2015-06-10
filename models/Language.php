@@ -33,4 +33,13 @@ class Language extends Model {
           'name'=>'Olasz',
       ],
     ];
+
+    public static function getAsDropdownData()
+    {
+        $data=[];
+        foreach(self::$languages as $key=>$value) {
+            $data[$value['code']]=$value['name'];
+        }
+        return $data;
+    }
 }

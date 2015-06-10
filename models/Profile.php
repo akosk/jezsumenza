@@ -33,7 +33,7 @@ class Profile extends BaseProfile
         return ArrayHelper::merge(
             parent::rules(),
             [
-                [['yami_id', 'barcode'], 'string'],
+                [['language','yami_id', 'barcode'], 'string'],
                 [['school_class_id'], 'integer'],
                 [['eating_time_start', 'eating_time_end'], 'safe'],
             ]
@@ -51,6 +51,7 @@ class Profile extends BaseProfile
                     'eating_time_start' => 'Egyéni étkezési idősáv kezdete',
                     'eating_time_end'   => 'Egyéni étkezési idősáv vége',
                     'barcode'           => 'Vonalkód',
+                    'language'           => 'Nyelv',
                 ]
 
 

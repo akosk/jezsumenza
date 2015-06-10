@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\components\DateHelper;
 use app\models\LunchChoice;
 use app\models\LunchMenu;
+use app\models\User;
 use DateInterval;
 use yii\db\Expression;
 use yii\filters\AccessControl;
@@ -33,6 +34,11 @@ class LunchChoiceController extends ControllerBase
 
     public function actionIndex($date = null)
     {
+        $user = User::findOne(\Yii::$app->user->id);
+        if ($user->profile->language != '') {
+            \Yii::$app->language = $user->profile->language;
+        }
+
         $lastMonday = DateHelper::getLastMonday($date);
         $nextSunday = DateHelper::getNextSunday($date);
         $date = new \DateTime($lastMonday);
@@ -91,5 +97,4 @@ class LunchChoiceController extends ControllerBase
             throw new ServerErrorHttpException('Model validation errors:' . $errors);
         }
     }
-
 }

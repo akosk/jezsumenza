@@ -15,7 +15,7 @@ class DateHelper
     private static $MONTH_NAMES = ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július',
         'Augusztus', 'Szeptember', 'Október', 'November', 'December'];
 
-    private static $DAY_NAMES = ['Vasárnap','Hétfő', 'Kedd', 'Szerda', 'Csütörtök', 'Péntek', 'Szombat'];
+    private static $DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
     public static function getMonthName($i)
     {
@@ -26,7 +26,7 @@ class DateHelper
         $dw = date( "w", strtotime($date));
 
 
-        return $date.", ".self::$DAY_NAMES[intval($dw)%7];
+        return $date.", ".\Yii::t('app', self::$DAY_NAMES[intval($dw)%7]);
     }
 
 
