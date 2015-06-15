@@ -10,6 +10,7 @@ namespace app\models;
 use app\components\DinaAuthentication;
 use dektrium\user\Finder;
 use dektrium\user\models\LoginForm as BaseLoginForm;
+use Yii;
 
 class LoginForm extends BaseLoginForm
 {
