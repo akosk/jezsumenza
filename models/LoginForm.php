@@ -78,7 +78,7 @@ class LoginForm extends BaseLoginForm
                     $this->addError('login', \Yii::t('user', 'A felhasználó profil létrehozása sikertelen'));
                 }
             } else {
-                $this->addError('login', \Yii::t('user', 'A felhasználó létrehozása sikertelen'));
+                $this->addError('login', \Yii::t('user', 'A felhasználó létrehozása sikertelen'.implode(',',$user->getFirstErrors())));
             }
         }
 
