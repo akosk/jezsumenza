@@ -42,7 +42,7 @@ class DinaAuthentication
         $q = "SELECT * FROM dbo.tanulo WHERE dbo.tanulo.TanAz=:uid";
 
         $data = $db->createCommand($q, [
-            ':tanaz'           => $uid,
+            ':uid'           => $uid,
         ])->queryOne();
         return $data;
     }
