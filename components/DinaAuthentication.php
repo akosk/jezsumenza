@@ -7,6 +7,8 @@
 
 namespace app\components;
 
+use Yii;
+
 class DinaAuthentication
 {
 
