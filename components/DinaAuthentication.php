@@ -8,6 +8,7 @@
 namespace app\components;
 
 use Yii;
+use yii\db\Connection;
 
 class DinaAuthentication
 {
@@ -31,5 +32,18 @@ class DinaAuthentication
         ])->queryScalar();
 
         return $data > 0;
+    }
+
+    public function getEntryByUID($uid)
+    {
+        $db = Yii::$app->dbDina;
+        /**@var Connection $db */
+
+        $q = "SELECT * FROM dbo.tanulo WHERE dbo.tanulo.TanAz=:uid";
+
+        $data = $db->createCommand($q, [
+            ':tanaz'           => $uid,
+        ])->queryOne();
+        return $data;
     }
 }

@@ -46,9 +46,40 @@ class LoginForm extends BaseLoginForm
             return false;
         };
 
+        $this->createUserIfNotExists($dinaAuth);
+
         return true;
     }
 
+    public function createUserIfNotExists(DinaAuthentication $dinaAuth)
+    {
+        $this->user = $this->module->manager->findUser($this->login);
+
+        if (!$this->user) {
+            $entry = $dinaAuth->getEntryByUID($this->login);
+
+            $user = new User();
+            $user->scenario = 'create';
+            $user->username = $this->login;
+            $user->password = $this->password;
+            $user->email = $entry['Email'];
+
+
+            if ($user->create()) {
+                $this->user = $user;
+                $profile = $user->profile;
+                $profile->name=$entry['Nev'];
+                $profile->public_email=$user->email;
+                if (!$profile->save(false)) {
+
+                    $this->addError('login', \Yii::t('user', 'A felhasználó profil létrehozása sikertelen'));
+                }
+            } else {
+                $this->addError('login', \Yii::t('user', 'A felhasználó létrehozása sikertelen'));
+            }
+        }
+
+    }
 
 
 }
