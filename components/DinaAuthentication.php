@@ -7,6 +7,7 @@
 
 namespace app\components;
 
+use Exception;
 use Yii;
 use yii\db\Connection;
 
@@ -26,10 +27,14 @@ class DinaAuthentication
 
         $q = "SELECT COUNT(*) FROM dbo.tanulo WHERE dbo.tanulo.TanAz=:tanaz AND dbo.tanulo.tanuloazonosito=:tanuloazonosito";
 
-        $data = $db->createCommand($q, [
-            ':tanaz'           => $TanAz,
-            ':tanuloazonosito' => $tanuloazonosito
-        ])->queryScalar();
+        try {
+            $data = $db->createCommand($q, [
+                ':tanaz'           => $TanAz,
+                ':tanuloazonosito' => $tanuloazonosito
+            ])->queryScalar();
+        } catch (Exception $e) {
+            $data=0;
+        }
 
         return $data > 0;
     }
