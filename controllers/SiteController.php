@@ -79,7 +79,7 @@ class SiteController extends ControllerBase
 
         $db = Yii::$app->dbDina; /**@var yii\db\Connection $db  */
 
-        $q="SELECT COUNT(*) FROM dbo.tanulok";
+        $q="SELECT COUNT(*) FROM dbo.tanulo";
 
 //        $data = $db->createCommand($q)->queryOne();
         $data = $db->createCommand($q)->queryScalar();
