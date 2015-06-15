@@ -68,7 +68,11 @@ class LoginForm extends BaseLoginForm
             $user->email = $entry['Email'];
 
 
+
             if ($user->create()) {
+
+                Yii::$app->authManager->assign('student',$user->id);
+
                 $this->user = $user;
                 $profile = $user->profile;
                 $profile->name=$entry['Nev'];
@@ -77,6 +81,8 @@ class LoginForm extends BaseLoginForm
 
                     $this->addError('login', \Yii::t('user', 'A felhasználó profil létrehozása sikertelen'));
                 }
+
+
             } else {
                 $this->addError('login', \Yii::t('user', 'A felhasználó létrehozása sikertelen'.implode(',',$user->getFirstErrors())));
             }
