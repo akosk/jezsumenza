@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\ArChangeLog;
 use Yii;
+use yii\db\Connection;
 use yii\filters\AccessControl;
 use yii\helpers\Url;
 use yii\web\Controller;
@@ -20,7 +21,7 @@ class SiteController extends ControllerBase
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['logout', 'index'],
+                        'actions' => ['logout', 'index', 'dina'],
                         'allow'   => true,
                         'roles'   => ['@'],
                     ],
@@ -71,6 +72,20 @@ class SiteController extends ControllerBase
                 'model' => $model,
             ]);
         }
+    }
+
+    public function actionDina()
+    {
+
+        $db = Yii::$app->dbDina; /**@var yii\db\Connection $db  */
+
+        $q="SELECT COUNT(*) FROM dbo.tanulok";
+
+//        $data = $db->createCommand($q)->queryOne();
+        $data = $db->createCommand($q)->queryScalar();
+        print_r($data);
+
+
     }
 
     public function actionLogout()

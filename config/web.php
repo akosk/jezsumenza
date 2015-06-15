@@ -14,7 +14,7 @@ $config = [
             'admins'             => ['akosk'],
 
             'controllerMap'      => [
-                'admin' => 'app\controllers\AdminController',
+                'admin'    => 'app\controllers\AdminController',
                 'security' => 'app\controllers\SecurityController',
             ],
 
@@ -43,8 +43,8 @@ $config = [
     'components' => [
         'request'      => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'IDNNZc7GCYB-O3Dz_2v-NVLddUvecZNQ',
-            'enableCsrfValidation'=>false,
+            'cookieValidationKey'  => 'IDNNZc7GCYB-O3Dz_2v-NVLddUvecZNQ',
+            'enableCsrfValidation' => false,
         ],
         'cache'        => [
             'class' => 'yii\caching\FileCache',
@@ -116,6 +116,13 @@ $config = [
         ],
 
         'db'           => require(__DIR__ . '/db.php'),
+        'dbDina'       => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'sqlsrv:Server=localhost\DINASQLSERVER;Database=ENAPLO_AKTIV',
+            'username' => 'sadina',
+            'password' => 'naploDina',
+            'charset' => 'utf8',
+        ],
     ],
     'params'     => $params,
 ];
