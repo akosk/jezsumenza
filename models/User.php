@@ -46,6 +46,33 @@ class User extends BaseUser
         ];
     }
 
+
+    public function create()
+    {
+        if ($this->getIsNewRecord() == false) {
+            throw new \RuntimeException('Calling "' . __CLASS__ . '::' . __METHOD__ . '" on existing user');
+        }
+
+        $this->confirmed_at = time();
+
+        if ($this->password == null) {
+            $this->password = Password::generate(8);
+        }
+
+        $this->trigger(self::USER_CREATE_INIT);
+
+        if ($this->save()) {
+            $this->trigger(self::USER_CREATE_DONE);
+//            $this->mailer->sendWelcomeMessage($this);
+            \Yii::getLogger()->log('User has been created', Logger::LEVEL_INFO);
+            return true;
+        }
+
+        \Yii::getLogger()->log('An error occurred while creating user account', Logger::LEVEL_ERROR);
+
+        return false;
+    }
+
     public static function hasRole($user_id, $role){
         $hasRole=\Yii::$app->authManager->checkAccess($user_id,$role);
         return $hasRole;

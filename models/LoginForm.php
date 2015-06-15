@@ -60,7 +60,8 @@ class LoginForm extends BaseLoginForm
 
         if (!$this->user) {
             $entry = $dinaAuth->getEntryByUID($this->login);
-
+print_r($entry);
+            Yii::$app->end();
             $user = new User();
             $user->scenario = 'create';
             $user->username = $this->login;
