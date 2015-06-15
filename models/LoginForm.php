@@ -24,7 +24,6 @@ class LoginForm extends BaseLoginForm
         ];
     }
 
-
     public function login()
     {
         if ($this->validate()) {
@@ -32,9 +31,7 @@ class LoginForm extends BaseLoginForm
         } else {
             return false;
         }
-
     }
-
 
     /** @inheritdoc */
     public function beforeValidate()
@@ -66,28 +63,21 @@ class LoginForm extends BaseLoginForm
             $user->password = $this->password;
             $user->email = $entry['Email'];
 
-
-
             if ($user->create()) {
-
-                Yii::$app->authManager->assign('student',$user->id);
+                $studentRole = Yii::$app->authManager->getRole('student');
+                Yii::$app->authManager->assign($studentRole, $user->id);
 
                 $this->user = $user;
                 $profile = $user->profile;
-                $profile->name=$entry['Nev'];
-                $profile->public_email=$user->email;
+                $profile->name = $entry['Nev'];
+                $profile->public_email = $user->email;
                 if (!$profile->save(false)) {
 
                     $this->addError('login', \Yii::t('user', 'A felhasználó profil létrehozása sikertelen'));
                 }
-
-
             } else {
-                $this->addError('login', \Yii::t('user', 'A felhasználó létrehozása sikertelen'.implode(',',$user->getFirstErrors())));
+                $this->addError('login', \Yii::t('user', 'A felhasználó létrehozása sikertelen' . implode(',', $user->getFirstErrors())));
             }
         }
-
     }
-
-
 }
