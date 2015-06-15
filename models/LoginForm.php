@@ -8,6 +8,7 @@
 namespace app\models;
 
 use app\components\DinaAuthentication;
+use dektrium\user\Finder;
 use dektrium\user\models\LoginForm as BaseLoginForm;
 
 class LoginForm extends BaseLoginForm
@@ -52,7 +53,9 @@ class LoginForm extends BaseLoginForm
 
     public function createUserIfNotExists(DinaAuthentication $dinaAuth)
     {
-        $this->user = $this->module->manager->findUserByUsernameOrEmail($this->login);
+        $finder = Yii::createObject(Finder::className());
+
+        $this->user = $finder->findUserByUsernameOrEmail($this->login);
 
         if (!$this->user) {
             $entry = $dinaAuth->getEntryByUID($this->login);
