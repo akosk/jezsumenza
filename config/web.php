@@ -22,6 +22,7 @@ $config = [
                 'User'       => 'app\models\User',
                 'Profile'    => 'app\models\Profile',
                 'UserSearch' => 'app\models\UserSearch',
+                'loginFormClass' => 'app\models\LoginForm',
             ],
         ],
         'rbac'     => [

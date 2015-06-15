@@ -82,7 +82,6 @@ class SiteController extends ControllerBase
 
         $q = "SELECT COUNT(*) FROM dbo.tanulo WHERE dbo.tanulo.TanAz=:tanaz AND dbo.tanulo.tanuloazonosito=:tanuloazonosito";
 
-//        $data = $db->createCommand($q)->queryOne();
         $data = $db->createCommand($q, [
             ':tanaz'           => $tanaz,
             ':tanuloazonosito' => $tanuloazonosito
