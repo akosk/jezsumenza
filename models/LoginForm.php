@@ -8,7 +8,6 @@
 namespace app\models;
 
 use app\components\DinaAuthentication;
-use dektrium\user\helpers\Password;
 use dektrium\user\models\LoginForm as BaseLoginForm;
 
 class LoginForm extends BaseLoginForm
@@ -53,7 +52,7 @@ class LoginForm extends BaseLoginForm
 
     public function createUserIfNotExists(DinaAuthentication $dinaAuth)
     {
-        $this->user = $this->module->manager->findUser($this->login);
+        $this->user = $this->module->manager->findUserByUsernameOrEmail($this->login);
 
         if (!$this->user) {
             $entry = $dinaAuth->getEntryByUID($this->login);
