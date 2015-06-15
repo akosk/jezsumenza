@@ -25,6 +25,27 @@ class User extends BaseUser
         );
     }
 
+    /** @inheritdoc */
+    public function rules()
+    {
+        return [
+            // username rules
+            ['username', 'required', 'on' => ['register', 'connect', 'create', 'update']],
+            ['username', 'unique'],
+            ['username', 'trim'],
+
+            // email rules
+            ['email', 'email'],
+            ['email', 'string', 'max' => 255],
+            ['email', 'unique'],
+            ['email', 'trim'],
+
+            // password rules
+            ['password', 'required', 'on' => ['register']],
+            ['password', 'string', 'min' => 3, 'on' => ['register', 'create']],
+        ];
+    }
+
     public static function hasRole($user_id, $role){
         $hasRole=\Yii::$app->authManager->checkAccess($user_id,$role);
         return $hasRole;
