@@ -64,7 +64,7 @@ class User extends BaseUser
         if ($this->save()) {
             $this->trigger(self::USER_CREATE_DONE);
 //            $this->mailer->sendWelcomeMessage($this);
-            \Yii::getLogger()->log('User has been created', Logger::LEVEL_INFO);
+//            \Yii::getLogger()->log('User has been created', Logger::LEVEL_INFO);
             return true;
         }
 
