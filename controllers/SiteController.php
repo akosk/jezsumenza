@@ -74,18 +74,20 @@ class SiteController extends ControllerBase
         }
     }
 
-    public function actionDina()
+    public function actionDina($tanaz, $tanuloazonosito)
     {
 
-        $db = Yii::$app->dbDina; /**@var yii\db\Connection $db  */
+        $db = Yii::$app->dbDina;
+        /**@var Connection $db */
 
-        $q="SELECT COUNT(*) FROM dbo.tanulo";
+        $q = "SELECT COUNT(*) FROM dbo.tanulo WHERE dbo.tanulo.TanAz=:tanaz AND dbo.tanulo.tanuloazonosito=:tanuloazonosito";
 
 //        $data = $db->createCommand($q)->queryOne();
-        $data = $db->createCommand($q)->queryScalar();
+        $data = $db->createCommand($q, [
+            ':tanaz'           => $tanaz,
+            ':tanuloazonosito' => $tanuloazonosito
+        ])->queryScalar();
         print_r($data);
-
-
     }
 
     public function actionLogout()
