@@ -41,13 +41,16 @@ class LoginForm extends BaseLoginForm
 
         $isAuthenticated = $dinaAuth->authenticate($this->login, $this->password);
         if (!$isAuthenticated) {
+            $this->user = $this->finder->findUserByUsernameOrEmail($this->login);
             if ($this->user === null || !Password::validate($this->password, $this->user->password_hash)) {
                 $this->addError('password', \Yii::t('user', 'Invalid login or password'));
+                return false;
             }
-            return false;
-        };
+        } else {
+            $this->createUserIfNotExists($dinaAuth);
+        }
 
-        $this->createUserIfNotExists($dinaAuth);
+
 
         return true;
     }
