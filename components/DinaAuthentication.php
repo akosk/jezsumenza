@@ -49,6 +49,10 @@ class DinaAuthentication
                 ':tanaz'           => $TanAz,
                 ':tanuloazonosito' => $tanuloazonosito
             ])->queryScalar();
+
+            print_r($data);
+            Yii::$app->end();
+
             if ($data > 0) {
                 $this->lastUserRole = 'student';
                 return true;
