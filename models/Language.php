@@ -28,9 +28,9 @@ class Language extends Model {
           'code'=>'fr-FR',
           'name'=>'Francia',
       ],
-      'it'=> [
-          'code'=>'it-IT',
-          'name'=>'Olasz',
+      'cn'=> [
+          'code'=>'zh-CN',
+          'name'=>'Kínai',
       ],
     ];
 
