@@ -54,8 +54,8 @@ class DinaAuthentication
                 return true;
             }
 
-            $q = "SELECT * FROM dbo.Users WHERE (dbo.Users.UserAz=:tanaz OR dbo.Users.FelhasznaloNev=:tanaz)  AND dbo.Users
-.Jelszouj=:tanuloazonosito";
+            $q = "SELECT * FROM dbo.Users WHERE (dbo.Users.FelhasznaloNev=:tanaz)
+                  AND dbo.Users.Jelszouj=:tanuloazonosito";
             $data = $db->createCommand($q, [
                 ':tanaz'           => $TanAz,
                 ':tanuloazonosito' => $tanuloazonosito
