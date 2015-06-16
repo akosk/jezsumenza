@@ -42,8 +42,10 @@ class LoginForm extends BaseLoginForm
     {
         $dinaAuth = new DinaAuthentication();
 
+        Yii::info('before auth ', 'debug');
         $isAuthenticated = $dinaAuth->authenticate($this->login, $this->password);
         if (!$isAuthenticated) {
+            Yii::info('after auth false', 'debug');
             $this->addError('password', \Yii::t('user', 'Invalid login or password'));
             return false;
         };
