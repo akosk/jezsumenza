@@ -26,13 +26,9 @@ class LoginForm extends BaseLoginForm
 
     public function login()
     {
-        Yii::info('login start', 'debug');
         if ($this->validate()) {
-            Yii::info('login validated', 'debug');
             return \Yii::$app->getUser()->login($this->user, $this->rememberMe ? $this->module->rememberFor : 0);
         } else {
-            Yii::info('login validated false', 'debug');
-            Yii::info(implode(',',$this->getFirstErrors()), 'debug');
             return false;
         }
     }
@@ -40,13 +36,10 @@ class LoginForm extends BaseLoginForm
     /** @inheritdoc */
     public function beforeValidate()
     {
-        Yii::info('before validate start', 'debug');
         $dinaAuth = new DinaAuthentication();
 
-        Yii::info('before validate ', 'debug');
         $isAuthenticated = $dinaAuth->authenticate($this->login, $this->password);
         if (!$isAuthenticated) {
-            Yii::info('after auth false', 'debug');
             $this->addError('password', \Yii::t('user', 'Invalid login or password'));
             return false;
         };

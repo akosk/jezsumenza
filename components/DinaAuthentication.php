@@ -37,7 +37,7 @@ class DinaAuthentication
      */
     public function authenticate($TanAz, $tanuloazonosito)
     {
-        $this->lastUserRole='';
+        $this->lastUserRole = '';
 
         $db = Yii::$app->dbDina;
         /**@var Connection $db */
@@ -50,28 +50,25 @@ class DinaAuthentication
                 ':tanuloazonosito' => $tanuloazonosito
             ])->queryScalar();
 
-            print_r($data);
-            Yii::$app->end();
 
             if ($data > 0) {
                 $this->lastUserRole = 'student';
                 return true;
             }
+        } catch (Exception $e) {
+        }
 
+        try {
             $q = "SELECT * FROM dbo.Users WHERE (dbo.Users.FelhasznaloNev=:tanaz)
                   AND dbo.Users.Jelszouj=:tanuloazonosito";
             $data = $db->createCommand($q, [
                 ':tanaz'           => $TanAz,
                 ':tanuloazonosito' => $tanuloazonosito
             ])->queryOne();
-            print_r($data);
-            Yii::$app->end();
             if ($data) {
                 $this->lastUserRole = $this->roleMap[$data['Jog']];
                 return true;
             }
-
-
         } catch (Exception $e) {
         }
 
