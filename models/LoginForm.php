@@ -40,9 +40,10 @@ class LoginForm extends BaseLoginForm
     /** @inheritdoc */
     public function beforeValidate()
     {
+        Yii::info('before validate start', 'debug');
         $dinaAuth = new DinaAuthentication();
 
-        Yii::info('before auth ', 'debug');
+        Yii::info('before validate ', 'debug');
         $isAuthenticated = $dinaAuth->authenticate($this->login, $this->password);
         if (!$isAuthenticated) {
             Yii::info('after auth false', 'debug');
