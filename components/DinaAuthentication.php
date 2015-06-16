@@ -50,7 +50,6 @@ class DinaAuthentication
                 ':tanuloazonosito' => $tanuloazonosito
             ])->queryScalar();
 
-
             if ($data > 0) {
                 $this->lastUserRole = 'student';
                 return true;
@@ -80,7 +79,11 @@ class DinaAuthentication
         $db = Yii::$app->dbDina;
         /**@var Connection $db */
 
-        $q = "SELECT * FROM dbo.tanulo WHERE dbo.tanulo.TanAz=:uid";
+        if ($this->lastUserRole == 'student') {
+            $q = "SELECT * FROM dbo.tanulo WHERE dbo.tanulo.TanAz=:uid";
+        } else {
+            $q = "SELECT * FROM dbo.Users WHERE (dbo.Users.FelhasznaloNev=:tanaz)";
+        }
 
         $data = $db->createCommand($q, [
             ':uid' => $uid,
