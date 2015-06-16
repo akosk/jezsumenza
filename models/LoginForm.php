@@ -26,9 +26,12 @@ class LoginForm extends BaseLoginForm
 
     public function login()
     {
+        Yii::info('login start', 'debug');
         if ($this->validate()) {
+            Yii::info('login validated', 'debug');
             return \Yii::$app->getUser()->login($this->user, $this->rememberMe ? $this->module->rememberFor : 0);
         } else {
+            Yii::info('login validated false', 'debug');
             return false;
         }
     }
