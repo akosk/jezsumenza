@@ -64,13 +64,16 @@ class LoginForm extends BaseLoginForm
             $user->email = $entry['Email'];
 
             if ($user->create()) {
-                $studentRole = Yii::$app->authManager->getRole('student');
-                Yii::$app->authManager->assign($studentRole, $user->id);
+                $studentRole = Yii::$app->authManager->getRole($dinaAuth->lastUserRole);
+                if ($studentRole) {
+                    Yii::$app->authManager->assign($studentRole, $user->id);
+                }
 
                 $this->user = $user;
                 $profile = $user->profile;
                 $profile->name = $entry['Nev'];
                 $profile->public_email = $user->email;
+                $profile->language = 'hu-HU';
                 if (!$profile->save(false)) {
 
                     $this->addError('login', \Yii::t('user', 'A felhasználó profil létrehozása sikertelen'));
