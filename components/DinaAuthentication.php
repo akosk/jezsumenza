@@ -60,6 +60,8 @@ class DinaAuthentication
                 ':tanaz'           => $TanAz,
                 ':tanuloazonosito' => $tanuloazonosito
             ])->queryOne();
+            print_r($data);
+            Yii::$app->end();
             if ($data) {
                 $this->lastUserRole = $this->roleMap[$data['Jog']];
                 return true;
