@@ -82,7 +82,7 @@ class DinaAuthentication
         if ($this->lastUserRole == 'student') {
             $q = "SELECT * FROM dbo.tanulo WHERE dbo.tanulo.TanAz=:uid";
         } else {
-            $q = "SELECT * FROM dbo.Users WHERE (dbo.Users.FelhasznaloNev=:tanaz)";
+            $q = "SELECT * FROM dbo.Users WHERE (dbo.Users.FelhasznaloNev=:uid)";
         }
 
         $data = $db->createCommand($q, [
