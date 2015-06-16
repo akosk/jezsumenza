@@ -67,7 +67,8 @@ class User extends BaseUser
 //            \Yii::getLogger()->log('User has been created', Logger::LEVEL_INFO);
             return true;
         }
-
+echo implode(',',$this->getFirstErrors());
+        Yii::$app->end();
         \Yii::getLogger()->log('An error occurred while creating user account', Logger::LEVEL_ERROR);
 
         return false;
