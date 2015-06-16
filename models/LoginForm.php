@@ -9,6 +9,7 @@ namespace app\models;
 
 use app\components\DinaAuthentication;
 use dektrium\user\Finder;
+use dektrium\user\helpers\Password;
 use dektrium\user\models\LoginForm as BaseLoginForm;
 use Yii;
 
@@ -40,7 +41,9 @@ class LoginForm extends BaseLoginForm
 
         $isAuthenticated = $dinaAuth->authenticate($this->login, $this->password);
         if (!$isAuthenticated) {
-            $this->addError('password', \Yii::t('user', 'Invalid login or password'));
+            if ($this->user === null || !Password::validate($this->password, $this->user->password_hash)) {
+                $this->addError('password', \Yii::t('user', 'Invalid login or password'));
+            }
             return false;
         };
 
