@@ -109,6 +109,7 @@ class SiteController extends ControllerBase
 //        $response->format = Response::FORMAT_RAW;
 
         var_dump($data);
+        file_put_contents('c:\unknown',$data['kep']);
 
 //        header("Content-type: image/jpeg");
 //
