@@ -22,7 +22,7 @@ $config = [
                 'User'       => 'app\models\User',
                 'Profile'    => 'app\models\Profile',
                 'UserSearch' => 'app\models\UserSearch',
-                'LoginForm' => 'app\models\LoginForm',
+                'LoginForm'  => 'app\models\LoginForm',
             ],
         ],
         'rbac'     => [
@@ -118,11 +118,18 @@ $config = [
 
         'db'           => require(__DIR__ . '/db.php'),
         'dbDina'       => [
-            'class' => 'yii\db\Connection',
-            'dsn' => 'sqlsrv:Server=localhost\DINASQLSERVER;Database=ENAPLO_AKTIV',
+            'class'    => 'yii\db\Connection',
+            'dsn'      => 'sqlsrv:Server=localhost\DINASQLSERVER;Database=ENAPLO_AKTIV',
             'username' => 'sadina',
             'password' => 'naploDina',
-            'charset' => 'utf8',
+            'charset'  => 'utf8',
+        ],
+        'dbDinaPic'    => [
+            'class'    => 'yii\db\Connection',
+            'dsn'      => 'sqlsrv:Server=localhost\DINASQLSERVER;Database=Dina_kepek',
+            'username' => 'sadina',
+            'password' => 'naploDina',
+            'charset'  => 'utf8',
         ],
     ],
     'params'     => $params,

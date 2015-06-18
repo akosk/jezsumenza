@@ -11,6 +11,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use yii\web\Response;
 
 class SiteController extends ControllerBase
 {
@@ -87,6 +88,28 @@ class SiteController extends ControllerBase
             ':tanuloazonosito' => $tanuloazonosito
         ])->queryScalar();
         print_r($data);
+    }
+
+    public function actionDinapic($tanaz)
+    {
+
+        $db = Yii::$app->dbDinaPic;
+        /**@var Connection $db */
+
+        $q = "SELECT * FROM dbo.Pic WHERE dbo.Pic.tanaz=:tanaz";
+
+        $data = $db->createCommand($q, [
+            ':tanaz'           => $tanaz,
+        ])->queryOne();
+
+//        echo $data['kep'];
+
+//        $response = Yii::$app->getResponse();
+//        $response->headers->set('Content-Type', 'image/jpeg');
+//        $response->format = Response::FORMAT_RAW;
+        header("Content-type: image/jpeg");
+
+        echo $data['kep'];
     }
 
     public function actionLogout()
