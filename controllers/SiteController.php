@@ -107,9 +107,12 @@ class SiteController extends ControllerBase
 //        $response = Yii::$app->getResponse();
 //        $response->headers->set('Content-Type', 'image/jpeg');
 //        $response->format = Response::FORMAT_RAW;
-        header("Content-type: image/jpeg");
 
-        echo $data['kep'];
+        var_dump($data);
+
+//        header("Content-type: image/jpeg");
+//
+//        echo $data['kep'];
     }
 
     public function actionLogout()
