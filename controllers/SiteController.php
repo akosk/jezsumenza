@@ -108,12 +108,10 @@ class SiteController extends ControllerBase
 //        $response->headers->set('Content-Type', 'image/jpeg');
 //        $response->format = Response::FORMAT_RAW;
 
-        var_dump($data);
-        file_put_contents('c:\unknown',$data['kep']);
 
-//        header("Content-type: image/jpeg");
-//
-//        echo $data['kep'];
+        header("Content-type: image/jpeg");
+
+        echo base64_decode($data['kep']);
     }
 
     public function actionLogout()
