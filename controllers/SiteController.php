@@ -90,9 +90,12 @@ class SiteController extends ControllerBase
         print_r($data);
     }
 
+    //        $response = Yii::$app->getResponse();
+//        $response->headers->set('Content-Type', 'image/jpeg');
+//        $response->format = Response::FORMAT_RAW;
+
     public function actionDinapic($tanaz)
     {
-
         $db = Yii::$app->dbDinaPic;
         /**@var Connection $db */
 
@@ -104,13 +107,7 @@ class SiteController extends ControllerBase
 
 //        echo $data['kep'];
 
-//        $response = Yii::$app->getResponse();
-//        $response->headers->set('Content-Type', 'image/jpeg');
-//        $response->format = Response::FORMAT_RAW;
-
-
         header("Content-type: image/jpeg");
-
         echo base64_decode($data['kep']);
     }
 
