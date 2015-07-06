@@ -9,7 +9,7 @@ namespace app\assets;
 
 use yii\web\AssetBundle;
 
-class GateAsset extends AssetBundle
+class GateAsset extends BaseAssetBundle
 {
     public $basePath = '/';
     public $css = [];
@@ -30,4 +30,6 @@ class GateAsset extends AssetBundle
         'app\assets\UnderscoreAsset',
         'app\assets\AngularNgRouteAsset'
     ];
+
+
 }
