@@ -27,6 +27,7 @@
     "punycode": "*",
     "typeahead.js": "*",
     "yii2-pjax": "*",
-    "jasmine": "*"
+    "jasmine": "*",
+    "font-awesome-animation": "~0.0.6"
   }
 }

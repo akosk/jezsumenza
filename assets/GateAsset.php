@@ -25,7 +25,7 @@ class GateAsset extends AssetBundle
         'yii\web\JqueryAsset',
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
-        'app\assets\FontawesomeAsset',
+        'app\assets\FontawesomeAnimationAsset',
         'app\assets\AngularAsset',
         'app\assets\UnderscoreAsset',
         'app\assets\AngularNgRouteAsset'

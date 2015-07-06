@@ -35,16 +35,15 @@ class GateController extends ControllerBase
         $currentTime = $currentDateTime->format('H:i:s');
         $currentDate = $currentDateTime->format('Y-m-d');
 
-
         $profile = Profile::find()->where('barcode=:barcode', [':barcode' => $barcode])->one();
         if (!$profile) {
             $response = [
-                'gate'               => $gate,
-                'timestamp'          => $currentDateTime->getTimestamp(),
-                'date'               => $currentDate,
-                'time'               => $currentTime,
-                'barcode'            => $barcode,
-                'error'              => "A vonalkódhoz nincs felhasználó rendelve"
+                'gate'      => $gate,
+                'timestamp' => $currentDateTime->getTimestamp(),
+                'date'      => $currentDate,
+                'time'      => $currentTime,
+                'barcode'   => $barcode,
+                'error'     => "A vonalkódhoz nincs felhasználó rendelve"
             ];
             return Json::encode($response);
         }
@@ -72,6 +71,7 @@ class GateController extends ControllerBase
 
         if (!$lunchChoice) {
             $response = [
+                'tanaz'              => $profile->user->username,
                 'gate'               => $gate,
                 'timestamp'          => $currentDateTime->getTimestamp(),
                 'date'               => $currentDate,
@@ -87,6 +87,7 @@ class GateController extends ControllerBase
             ];
         } else {
             $response = [
+                'tanaz'              => $user->username,
                 'gate'               => $gate,
                 'timestamp'          => $currentDateTime->getTimestamp(),
                 'date'               => $currentDate,

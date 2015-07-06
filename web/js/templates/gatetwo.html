@@ -1,45 +1,11 @@
 <div ng-include="getTemplate('focus.html')"></div>
 
 
-<div ng-show="isFocused" class="row">
-    <div class="col-md-12">
-        <table class="table table-condensed" style="font-size: 120%">
-            <tr>
-                <th>Időpont</th>
-                <th>Tanuló</th>
-                <th>Vonalkód</th>
-                <th>Menü</th>
-                <th>Étel</th>
-                <th>Fizetve</th>
-                <th>Hiba</th>
-            </tr>
-            <tr ng-class="gateEvent.error!==undefined || !gateEvent.within_eating_time || !gateEvent.paid ? 'danger':''" ng-repeat="gateEvent in dataService.getGateEvents()  track by $index">
-                <td>{{gateEvent.time}}</td>
-                <td>{{gateEvent.user_name}}</td>
-                <td>{{gateEvent.barcode}}</td>
-                <td><strong>{{gateEvent.lunch_menu}}</strong></td>
-                <td>
-                    {{getFoodName(gateEvent)}}
-                </td>
-                <td>
-                    <i ng-show="gateEvent.paid" class="glyphicon glyphicon-ok" style="color:#008000"></i>
-                    <i ng-show="!gateEvent.paid" class="glyphicon glyphicon-remove" style="color:darkred"></i>
-                </td>
 
-                <td>{{gateEvent.error}}</td>
-            </tr>
-        </table>
+<div ng-show="isFocused"
+
+     class="row">
+    <div ng-repeat="gateEvent in dataService.getGateEvents()|limitTo:3  track by $index" class="col-md-4">
+        <div ng-include="getTemplate('card2.html')"></div>
     </div>
 </div>
-
-
-
-
-            <div ng-if="gateEvent.error===undefined">
-                <div class="col-md-1">{{gateEvent.time}}</div>
-                <div class="col-md-2">{{gateEvent.user_name}}</div>
-                <div class="col-md-2">{{gateEvent.barcode}}</div>
-                <div class="col-md-1">{{gateEvent.lunch_menu}}</div>
-                <div class="col-md-5">{{getFoodName(gateEvent)}}</div>
-                <div class="col-md-1">{{gateEvent.paid}}</div>
-            </div>

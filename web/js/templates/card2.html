@@ -1,0 +1,18 @@
+<div class="text-center alert" ng-class="gateEvent.within_eating_time && gateEvent.paid?'alert-success':'alert-danger'">
+    <h2>
+        <i ng-show="gateEvent.paid" class="glyphicon glyphicon-ok" style="color:#008000"></i>
+        <i ng-show="!gateEvent.paid" class="glyphicon glyphicon-remove" style="color:darkred"></i>
+        {{getUserName(gateEvent)}}</h2>
+
+    <img ng-src="{{getImageUrl(gateEvent)}}" class="img img-rounded" style="width:100%;border:solid 5px
+    rgba(0,0,0,0.2);max-height:200px;"/>
+
+    <h3><i class="fa fa-clock-o"></i> {{gateEvent.time}}</h3>
+
+    <div style="font-size: 700%">
+        <i ng-show="!gateEvent.paid" class="fa fa-money faa-float animated" ></i>
+        <span>{{gateEvent.lunch_menu}}</span>
+        <span ng-show="gateEvent.lunch_menu===undefined"><i class="fa fa-question"></i></span>
+    </div>
+
+</div>

@@ -40,7 +40,7 @@
 
       $scope.getFoodName = function (gateEvent) {
          var foods = gateEvent.lunch_menu_food;
-         if (foods===undefined) return '';
+         if (foods === undefined) return '';
          foods.sort(
             function (a, b) {
                if (a.category < b.category) {
@@ -52,7 +52,7 @@
                return 0;
             });
 
-         var res=foods.map(function (a) {
+         var res = foods.map(function (a) {
             return a.name;
          });
 
@@ -89,6 +89,15 @@
 
       $scope.getTemplate = function (template) {
          return TEMPLATE_URL + template;
+      };
+
+      $scope.getImageUrl = function (gateEvent) {
+         var url = BASE_URL + '/site/dinapic?tanaz=' + gateEvent.tanaz;
+         return url;
+      };
+
+      $scope.getUserName = function (gateEvent) {
+         return gateEvent.user_name === undefined ? 'Ismeretlen' : gateEvent.user_name;
       };
 
    }

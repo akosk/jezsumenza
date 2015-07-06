@@ -1,0 +1,40 @@
+<div ng-include="getTemplate('focus.html')"></div>
+
+
+<div ng-show="isFocused" class="row">
+    <div class="col-md-12">
+
+        <table class="table table-condensed" style="font-size: 120%">
+            <tr>
+                <th>Időpont</th>
+                <th>Tanuló/Tanár</th>
+                <th>Vonalkód</th>
+                <th>Osztály</th>
+                <th>Idősáv</th>
+                <th>Fizetve</th>
+                <th>Idősávban</th>
+                <th>Hiba</th>
+            </tr>
+
+            <tr ng-class="gateEvent.error!==undefined || !gateEvent.within_eating_time || !gateEvent.paid ? 'danger':''" ng-repeat="gateEvent in dataService.getGateEvents()  track by $index">
+                <td>{{gateEvent.time}}</td>
+                <td>{{gateEvent.user_name}}</td>
+                <td>{{gateEvent.barcode}}</td>
+                <td>{{gateEvent.school_class}}</td>
+                <td>
+                    {{gateEvent.eating_time_start}}-{{gateEvent.eating_time_end}}
+                </td>
+                <td>
+                    <i ng-show="gateEvent.paid" class="glyphicon glyphicon-ok" style="color:#008000"></i>
+                    <i ng-show="!gateEvent.paid" class="glyphicon glyphicon-remove" style="color:darkred"></i>
+                </td>
+                <td>
+                    <i ng-show="gateEvent.within_eating_time" class="glyphicon glyphicon-ok" style="color:#008000"></i>
+                    <i ng-show="!gateEvent.within_eating_time" class="glyphicon glyphicon-remove" style="color:darkred"></i>
+                </td>
+
+                <td>{{gateEvent.error}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

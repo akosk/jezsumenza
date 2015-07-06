@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\ArChangeLog;
+use Exception;
 use Yii;
 use yii\db\Connection;
 use yii\filters\AccessControl;
@@ -101,16 +102,25 @@ class SiteController extends ControllerBase
 
         $q = "SELECT * FROM dbo.Pic WHERE dbo.Pic.tanaz=:tanaz";
 
-        $data = $db->createCommand($q, [
-            ':tanaz'           => $tanaz,
-        ])->queryOne();
+        try {
+            $data = $db->createCommand($q, [
+                ':tanaz' => $tanaz,
+            ])->queryOne();
+        } catch (Exception $e) {
+
+        }
 
 
-        header("Content-type: image/bmp");
-        echo hex2bin($data['kep']);
+        if ($data['kep'] != '') {
+            header("Content-type: image/bmp");
+            echo hex2bin($data['kep']);
+        } else {
+            $d=__DIR__;
+            $data=readfile($d.'/../web/images/anonymous.jpg');
+            header("Content-type: image/jpg");
+            echo $data;
+        }
     }
-
-
 
     public function actionLogout()
     {
