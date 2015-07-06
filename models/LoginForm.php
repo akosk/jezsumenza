@@ -50,8 +50,6 @@ class LoginForm extends BaseLoginForm
             $this->createUserIfNotExists($dinaAuth);
         }
 
-
-
         return true;
     }
 
@@ -67,7 +65,7 @@ class LoginForm extends BaseLoginForm
             $user->scenario = 'create';
             $user->username = $this->login;
             $user->password = $this->password;
-            $user->email = $entry['Email'];
+            $user->email = $entry['Email'] == '' ? $this->login . '@nem.valos.email' : $entry['Email'];
 
             if ($user->create()) {
                 $studentRole = Yii::$app->authManager->getRole($dinaAuth->lastUserRole);

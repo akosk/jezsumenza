@@ -105,11 +105,12 @@ class SiteController extends ControllerBase
             ':tanaz'           => $tanaz,
         ])->queryOne();
 
-//        echo $data['kep'];
 
-        header("Content-type: image/jpeg");
-        echo base64_decode($data['kep']);
+        header("Content-type: image/bmp");
+        echo hex2bin($data['kep']);
     }
+
+
 
     public function actionLogout()
     {
