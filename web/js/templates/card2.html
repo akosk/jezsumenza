@@ -4,8 +4,10 @@
         <i ng-show="!gateEvent.paid" class="glyphicon glyphicon-remove" style="color:darkred"></i>
         {{getUserName(gateEvent)}}</h2>
 
-    <img ng-src="{{getImageUrl(gateEvent)}}" class="img img-rounded" style="width:100%;border:solid 5px
-    rgba(0,0,0,0.2);height:100%;max-height: 300px;"/>
+    <div class="gate-thumbnail">
+        <img ng-src="{{getImageUrl(gateEvent)}}" class="portrait" style="border:solid 5px
+    rgba(0,0,0,0.2);"/>
+    </div>
 
     <h3><i class="fa fa-clock-o"></i> {{gateEvent.time}}</h3>
 

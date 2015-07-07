@@ -111,10 +111,15 @@ class SiteController extends ControllerBase
 
         }
 
-
         if ($data['kep'] != '') {
-            header("Content-type: image/bmp");
-            echo hex2bin($data['kep']);
+
+            $headers = Yii::$app->response->headers;
+            $headers->remove('Pragma');
+            $headers->add('Content-Type: ','image/bmp');
+            $headers->add('Cache-control','max-age='.(60*60*24*365));
+            $headers->add('Expires',gmdate(DATE_RFC1123,time()+60*60*24*365));
+            Yii::$app->response->sendContentAsFile(hex2bin($data['kep']),'image.bmp');
+//            echo hex2bin($data['kep']);
         } else {
             $d=__DIR__;
             $data=readfile($d.'/../web/images/anonymous.jpg');
