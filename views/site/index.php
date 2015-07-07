@@ -15,7 +15,7 @@ $this->title = 'Menza';
 
         <div class="row">
             <div class="col-lg-12 text-center">
-                <img src="images/chef.jpg"/>
+                <img src="/images/chef.jpg"/>
             </div>
         </div>
 
