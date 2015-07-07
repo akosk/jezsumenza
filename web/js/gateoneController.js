@@ -76,7 +76,7 @@
          //$scope.puffer.match(/^[0-9]{5}$/)
          $scope.$apply(function () {
             if (event.keyCode !== 13) {
-               $scope.puffer += String.fromCharCode(event.keyCode);
+               $scope.puffer += String.fromCharCode(event.charCode);
             } else {
                $scope.items.push($scope.puffer);
                $scope.gateEvent($scope.puffer);
