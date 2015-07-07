@@ -27,6 +27,7 @@
 
 
       var _addGateEvent = function (gate, barcode) {
+         console.dir(barcode);
          var deferred = $q.defer();
          $http({
             url   : BASE_URL + '/gate/gate-event',
