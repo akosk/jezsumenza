@@ -50,7 +50,7 @@ class Profile extends BaseProfile
                     'school_class_id'   => \Yii::t('user', 'Osztály'),
                     'eating_time_start' => 'Egyéni étkezési idősáv kezdete',
                     'eating_time_end'   => 'Egyéni étkezési idősáv vége',
-                    'barcode'           => 'Vonalkód',
+                    'barcode'           => 'Kártyaazonosító',
                     'language'           => 'Nyelv',
                 ]
 

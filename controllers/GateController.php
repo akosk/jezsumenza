@@ -43,7 +43,7 @@ class GateController extends ControllerBase
                 'date'      => $currentDate,
                 'time'      => $currentTime,
                 'barcode'   => $barcode,
-                'error'     => "A vonalkódhoz nincs felhasználó rendelve"
+                'error'     => "A kártyaazonosítóhoz nincs felhasználó rendelve"
             ];
             return Json::encode($response);
         }
