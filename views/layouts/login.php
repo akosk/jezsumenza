@@ -49,7 +49,8 @@ AppAsset::register($this);
 
     <div class="row">
         <div class="col-md-12 text-center text-info">
-            <i class="glyphicon glyphicon-question-sign"></i> Ha kérdésed van, keresd Kovács Attilát!
+            <i class="glyphicon glyphicon-question-sign"></i> Ha kérdésed van, keresd a rendszergazdát!<br><a
+                href="mailto:sysadmin@jezsu.hu">sysadmin@jezsu.hu</a>
         </div>
     </div>
 
