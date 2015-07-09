@@ -1,6 +1,8 @@
 <?php
 
 use kartik\detail\DetailView;
+use kartik\grid\GridView;
+use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -44,4 +46,24 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+
+    <?= GridView::widget([
+        'dataProvider' => new ActiveDataProvider([
+            'query' => $model->getProfiles(),
+        ]),
+//        'dataProvider' => $dataProvider,
+//        'filterModel'  => $searchModel,
+        'responsive'   => true,
+        'hover'        => true,
+        'panel'        => [
+            'type'    => GridView::TYPE_PRIMARY,
+            'heading' => 'Tanulók',
+        ],
+        'columns'      => [
+
+            'name',
+
+
+        ],
+    ]); ?>
 </div>
