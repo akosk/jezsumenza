@@ -34,7 +34,7 @@ use yii\widgets\ActiveForm;
     <div class="food-form">
 
         <?php $form = ActiveForm::begin([
-
+//            'enableClientValidation'=>false,
         ]); ?>
 
         <!-- Tab panes -->
