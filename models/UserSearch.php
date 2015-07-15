@@ -93,7 +93,7 @@ class UserSearch extends User
             ],
         ]);
         $query->andOnCondition('school_class_id IS NULL');
-        $query->andOnCondition("role.item_name='student'");
+        $query->andOnCondition("auth_assignment.item_name='student'");
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
