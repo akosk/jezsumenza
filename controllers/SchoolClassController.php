@@ -2,9 +2,13 @@
 
 namespace app\controllers;
 
+use app\models\Profile;
+use app\models\User;
+use app\models\UserSearch;
 use Yii;
 use app\models\SchoolClass;
 use app\models\SchoolClassSearch;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -18,7 +22,7 @@ class SchoolClassController extends ControllerBase
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class'   => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['post'],
                 ],
@@ -36,7 +40,7 @@ class SchoolClassController extends ControllerBase
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
+            'searchModel'  => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -101,6 +105,29 @@ class SchoolClassController extends ControllerBase
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionAddUsers($id)
+    {
+        $schoolClass = SchoolClass::findOne($id);
+
+        $searchModel = \Yii::createObject(UserSearch::className());
+        $dataProvider = $searchModel->searchNonClassUsers($_GET, $schoolClass);
+
+        return $this->render('add-users', [
+            'schoolClass'  => $schoolClass,
+            'dataProvider' => $dataProvider,
+            'searchModel'  => $searchModel,
+        ]);
+    }
+
+    public function actionAddUsersXhr($ids, $school_class_id)
+    {
+        $allUserId = explode(',', $ids);
+        foreach ($allUserId as $user_id) {
+            Profile::updateAll(['school_class_id' => $school_class_id], 'user_id=:user_id', [':user_id' => $user_id]);
+        }
+        $this->redirect(Url::toRoute(['/school-class/add-users','id'=>$school_class_id]));
     }
 
     /**

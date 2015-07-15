@@ -39,7 +39,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class'    => 'yii\grid\ActionColumn',
-                'template' => Yii::$app->user->can('admin') ? '{view} {update} {delete}' : '{view}',
+                'contentOptions' => ['style' => 'min-width: 89px;'],
+                'template' => Yii::$app->user->can('admin') ? '{users} {view} {update} {delete}' : '{view}',
+                'buttons'  => [
+                    'users' => function ($url, $model) {
+                        $url = \yii\helpers\Url::to(['/school-class/add-users', 'id' => $model->id]);
+                        return Html::a('<i class="glyphicon glyphicon-user"></i>', $url, [
+                            'class' => '',
+                            'title' => Yii::t('yii', 'Tanulók csoportos hozzáadása'),
+                        ]);
+                    },
+                ]
             ],
         ],
     ]); ?>
