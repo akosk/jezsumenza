@@ -45,7 +45,7 @@ class UserSearch extends User
      */
     public function search($params)
     {
-        $query = static::find()->joinWith(['profile','role']);
+        $query = static::find()->joinWith(['profile', 'role']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -77,7 +77,7 @@ class UserSearch extends User
 
     public function searchNonClassUsers($params, $schoolClass)
     {
-        $query = static::find()->joinWith(['profile','role']);
+        $query = static::find()->joinWith(['profile', 'role']);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -92,7 +92,8 @@ class UserSearch extends User
                 ],
             ],
         ]);
-$query->andOnCondition('school_class_id IS NULL');
+        $query->andOnCondition('school_class_id IS NULL');
+        $query->andOnCondition("role.item_name='student'");
 
         if (!($this->load($params) && $this->validate())) {
             return $dataProvider;
@@ -100,7 +101,6 @@ $query->andOnCondition('school_class_id IS NULL');
 
         $query->andFilterWhere(['created_at' => $this->created_at])
             ->andFilterWhere(['like', 'username', $this->username])
-
             ->andFilterWhere(['like', 'email', $this->email])
             ->andFilterWhere(['like', 'auth_assignment.item_name', $this->role_name])
             ->andFilterWhere(['registration_ip' => $this->registration_ip]);
