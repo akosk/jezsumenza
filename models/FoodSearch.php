@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\controllers\GridViewController;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -57,6 +58,9 @@ class FoodSearch extends Food
                     'name',
                 ],
             ],
+            'pagination' => [
+                'pageSize' => GridViewController::getPageSize($this->className()),
+            ]
         ]);
 
         $this->load($params);
@@ -121,6 +125,9 @@ class FoodSearch extends Food
             'pagination' => [
                 'pageSize' => 20,
             ],
+            'pagination' => [
+                'pageSize' => GridViewController::getPageSize($this->className()),
+            ]
         ]);
 
         return $dataProvider;

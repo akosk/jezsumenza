@@ -8,6 +8,7 @@
 namespace app\models;
 
 
+use app\controllers\GridViewController;
 use Yii;
 use yii\base\Model;
 use yii\data\SqlDataProvider;
@@ -97,6 +98,9 @@ LEFT JOIN gate_event ge ON date(ge.create_time)=t.lunch_date AND ge.user_id=t.us
             'pagination' => [
                 'pageSize' => 20,
             ],
+            'pagination' => [
+                'pageSize' => GridViewController::getPageSize($this->className()),
+            ]
         ]);
 
         return $dataProvider;

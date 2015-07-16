@@ -42,7 +42,10 @@ class LunchMenuController extends ControllerBase
         $model = LunchMenu::findOne($id);
 
         $dataProvider = new ActiveDataProvider([
-            'query' => LunchChoice::find()->where(['lunch_menu_id' => $id])
+            'query' => LunchChoice::find()->where(['lunch_menu_id' => $id]),
+            'pagination' => [
+                'pageSize' => GridViewController::getPageSize($this->className()),
+            ]
         ]);
 
         return $this->render('users', [

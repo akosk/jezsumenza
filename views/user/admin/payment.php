@@ -6,7 +6,7 @@
  */
 
 use yii\helpers\Html;
-use kartik\grid\GridView;
+use app\components\GridView;
 
 /* @var $this yii\web\View */
 

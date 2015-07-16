@@ -1,7 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 
-use kartik\grid\GridView;
+use app\components\GridView;
 use yii\helpers\Html;
 
 $this->title = 'Menüt rendelő, de nem fogyasztó tanulók';

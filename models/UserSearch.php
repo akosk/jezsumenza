@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\controllers\GridViewController;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -59,6 +60,9 @@ class UserSearch extends User
                     'email',
                 ],
             ],
+            'pagination' => [
+                'pageSize' => GridViewController::getPageSize($this->className()),
+            ]
         ]);
 
         if (!($this->load($params) && $this->validate())) {
@@ -91,6 +95,9 @@ class UserSearch extends User
                     'email',
                 ],
             ],
+            'pagination' => [
+                'pageSize' => GridViewController::getPageSize($this->className()),
+            ]
         ]);
         $query->andOnCondition('school_class_id IS NULL');
         $query->andOnCondition("auth_assignment.item_name='student'");

@@ -8,6 +8,7 @@
 namespace app\models;
 
 
+use app\controllers\GridViewController;
 use Yii;
 use yii\base\Model;
 use yii\data\SqlDataProvider;
@@ -110,6 +111,9 @@ class ProblematicStudent extends Model {
             'pagination' => [
                 'pageSize' => 20,
             ],
+            'pagination' => [
+                'pageSize' => GridViewController::getPageSize($this->className()),
+            ]
         ]);
 
         return $dataProvider;

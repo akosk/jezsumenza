@@ -10,7 +10,7 @@
  */
 
 use yii\helpers\Html;
-use kartik\grid\GridView;
+use app\components\GridView;
 use yii\widgets\Pjax;
 
 /**

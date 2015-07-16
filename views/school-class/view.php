@@ -1,7 +1,7 @@
 <?php
 
 use kartik\detail\DetailView;
-use kartik\grid\GridView;
+use app\components\GridView;
 use yii\data\ActiveDataProvider;
 use yii\helpers\Html;
 

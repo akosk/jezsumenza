@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\controllers\GridViewController;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -46,6 +47,9 @@ class LogSearch extends Log
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'pagination' => [
+                'pageSize' => GridViewController::getPageSize($this->className()),
+            ]
         ]);
 
         $this->load($params);

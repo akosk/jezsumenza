@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use app\controllers\GridViewController;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -44,8 +45,11 @@ class LunchMenuSearch extends LunchMenu
         $query = LunchMenu::find();
 
         $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            'sort'  => ['defaultOrder' => ['create_time' => SORT_DESC]]
+            'query'      => $query,
+            'sort'       => ['defaultOrder' => ['create_time' => SORT_DESC]],
+            'pagination' => [
+                'pageSize' => GridViewController::getPageSize($this->className()),
+            ]
         ]);
 
         $this->load($params);

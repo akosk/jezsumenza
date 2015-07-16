@@ -8,6 +8,7 @@
 namespace app\models;
 
 
+use app\controllers\GridViewController;
 use Yii;
 use yii\base\Model;
 use yii\data\SqlDataProvider;
@@ -99,6 +100,9 @@ LEFT JOIN lunch_right lr ON lr.lunch_date=t.date AND lr.user_id=u.id
             'pagination' => [
                 'pageSize' => 20,
             ],
+            'pagination' => [
+                'pageSize' => GridViewController::getPageSize($this->className()),
+            ]
         ]);
 
         return $dataProvider;
