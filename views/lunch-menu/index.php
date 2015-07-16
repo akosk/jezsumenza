@@ -13,7 +13,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="lunch-menu-index">
 
     <?php if (Yii::$app->user->can('admin')) { ?>
-        <h1><?= Html::a('<i class="glyphicon glyphicon-plus"></i> Ebéd menü létrehozása', ['create'], ['class' => 'btn btn-success']) ?>
+        <h1>
+            <?= Html::a('<i class="glyphicon glyphicon-plus"></i> Ebéd menü létrehozása', ['create'], ['class' => 'btn btn-success']) ?>
+            <?= Html::a('<i class="glyphicon glyphicon-plus"></i> Napi menük létrehozása', ['create-daily'],
+                ['class' =>
+                                                                                                             'btn btn-success']) ?>
             <button onclick="deleteSelected()" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>
                 Kijelöltek törlése
             </button>

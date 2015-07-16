@@ -42,7 +42,7 @@ class LunchMenuController extends ControllerBase
         $model = LunchMenu::findOne($id);
 
         $dataProvider = new ActiveDataProvider([
-            'query' => LunchChoice::find()->where(['lunch_menu_id' => $id]),
+            'query'      => LunchChoice::find()->where(['lunch_menu_id' => $id]),
             'pagination' => [
                 'pageSize' => GridViewController::getPageSize($this->className()),
             ]
@@ -180,7 +180,6 @@ class LunchMenuController extends ControllerBase
                 "Már létezik a megadott napra ilyen betű-kódú menü";
 
             Yii::$app->getSession()->setFlash('error', "<strong>Hiba!</strong> $errorMsg");
-
         }
 
         $foods = BaseArrayHelper::map(Food::find()->all(), 'id', function ($data) {
@@ -190,6 +189,55 @@ class LunchMenuController extends ControllerBase
         return $this->render('create', [
             'model' => $model,
             'foods' => $foods,
+        ]);
+    }
+
+    public function actionCreateDaily()
+    {
+        $modelA = new LunchMenu();
+        $modelB = new LunchMenu();
+        $modelC = new LunchMenu();
+
+        $modelA->date = date('Y-m-d');
+
+        try {
+
+            if ($modelA->load(Yii::$app->request->post())) {
+
+                $modelA->letter = 'A';
+                $modelB->letter = 'B';
+                $modelC->letter = 'C';
+
+                $modelB->date = $modelA->date;
+                $modelC->date = $modelA->date;
+                $modelB->formFoods[0] = $modelA->formFoods[2];
+                $modelB->formFoods[1] = $modelA->formFoods[3];
+                $modelC->formFoods[0] = $modelA->formFoods[4];
+                $modelC->formFoods[1] = $modelA->formFoods[5];
+                $modelA->formFoods = array_slice($modelA->formFoods, 0, 2);
+
+                if ($modelA->save() && $modelB->save() && $modelC->save()) {
+                    return $this->redirect(['index']);
+                }
+            }
+        } catch (Exception $e) {
+            $errorMsg = (count($modelA->formFoods) !== count(array_unique($modelA->formFoods))) ?
+                "Egy étel csak egyszer szerepelhet a menüben."
+                :
+                "Már létezik a megadott napra ilyen betű-kódú menü";
+
+            Yii::$app->getSession()->setFlash('error', "<strong>Hiba!</strong> $errorMsg");
+        }
+
+        $foods = BaseArrayHelper::map(Food::find()->all(), 'id', function ($data) {
+            return $data->translate(Yii::$app->language)->name;
+        });
+
+        return $this->render('create_daily', [
+            'modelA' => $modelA,
+            'modelB' => $modelB,
+            'modelC' => $modelC,
+            'foods'  => $foods,
         ]);
     }
 
