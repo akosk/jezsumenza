@@ -15,7 +15,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lunch-menu-view">
     <?php if (Yii::$app->user->can('admin')) { ?>
-        <h1> <?= Html::a('<i class="glyphicon glyphicon-pencil"></i> Módosítás', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <h1>
+            <?= Html::a('<i class="glyphicon glyphicon-pencil"></i> Módosítás', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('<i class="glyphicon glyphicon-plus"></i> Létrehozás', ['create', 'id' => $model->id], ['class'
+                                                                                                              => 'btn btn-primary']) ?>
             <?= Html::a('<i class="glyphicon glyphicon-trash"></i> Törlés', ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data'  => [
