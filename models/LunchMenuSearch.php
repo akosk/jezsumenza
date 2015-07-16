@@ -45,21 +45,20 @@ class LunchMenuSearch extends LunchMenu
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'  => ['defaultOrder' => ['create_time' => SORT_DESC]]
         ]);
 
         $this->load($params);
 
-        if (strlen($this->date)>0) {
-            list($from,$to)=explode(' - ',$this->date);
-            if (strlen($from)>0) {
+        if (strlen($this->date) > 0) {
+            list($from, $to) = explode(' - ', $this->date);
+            if (strlen($from) > 0) {
                 $query->andFilterWhere(['>=', 'date', $from]);
             }
-            if (strlen($to)>0) {
+            if (strlen($to) > 0) {
                 $query->andFilterWhere(['<=', 'date', $to]);
             }
         }
-
-
 
         if (!$this->validate()) {
             // uncomment the following line if you do not want to return any records when validation fails

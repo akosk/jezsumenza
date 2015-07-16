@@ -13,10 +13,11 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="lunch-menu-index">
 
     <?php if (Yii::$app->user->can('admin')) { ?>
-    <h1><?= Html::a('<i class="glyphicon glyphicon-plus"></i> Ebéd menü létrehozása', ['create'], ['class' => 'btn btn-success']) ?>
-        <button onclick="deleteSelected()" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>
-            Kijelöltek törlése</button>
-    </h1>
+        <h1><?= Html::a('<i class="glyphicon glyphicon-plus"></i> Ebéd menü létrehozása', ['create'], ['class' => 'btn btn-success']) ?>
+            <button onclick="deleteSelected()" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i>
+                Kijelöltek törlése
+            </button>
+        </h1>
     <?php } ?>
 
     <?= GridView::widget([
@@ -30,17 +31,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\CheckboxColumn'],
 
             [
-                'label'     => 'Időpont',
-                'attribute' => 'date',
-                'filterType'=>GridView::FILTER_DATE_RANGE,
-                'filterWidgetOptions'=>[
-                    'convertFormat'=>true,
-                    'pluginOptions'=>[
-                        'timePicker'=>false,
-                        'format'=>'Y-m-d'
+                'label'               => 'Időpont',
+                'attribute'           => 'date',
+                'filterType'          => GridView::FILTER_DATE_RANGE,
+                'filterWidgetOptions' => [
+                    'convertFormat' => true,
+                    'pluginOptions' => [
+                        'timePicker' => false,
+                        'format'     => 'Y-m-d'
                     ]
                 ],
-                'value'     => function ($model, $key, $index, $column) {
+                'value'               => function ($model, $key, $index, $column) {
                     return $model['date'];
                 }
             ],
@@ -48,20 +49,25 @@ $this->params['breadcrumbs'][] = $this->title;
             'letter',
 
             [
-                'attribute'=>'foodsSorted',
-                'label' => "Ételek",
-                'value' => function ($data, $id, $index, $dataColumn) {
+                'attribute' => 'foodsSorted',
+                'label'     => "Ételek",
+                'value'     => function ($data, $id, $index, $dataColumn) {
                     return implode(', ',
                         array_map(function ($item) {
                             return $item->name;
                         }, $data->foodsSorted));
                 },
             ],
+            [
+                'attribute' => 'create_time',
+                'filter'=>false
+
+            ],
 
             [
                 'class'          => 'yii\grid\ActionColumn',
                 'template'       => '{users} {view} {update} {delete}',
-                'template' => Yii::$app->user->can('admin') ? '{users} {view} {update} {delete}':'{users} {view}',
+                'template'       => Yii::$app->user->can('admin') ? '{users} {view} {update} {delete}' : '{users} {view}',
                 'contentOptions' => ['style' => 'min-width: 69px;'],
                 'buttons'        => [
                     'users' => function ($url, $model) {
