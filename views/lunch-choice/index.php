@@ -10,7 +10,7 @@ $this->params['breadcrumbs'][] = "$date";
 
 $this->registerJs('var baseUrl="' . \yii\helpers\Url::home(true) . '";', \yii\web\View::POS_HEAD);
 $this->registerJs('var selectUrl="' . \yii\helpers\Url::toRoute('select') . '";', \yii\web\View::POS_HEAD);
-$this->registerJsFile(\yii\helpers\Url::base(true) . '\js\lunch-choice-index.js', [
+$this->registerJsFile(\yii\helpers\Url::base(true) . '/js/lunch-choice-index.js', [
     'depends'  => ['yii\web\YiiAsset'],
     'position' => \yii\web\View::POS_END
 ]);
@@ -56,7 +56,7 @@ $this->registerJsFile(\yii\helpers\Url::base(true) . '\js\lunch-choice-index.js'
                                 <button data-user-selected="<?= $userSelected ? 1 : 0 ?>"
                                         data-menu-date="<?= $menu->date ?>"
                                         data-menu-id="<?= $menu->id ?>"
-                                        class="menu-widget btn btn-primary <?= $userSelected || ($key <= date('Y-m-d'))
+                                        class="menu-widget btn btn-primary <?= $userSelected || ($key < date('Y-m-d'))
                                             ? 'disabled' : '' ?>">
                                     <h3>
                                         <?php if ($userSelected) { ?>
