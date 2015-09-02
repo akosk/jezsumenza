@@ -22,9 +22,14 @@ class SiteController extends ControllerBase
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
+                    [
+                        'actions' => ['dinapic'],
+                        'allow'   => true,
+//                        'roles'   => ['@'],
+                    ],
 
                     [
-                        'actions' => ['logout', 'index','dina', 'dinapic'],
+                        'actions' => ['logout', 'index','dina'],
                         'allow'   => true,
                         'roles'   => ['@'],
                     ],
