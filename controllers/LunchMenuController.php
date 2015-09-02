@@ -186,6 +186,8 @@ class LunchMenuController extends ControllerBase
             return $data->translate(Yii::$app->language)->name;
         });
 
+        asort($foods);
+
         return $this->render('create', [
             'model' => $model,
             'foods' => $foods,
@@ -232,6 +234,7 @@ class LunchMenuController extends ControllerBase
         $foods = BaseArrayHelper::map(Food::find()->all(), 'id', function ($data) {
             return $data->translate(Yii::$app->language)->name;
         });
+        asort($foods);
 
         return $this->render('create_daily', [
             'modelA' => $modelA,
