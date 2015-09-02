@@ -70,7 +70,7 @@ use yii\widgets\ActiveForm;
 </div>
 
 <?php
-$this->registerJsFile(\yii\helpers\Url::base(true) . '\js\food-form.js', [
+$this->registerJsFile(\yii\helpers\Url::base(true) . '/js/food-form.js', [
     'depends'  => ['yii\web\YiiAsset'],
     'position' => \yii\web\View::POS_END
 ]);
