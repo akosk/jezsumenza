@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="food-index">
 
-    <?php if (Yii::$app->user->can('admin')) { ?>
+    <?php if (Yii::$app->user->can('admin') || Yii::$app->user->can('kitchener')) { ?>
     <h1><?= Html::a('<i class="glyphicon glyphicon-plus"></i> Étel létrehozása', ['create'], ['class' => 'btn btn-success']) ?></h1>
     <?php } ?>
 
@@ -52,7 +52,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
             [
                 'class' => 'yii\grid\ActionColumn',
-                'template' => Yii::$app->user->can('admin') ? '{view} {update} {delete}':'{view}',
+                'template' => Yii::$app->user->can('admin') || Yii::$app->user->can('kitchener')? '{view} {update}
+                {delete}':'{view}',
             ],
         ],
     ]); ?>

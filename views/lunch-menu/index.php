@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="lunch-menu-index">
 
-    <?php if (Yii::$app->user->can('admin')) { ?>
+    <?php if (Yii::$app->user->can('admin') || Yii::$app->user->can('kitchener')) { ?>
         <h1>
             <?= Html::a('<i class="glyphicon glyphicon-plus"></i> Ebéd menü létrehozása', ['create'], ['class' => 'btn btn-success']) ?>
             <?= Html::a('<i class="glyphicon glyphicon-plus"></i> Napi menük létrehozása', ['create-daily'],
@@ -71,7 +71,9 @@ $this->params['breadcrumbs'][] = $this->title;
             [
                 'class'          => 'yii\grid\ActionColumn',
                 'template'       => '{users} {view} {update} {delete}',
-                'template'       => Yii::$app->user->can('admin') ? '{users} {view} {update} {delete}' : '{users} {view}',
+                'template'       => Yii::$app->user->can('admin') || Yii::$app->user->can('kitchener') ? '{users}
+                {view} {update} {delete}' : '{users}
+                {view}',
                 'contentOptions' => ['style' => 'min-width: 69px;'],
                 'buttons'        => [
                     'users' => function ($url, $model) {

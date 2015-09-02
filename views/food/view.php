@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="food-view">
 
-    <?php if (Yii::$app->user->can('admin')) { ?>
+    <?php if (Yii::$app->user->can('admin') || Yii::$app->user->can('kitchener')) { ?>
     <h1><?= Html::a('<i class="glyphicon glyphicon-pencil"></i> Módosítás', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('<i class="glyphicon glyphicon-plus"></i> Létrehozás', ['create', 'id' => $model->id], ['class'
                                                                                                             => 'btn btn-primary']) ?>

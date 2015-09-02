@@ -29,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
+        'filterModel'  => new \app\models\UserSearch(),
         'panel'        => [
             'type'    => GridView::TYPE_PRIMARY,
             'heading' => "$model->date '$model->letter' menü-t választó felhasználók",
