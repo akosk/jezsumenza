@@ -15,6 +15,7 @@
         <i ng-show="!gateEvent.paid" class="fa fa-money faa-float animated" ></i>
         <span>{{gateEvent.lunch_menu}}</span>
         <span ng-show="gateEvent.lunch_menu===undefined"><i class="fa fa-question"></i></span>
+        <i ng-show="!gateEvent.within_eating_time" class="fa fa-clock-o faa-float animated" ></i>
     </div>
 
 </div>
