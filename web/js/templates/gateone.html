@@ -1,11 +1,17 @@
-<!--<div ng-include="getTemplate('focus.html')"></div>-->
+<div ng-include="getTemplate('focus.html')"></div>
 
 
-<!--ng-show="isFocused"-->
+
+<div   ng-show="isFocused" class="alert alert-success text-center" role="alert">
+    <h4 style="margin-bottom: 0px">Várom a következő kártyát...</h4>
+</div>
+
 <div
-
+        ng-show="isFocused"
         class="row">
-            <div ng-repeat="gateEvent in dataService.getGateEvents()|limitTo:3  track by $index" class="col-md-4">
+            <div ng-repeat="gateEvent in dataService.getGateEvents()|limitTo:4  track by $index" class="col-sm-6">
                 <div ng-include="getTemplate('card.html')"></div>
             </div>
+
+
 </div>
