@@ -9,7 +9,8 @@
 <div
         ng-show="isFocused"
         class="row">
-            <div ng-repeat="gateEvent in dataService.getGateEvents()|limitTo:4  track by $index" class="col-sm-6">
+            <div style="min-height:560px;height:560px"
+                 ng-repeat="gateEvent in dataService.getGateEvents()|limitTo:4  track by $index" class="col-sm-6">
                 <div ng-include="getTemplate('card.html')"></div>
             </div>
 

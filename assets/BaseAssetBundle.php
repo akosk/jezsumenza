@@ -12,7 +12,7 @@ use yii\web\AssetBundle;
 
 class BaseAssetBundle  extends AssetBundle{
 
-    const ver='11';
+    const ver='15';
 
     public function init()
     {
