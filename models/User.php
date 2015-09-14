@@ -36,6 +36,8 @@ class User extends BaseUser
 
             // email rules
             ['email', 'string', 'max' => 255],
+            ['email', 'required', 'on'=>['update']],
+            ['email', 'email'],
             ['email', 'unique'],
             ['email', 'trim'],
 
