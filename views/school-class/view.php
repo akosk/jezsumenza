@@ -55,7 +55,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'query' => $model->getProfiles(),
         ]),
 //        'dataProvider' => $dataProvider,
-//        'filterModel'  => $searchModel,
+        'filterModel'  => null,
         'responsive'   => true,
         'hover'        => true,
         'panel'        => [
@@ -63,10 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'heading' => 'Tanulók',
         ],
         'columns'      => [
-
             'name',
-
-
         ],
     ]); ?>
 </div>

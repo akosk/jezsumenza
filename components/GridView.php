@@ -52,10 +52,10 @@ HTML;
 
         $data = array_combine(range(10, 100, 10), range(10, 100, 10));
         $filterModel = $config['filterModel'];
-        $initSize = GridViewController::getPageSize($filterModel->className());
+        $initSize = $filterModel ? GridViewController::getPageSize($filterModel->className()) : 50;
 
-        $cf = str_replace('#url#', Url::toRoute('/grid-view/set-page-size'),$this->change_function);
-        $cf = str_replace('#class#', $filterModel->className(),$cf);
+        $cf = str_replace('#url#', Url::toRoute('/grid-view/set-page-size'), $this->change_function);
+        $cf = str_replace('#class#', $filterModel?$filterModel->className():"Unknownclass", $cf);
 
         $this->toolbar = [
             [
