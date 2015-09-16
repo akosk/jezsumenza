@@ -14,6 +14,7 @@ $this->registerJsFile(\yii\helpers\Url::base(true) . '/js/lunch-choice-index.js'
     'depends'  => ['yii\web\YiiAsset'],
     'position' => \yii\web\View::POS_END
 ]);
+
 ?>
 
 
@@ -38,9 +39,12 @@ $this->registerJsFile(\yii\helpers\Url::base(true) . '/js/lunch-choice-index.js'
 <?php if (!empty($lunchMenus)) { ?>
     <div id="menu-week">
 
-        <?php foreach ($lunchMenus as $key => $daylyMenus) { ?>
 
 
+
+        <?php foreach ($lunchMenus as $key => $daylyMenus) {
+            $lastWednesday=date('Y-m-d',strtotime('last wednesday', strtotime($key)));
+            ?>
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title"><i class="glyphicon glyphicon-calendar"></i> <?=
@@ -49,14 +53,17 @@ $this->registerJsFile(\yii\helpers\Url::base(true) . '/js/lunch-choice-index.js'
                 <div class="panel-body">
 
                     <div class="row">
-                        <?php foreach ($daylyMenus as $menu) {
+                        <?php
+
+                        foreach ($daylyMenus as $menu) {
+
                             $userSelected = in_array($menu->id, $userChoices);
                             ?>
                             <div class="col-xs-6 col-sm-4  text-center">
                                 <button data-user-selected="<?= $userSelected ? 1 : 0 ?>"
                                         data-menu-date="<?= $menu->date ?>"
                                         data-menu-id="<?= $menu->id ?>"
-                                        class="menu-widget btn btn-primary <?= $userSelected || ($key < date('Y-m-d'))
+                                        class="menu-widget btn btn-primary <?= $userSelected || (date('Y-m-d')>$lastWednesday)
                                             ? 'disabled' : '' ?>">
                                     <h3>
                                         <?php if ($userSelected) { ?>
