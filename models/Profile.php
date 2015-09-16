@@ -35,6 +35,7 @@ class Profile extends BaseProfile
             [
                 [['language','yami_id', 'barcode'], 'string'],
                 [['school_class_id'], 'integer'],
+                [['barcode'], 'unique'],
                 [['eating_time_start', 'eating_time_end'], 'safe'],
             ]
 
