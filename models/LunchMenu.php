@@ -79,7 +79,7 @@ class LunchMenu extends LunchMenuBase
             [
                 ':date1' => $lastMonday,
                 ':date2' => $nextSunday,
-            ])->orderBy('date')->all();
+            ])->orderBy('date, letter')->all();
 
         $data = array_reduce($lunchMenus, function ($carry, $item) {
             if (!isset($carry[$item->date])) {
