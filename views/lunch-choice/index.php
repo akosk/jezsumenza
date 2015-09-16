@@ -65,7 +65,7 @@ $this->registerJsFile(\yii\helpers\Url::base(true) . '/js/lunch-choice-index.js'
                                         <strong><?= $menu->letter ?></strong></h3>
                                     <?php
                                     $description = "";
-                                    foreach ($menu->foods as $food) {
+                                    foreach ($menu->foodsSorted as $food) {
                                         $description .= "<h4>{$food->name}</h4> <em>{$food->description}</em>"
                                         ?>
                                         <h5><?= $food->translate(Yii::$app->language)->name ?></h5>
