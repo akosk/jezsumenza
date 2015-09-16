@@ -67,6 +67,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'filter'=>false
 
             ],
+            [
+                'label'     => "Választások",
+                'value'     => function ($data, $id, $index, $dataColumn) {
+                    return $data->usersCount;
+                },
+            ],
+
 
             [
                 'class'          => 'yii\grid\ActionColumn',
