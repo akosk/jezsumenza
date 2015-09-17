@@ -32,7 +32,7 @@ class PaymentImport extends Component
             ];
 
             foreach ($arr as $item) {
-                $profile = Profile::find()->where('yami_id=:id', [':id' => $item['tanulo_azonosito']])->one();
+                $profile = Profile::find()->where('yami_id=:id', [':id' => $item['kartyaszam']])->one();
                 if ($profile && strlen($profile->yami_id) > 0) {
                     $payment = Payment::find()->where('user_id=:user_id AND year=:year AND month=:month', [
                         ':user_id' => $profile->user_id,
@@ -80,7 +80,7 @@ class PaymentImport extends Component
                     }
                 } else {
                     Yii::info("Befizetések importálása során nem található az alábbi tanuló:
-                    {$item['nev']} (id:{$item['tanulo_azonosito']}) ",
+                    {$item['nev']} (id:{$item['kartyaszam']}) ",
                         ArChangeLoggerBehavior::LOG_CATEGORY);
                 }
             }
