@@ -56,6 +56,20 @@ btn-success']) ?></h1>
         ],
         'email:email',
         [
+            'label'     => 'Yami id',
+            'attribute' => 'profile_yami_id',
+            'value'     => function ($model, $key, $index, $column) {
+                return $model->profile->yami_id;
+            }
+        ],
+        [
+            'label'     => 'Kártyaazonosító',
+            'attribute' => 'profile_barcode',
+            'value'     => function ($model, $key, $index, $column) {
+                return $model->profile->barcode;
+            }
+        ],
+        [
             'label'               => 'Szerepkör',
             'attribute'           => 'role_name',
             'filterType'          => GridView::FILTER_SELECT2,
@@ -107,8 +121,8 @@ btn-success']) ?></h1>
             'visible' => Yii::$app->getModule('user')->enableConfirmation
         ],
         [
-            'header' => Yii::t('user', 'Block status'),
-            'value'  => function ($model) {
+            'header'  => Yii::t('user', 'Block status'),
+            'value'   => function ($model) {
                 if ($model->isBlocked) {
                     return Html::a(Yii::t('user', 'Unblock'), ['block', 'id' => $model->id], [
                         'class'        => 'btn btn-xs btn-success btn-block',
@@ -123,18 +137,21 @@ btn-success']) ?></h1>
                     ]);
                 }
             },
-            'format' => 'raw',
+            'format'  => 'raw',
             'visible' => Yii::$app->user->can('admin')
         ],
         [
             'class'    => 'yii\grid\ActionColumn',
-            'template' => Yii::$app->user->can('admin') ? '{payment} {update} {delete}':'{payment}',
-            'buttons' => [
-                'payment'=>  function ($url, $model, $key) {
+            'contentOptions' => [
+                'style' => 'min-width:70px'
+            ],
+
+            'template' => Yii::$app->user->can('admin') ? '{payment} {update} {delete}' : '{payment}',
+            'buttons'  => [
+                'payment' => function ($url, $model, $key) {
                     return Html::a('<i class="glyphicon glyphicon-usd"></i>', $url, [
                         'title' => 'Befizetések',
                     ]);
-
                 }
             ]
         ],
