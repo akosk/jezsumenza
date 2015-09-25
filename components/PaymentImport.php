@@ -54,7 +54,7 @@ class PaymentImport extends Component
                     }
 
                     foreach ($item['jogosult_napok'] as $day) {
-                        if ($day['status'] != 'igen') {
+                        if ($day['statusz'] != 'igen') {
                             continue;
                         }
 
