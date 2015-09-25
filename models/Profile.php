@@ -33,9 +33,9 @@ class Profile extends BaseProfile
         return ArrayHelper::merge(
             parent::rules(),
             [
-                [['language','yami_id', 'barcode'], 'string'],
+                [['language', 'yami_id', 'barcode'], 'string'],
                 [['school_class_id'], 'integer'],
-                [['barcode'], 'unique'],
+                [['barcode', 'yami_id'], 'unique'],
                 [['eating_time_start', 'eating_time_end'], 'safe'],
             ]
 
@@ -46,15 +46,14 @@ class Profile extends BaseProfile
     {
         $merged = ArrayHelper::merge(
             parent::attributeLabels(),
-                [
-                    'yami_id'           => \Yii::t('user', 'Yami azonosító'),
-                    'school_class_id'   => \Yii::t('user', 'Osztály'),
-                    'eating_time_start' => 'Egyéni étkezési idősáv kezdete',
-                    'eating_time_end'   => 'Egyéni étkezési idősáv vége',
-                    'barcode'           => 'Kártyaazonosító',
-                    'language'           => 'Nyelv',
-                ]
-
+            [
+                'yami_id'           => \Yii::t('user', 'Yami azonosító'),
+                'school_class_id'   => \Yii::t('user', 'Osztály'),
+                'eating_time_start' => 'Egyéni étkezési idősáv kezdete',
+                'eating_time_end'   => 'Egyéni étkezési idősáv vége',
+                'barcode'           => 'Kártyaazonosító',
+                'language'          => 'Nyelv',
+            ]
 
         );
         return $merged;
