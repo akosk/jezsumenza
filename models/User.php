@@ -3,9 +3,11 @@
 namespace app\models;
 
 use app\components\ArChangeLoggerBehavior;
+use dektrium\user\helpers\Password;
 use dektrium\user\models\User as BaseUser;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\log\Logger;
 
 class User extends BaseUser
 {
@@ -36,7 +38,7 @@ class User extends BaseUser
 
             // email rules
             ['email', 'string', 'max' => 255],
-            ['email', 'required', 'on'=>['update']],
+            ['email', 'required' ],
             ['email', 'email'],
             ['email', 'unique'],
             ['email', 'trim'],
