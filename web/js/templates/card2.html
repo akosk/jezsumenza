@@ -1,4 +1,4 @@
-<div class="text-center alert" ng-class="gateEvent.within_eating_time && gateEvent.paid?'alert-success':'alert-danger'">
+<div class="text-center alert" ng-class="!gateEvent.already_ate && gateEvent.within_eating_time && gateEvent.paid?'alert-success':'alert-danger'">
     <h2>
         <i ng-show="gateEvent.paid" class="glyphicon glyphicon-ok" style="color:#008000"></i>
         <i ng-show="!gateEvent.paid" class="glyphicon glyphicon-remove" style="color:darkred"></i>
@@ -15,6 +15,7 @@
         <i ng-show="!gateEvent.paid" class="fa fa-money faa-float animated" ></i>
         <span>{{gateEvent.lunch_menu}}</span>
         <span ng-show="gateEvent.lunch_menu===undefined"><i class="fa fa-question"></i></span>
+        <span ng-show="gateEvent.already_ate"><i class="fa fa-ban faa-float animated"></i></span>
         <i ng-show="!gateEvent.within_eating_time" class="fa fa-clock-o faa-float animated" ></i>
     </div>
 

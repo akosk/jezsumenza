@@ -69,6 +69,16 @@ class GateController extends ControllerBase
             ])
             ->one();
 
+
+        $already_ate = GateEvent::find()
+                ->where('
+                        user_id=:userId AND
+                        DATE(create_time)=:date AND
+                        TIME(create_time)<TIME(NOW() - INTERVAL 5 MINUTE)', [
+                ':date'   => $currentDate,
+                ':userId' => $user->id
+            ])->count() > 0;
+
         if (!$lunchChoice) {
             $response = [
                 'tanaz'              => $profile->user->username,
@@ -83,6 +93,7 @@ class GateController extends ControllerBase
                 'eating_time_end'    => $eatingTimeEnd,
                 'paid'               => $user->getLunchRight($currentDate)->one() != null,
                 'within_eating_time' => $user->isWithinEatingTime($eatingTimeStart, $eatingTimeEnd, $currentTime),
+                'already_ate'        => $already_ate,
                 'error'              => "Nem választott menüt"
             ];
         } else {
@@ -99,6 +110,7 @@ class GateController extends ControllerBase
                 'eating_time_end'    => $eatingTimeEnd,
                 'paid'               => $user->getLunchRight($currentDate)->one() != null,
                 'within_eating_time' => $user->isWithinEatingTime($eatingTimeStart, $eatingTimeEnd, $currentTime),
+                'already_ate'        => $already_ate,
                 'lunch_menu'         => $lunchChoice->lunchMenu->letter,
                 'lunch_menu_food'    => array_map(function ($item) {
                     return [
