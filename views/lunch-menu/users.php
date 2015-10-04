@@ -40,6 +40,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'user.username',
             'user.profile.name',
             [
+                'attribute' => 'user_selected',
+                'label'     => "Kiválasztás módja",
+                'value'     => function ($data, $id, $index, $dataColumn) {
+                    return $data->user_selected==1?'Személyes':'Gépi';
+                },
+            ],
+            [
                 'class'    => 'yii\grid\ActionColumn',
                 'template' => Yii::$app->user->can('admin') ? '{delete}':'',
                 'buttons'  => [
