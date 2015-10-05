@@ -42,8 +42,13 @@ $this->registerJsFile(\yii\helpers\Url::base(true) . '/js/lunch-choice-index.js'
 
 
 
-        <?php foreach ($lunchMenus as $key => $daylyMenus) {
-            $lastWednesday=date('Y-m-d',strtotime('last wednesday', strtotime($key)));
+        <?php
+        reset($lunchMenus);
+        $mondayOfCurrentWeek=key($lunchMenus);
+        $lastWednesday=date('Y-m-d',strtotime('last wednesday', strtotime($mondayOfCurrentWeek)));
+
+        echo "l: $lastWednesday";
+        foreach ($lunchMenus as $key => $daylyMenus) {
             ?>
             <div class="panel panel-default">
                 <div class="panel-heading">
