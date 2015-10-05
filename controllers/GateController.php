@@ -72,6 +72,7 @@ class GateController extends ControllerBase
 
         $already_ate = GateEvent::find()
                 ->where('
+                        gate=2 AND
                         user_id=:userId AND
                         DATE(create_time)=:date AND
                         TIME(create_time)<TIME(NOW() - INTERVAL 5 MINUTE)', [

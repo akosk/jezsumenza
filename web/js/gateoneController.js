@@ -25,7 +25,7 @@
 
       $scope.gateEvent = function (barcode) {
          $scope.isBusy = true;
-         dataService.addGateEvent(1, barcode)
+         dataService.addGateEvent(GATE_ID, barcode)
             .then(
             function () {
             },
