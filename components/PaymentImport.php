@@ -54,16 +54,25 @@ class PaymentImport extends Component
                     }
 
                     foreach ($item['jogosult_napok'] as $day) {
-                        if ($day['statusz'] != 'igen') {
-                            continue;
-                        }
 
                         $lunchDate = "{$payment->year}-{$payment->month}-{$day['day']}";
 
                         $lunchRight = LunchRight::find()->where('user_id=:user_id AND lunch_date=:lunchDate', [
-                            ':user_id' => $profile->user_id,
-                            ':lunchDate'    => $lunchDate,
+                            ':user_id'   => $profile->user_id,
+                            ':lunchDate' => $lunchDate,
                         ])->one();
+
+                        if ($day['statusz'] == 'nem') {
+                            if ($lunchRight) {
+                                $lunchRight->delete();
+                            }
+                            continue;
+                        }
+
+                        if ($day['statusz'] != 'igen') {
+                            continue;
+                        }
+
                         if (!$lunchRight) {
                             $lunchRight = new LunchRight();
                         }
