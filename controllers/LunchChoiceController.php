@@ -25,7 +25,7 @@ class LunchChoiceController extends ControllerBase
                     [
                         'actions' => ['index', 'select'],
                         'allow'   => true,
-                        'roles'   => ['student', 'teacher'],
+                        'roles'   => ['student', 'teacher', 'admin', 'economic'],
                     ],
                 ]
             ]
