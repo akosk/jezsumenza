@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\ArChangeLog;
+use DateTime;
 use Exception;
 use Yii;
 use yii\db\Connection;
@@ -19,7 +20,16 @@ class SiteController extends ControllerBase
     public function behaviors()
     {
         return [
+            'cache' => [
+                'class'        => 'yii\filters\HttpCache',
+                'only'         => ['dinapic'],
+                'lastModified' => function ($action, $params) {
+                    $date = new DateTime("2015-01-31");
+                    return $date->getTimestamp();
+                },
+            ],
             'access' => [
+
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
@@ -29,7 +39,7 @@ class SiteController extends ControllerBase
                     ],
 
                     [
-                        'actions' => ['logout', 'index','dina'],
+                        'actions' => ['logout', 'index', 'dina'],
                         'allow'   => true,
                         'roles'   => ['@'],
                     ],
@@ -65,22 +75,7 @@ class SiteController extends ControllerBase
         return $this->render('index');
     }
 
-    public function actionLogin()
-    {
 
-        if (!\Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
-
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }
-    }
 
     public function actionDina($tanaz, $tanuloazonosito)
     {
@@ -113,31 +108,25 @@ class SiteController extends ControllerBase
                 ':tanaz' => $tanaz,
             ])->queryOne();
         } catch (Exception $e) {
-
         }
 
         if ($data['kep'] != '') {
 
-            $headers = Yii::$app->response->headers;
-            $headers->remove('Pragma');
-            $headers->add('Content-Type: ','image/bmp');
-            $headers->add('Cache-control','max-age='.(60*60*24*365));
-            $headers->add('Expires',gmdate(DATE_RFC1123,time()+60*60*24*365));
-            Yii::$app->response->sendContentAsFile(hex2bin($data['kep']),'image.bmp');
-//            echo hex2bin($data['kep']);
+//            $headers = Yii::$app->response->headers;
+//            $headers->remove('Pragma');
+//            $headers->add('Content-Type: ','image/bmp');
+//            $headers->add('Cache-control','public, max-age='.(60*60*24*365));
+//            $headers->add('Expires',gmdate(DATE_RFC1123,time()+60*60*24*365));
+//            Yii::$app->response->sendContentAsFile(hex2bin($data['kep']),'image.bmp');
+
+            header('Content-Type:image/bmp');
+            echo hex2bin($data['kep']);
         } else {
-            $d=__DIR__;
-            $data=readfile($d.'/../web/images/anonymous.jpg');
+            $d = __DIR__;
+            $data = readfile($d . '/../web/images/anonymous.jpg');
             header("Content-type: image/jpg");
             echo $data;
         }
-    }
-
-    public function actionLogout()
-    {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
     }
 
 
