@@ -44,7 +44,7 @@ class FoodTranslation extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['language', 'name', 'description'], 'required'],
+            [['language', 'name'], 'required'],
             [['food_id'], 'integer'],
             [['description'], 'string'],
             [['language'], 'string', 'max' => 16],

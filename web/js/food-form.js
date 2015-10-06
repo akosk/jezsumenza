@@ -23,8 +23,8 @@
 
       var $this = $(this);
       var hasError = $this.find('.has-error');
-      if (hasError) {
-         var huValid = $('#foodtranslation-hu-hu-name').val().length > 0 && $('#foodtranslation-hu-hu-description').val().length > 0 &&
+      if (hasError && hasError.length>0) {
+         var huValid = $('#foodtranslation-hu-hu-name').val().length > 0 &&
             $('#food-category').val().length > 0;
 
          if (huValid) {
