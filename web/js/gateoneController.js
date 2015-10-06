@@ -13,7 +13,7 @@
       .controller('GateoneController', GateoneController);
 
 
-   function GateoneController($scope, dataService) {
+   function GateoneController($scope, $interval, dataService) {
       $scope.isBusy = false;
       $scope.items = [];
       $scope.puffer = '';
@@ -100,6 +100,17 @@
          return gateEvent.user_name === undefined ? 'Ismeretlen' : gateEvent.user_name;
       };
 
+      $interval(function () {
+         var events = dataService.getGateEvents();
+         if (events.length > 0) {
+            var event = events[events.length - 1];
+            var ellapsedSeconds = Date.now() - event.timestamp *1000;
+            if (ellapsedSeconds > 1000 * 60) {
+               var removed = events.pop();
+            }
+         }
+
+      }, 1000);
    }
 
 })();
