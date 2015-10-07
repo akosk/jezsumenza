@@ -1,0 +1,1 @@
+c:\wamp\bin\php\php5.5.12\php -c C:\wamp\bin\apache\apache2.4.9\bin\php.ini yii auto-payment/load
