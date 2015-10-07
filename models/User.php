@@ -38,7 +38,7 @@ class User extends BaseUser
 
             // email rules
             ['email', 'string', 'max' => 255],
-            ['email', 'required' ],
+            ['email', 'required'],
             ['email', 'email'],
             ['email', 'unique'],
             ['email', 'trim'],
@@ -48,7 +48,6 @@ class User extends BaseUser
             ['password', 'string', 'min' => 3, 'on' => ['register', 'create']],
         ];
     }
-
 
     public function create()
     {
@@ -76,38 +75,65 @@ class User extends BaseUser
         return false;
     }
 
-    public static function hasRole($user_id, $role){
-        $hasRole=\Yii::$app->authManager->checkAccess($user_id,$role);
+    public static function hasRole($user_id, $role)
+    {
+        $hasRole = \Yii::$app->authManager->checkAccess($user_id, $role);
         return $hasRole;
     }
 
     public function getEatingTimeStart()
     {
-        if (self::hasRole($this->id,'teacher')) {
+        if (self::hasRole($this->id, 'teacher')) {
             return null;
         }
-        return $this->profile->eating_time_start != null ?
-            $this->profile->eating_time_start :
-            $this->profile->schoolClass->eating_time_start;
+
+        if ($this->profile->eating_time_start != null) {
+            return $this->profile->eating_time_start;
+        }
+
+        $weekday = date('w');
+        $field = "eating_time_start_weekday_{$weekday}";
+        if ($this->profile->schoolClass->$field != null) {
+            return $this->profile->schoolClass->$field;
+        }
+
+        if ($this->profile->schoolClass->eating_time_start != null) {
+            return $this->profile->schoolClass->eating_time_start;
+        }
+
+        return null;
     }
 
     public function getEatingTimeEnd()
     {
-        if (self::hasRole($this->id,'teacher')) {
+        if (self::hasRole($this->id, 'teacher')) {
             return null;
         }
-        return $this->profile->eating_time_end != null ?
-            $this->profile->eating_time_end :
-            $this->profile->schoolClass->eating_time_end;
+
+        if ($this->profile->eating_time_end != null) {
+            return $this->profile->eating_time_end;
+        }
+
+        $weekday = date('w');
+        $field = "eating_time_end_weekday_{$weekday}";
+        if ($this->profile->schoolClass->$field != null) {
+            return $this->profile->schoolClass->$field;
+        }
+
+        if ($this->profile->schoolClass->eating_time_end != null) {
+            return $this->profile->schoolClass->eating_time_end;
+        }
+
+        return null;
     }
 
     public function isWithinEatingTime($timeFrom, $timeTo, $time)
     {
-        if (self::hasRole($this->id,'teacher')) {
+        if (self::hasRole($this->id, 'teacher')) {
             return true;
         }
 
-        return $time >= $timeFrom && $time < $timeTo;
+        return ($time >= $timeFrom || $timeFrom===null)  && ($time < $timeTo || $timeTo===null);
     }
 
     public function getLunchRight($date)
@@ -115,7 +141,8 @@ class User extends BaseUser
         return $this->hasOne(LunchRight::className(), ['user_id' => 'id'])->onCondition(['lunch_date' => $date]);
     }
 
-    public function getRole() {
+    public function getRole()
+    {
         return $this->hasOne(AuthAssignment::className(), ['user_id' => 'id']);
     }
 }

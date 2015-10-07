@@ -12,10 +12,10 @@ use DateInterval;
 class DateHelper
 {
 
-    private static $MONTH_NAMES = ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július',
+    public static $MONTH_NAMES = ['Január', 'Február', 'Március', 'Április', 'Május', 'Június', 'Július',
         'Augusztus', 'Szeptember', 'Október', 'November', 'December'];
 
-    private static $DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    public static $DAY_NAMES = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
     public static function getMonthName($i)
     {

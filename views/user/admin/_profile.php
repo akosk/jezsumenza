@@ -39,6 +39,7 @@ use yii\helpers\ArrayHelper;
     'pluginOptions' => [
         'showSeconds'  => false,
         'showMeridian' => false,
+        'defaultTime'  => false
     ]
 ]); ?>
 
@@ -49,6 +50,7 @@ use yii\helpers\ArrayHelper;
     'pluginOptions' => [
         'showSeconds'  => false,
         'showMeridian' => false,
+        'defaultTime'  => false
     ]
 ]); ?>
 
