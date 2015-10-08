@@ -33,7 +33,7 @@ class SiteController extends ControllerBase
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['dinapic'],
+                        'actions' => ['dinapic','contact','captcha'],
                         'allow'   => true,
 //                        'roles'   => ['@'],
                     ],
@@ -127,6 +127,21 @@ class SiteController extends ControllerBase
             header("Content-type: image/jpg");
             echo $data;
         }
+    }
+
+    public function actionContact()
+    {
+        $model = new ContactForm();
+        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+            Yii::$app->session->setFlash('contactFormSubmitted');
+
+            return $this->refresh();
+        } else {
+            return $this->render('contact', [
+                'model' => $model,
+            ]);
+        }
+
     }
 
 

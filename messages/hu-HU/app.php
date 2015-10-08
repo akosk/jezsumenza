@@ -7,6 +7,7 @@ return [
     'Next week'                      => 'Következő hét',
     'Food description'               => 'Ételek leírása',
     'Lunch choice'                   => 'Menü választó',
+    'Ideas'                          => 'Ötletbörze',
     'Logout'                         => 'Kijelentkezés',
     'There is no menu for this week' => 'Erre a hétre jelenleg nincs megadva egy menü sem.',
 

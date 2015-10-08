@@ -117,6 +117,12 @@ AppAsset::register($this);
                 'url'     => ['/lunch-choice'],
                 'visible' => !Yii::$app->user->isGuest,
             ],
+
+            [
+                'label'   => '<i class="glyphicon glyphicon-bullhorn"></i> '.Yii::t('app','Ideas'),
+                'url'     => ['/site/contact'],
+            ],
+
             Yii::$app->user->isGuest ?
                 ['label' => '<i class="glyphicon glyphicon-log-in"></i> Bejelentkezés', 'url' => ['/user/security/login']] :
                 ['label'       => '<i class="glyphicon glyphicon-off"></i> Kijelentkezés (' . Yii::$app->user->identity->username . ')',

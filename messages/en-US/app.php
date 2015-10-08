@@ -7,6 +7,7 @@ return [
     'Next week'                      => 'Next week',
     'Food description'               => 'Food description',
     'Lunch choice'                   => 'Lunch choice',
+    'Ideas'                          => 'Ideas',
     'Logout'                         => 'Logout',
     'There is no menu for this week' => 'There is no menu for this week',
     'Január'                         => 'January',
