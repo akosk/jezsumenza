@@ -37,9 +37,9 @@ class ContactForm extends Model
     public function attributeLabels()
     {
         return [
-            'name' => 'Név',
-            'email' => 'E-mail',
-            'subject' => 'Tárgy',
+            'name' => 'Neved',
+            'email' => 'E-mail címed',
+            'subject' => 'Üzenet címe',
             'body' => 'Üzenet',
             'verifyCode' => 'Ellenőrző kód',
         ];
