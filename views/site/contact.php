@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     'form'       => $form,
                     'columns'    => 1,
                     'attributes' => [
-                        'subject' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Tárgy...']],
+                        'subject' => ['type' => Form::INPUT_TEXT, 'options' => ['placeholder' => 'Cím...']],
                     ]
 
                 ]);
