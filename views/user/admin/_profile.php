@@ -13,10 +13,13 @@
  * @var yii\widgets\ActiveForm $form
  * @var dektrium\user\models\Profile $profile
  */
+
+use app\components\DateHelper;
 use app\models\Language;
 use app\models\SchoolClass;
 use kartik\widgets\TimePicker;
 use yii\helpers\ArrayHelper;
+use kartik\builder\Form;
 
 ?>
 
@@ -32,27 +35,6 @@ use yii\helpers\ArrayHelper;
         ['prompt' => 'Válasszon osztályt...']) ?>
 
 
-    <label>Egyéni étkezési idősáv kezdete</label>
-<?= TimePicker::widget([
-    'model'         => $profile,
-    'attribute'     => 'eating_time_start',
-    'pluginOptions' => [
-        'showSeconds'  => false,
-        'showMeridian' => false,
-        'defaultTime'  => false
-    ]
-]); ?>
-
-    <label>Egyéni étkezési idősáv vége</label>
-<?= TimePicker::widget([
-    'model'         => $profile,
-    'attribute'     => 'eating_time_end',
-    'pluginOptions' => [
-        'showSeconds'  => false,
-        'showMeridian' => false,
-        'defaultTime'  => false
-    ]
-]); ?>
 
 <?= $form->field($profile, 'barcode') ?>
 

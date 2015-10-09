@@ -10,7 +10,7 @@
  */
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use kartik\form\ActiveForm;
 
 /**
  * @var yii\web\View                 $this
@@ -88,6 +88,16 @@ $this->params['breadcrumbs'][] = $this->title;
                 </div>
                 <div class="panel-body">
                     <?= $this->render('@dektrium/user/views/admin/_profile', ['form' => $form, 'profile' => $profile]) ?>
+                </div>
+            </div>
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    Felhasználói étkezési idősávjának módosítása
+                </div>
+                <div class="panel-body">
+                    <?= $this->render('@dektrium/user/views/admin/_eating_time', ['form' => $form, 'profile' =>
+                        $profile]) ?>
                 </div>
             </div>
 

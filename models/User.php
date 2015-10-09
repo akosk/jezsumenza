@@ -87,12 +87,18 @@ class User extends BaseUser
             return null;
         }
 
+        $weekday = date('w');
+        $field = "eating_time_start_weekday_{$weekday}";
+
+
+        if ($this->profile->$field != null) {
+            return $this->profile->$field;
+        }
+
         if ($this->profile->eating_time_start != null) {
             return $this->profile->eating_time_start;
         }
 
-        $weekday = date('w');
-        $field = "eating_time_start_weekday_{$weekday}";
         if ($this->profile->schoolClass->$field != null) {
             return $this->profile->schoolClass->$field;
         }
@@ -110,12 +116,17 @@ class User extends BaseUser
             return null;
         }
 
+        $weekday = date('w');
+        $field = "eating_time_end_weekday_{$weekday}";
+
+        if ($this->profile->$field != null) {
+            return $this->profile->$field;
+        }
+
         if ($this->profile->eating_time_end != null) {
             return $this->profile->eating_time_end;
         }
 
-        $weekday = date('w');
-        $field = "eating_time_end_weekday_{$weekday}";
         if ($this->profile->schoolClass->$field != null) {
             return $this->profile->schoolClass->$field;
         }

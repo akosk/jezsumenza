@@ -36,7 +36,7 @@ class Profile extends BaseProfile
                 [['language', 'yami_id', 'barcode'], 'string'],
                 [['school_class_id'], 'integer'],
                 [['barcode', 'yami_id'], 'unique'],
-                [['eating_time_start', 'eating_time_end'], 'safe'],
+                [['eating_time_start', 'eating_time_end', 'eating_time_start_weekday_1', 'eating_time_end_weekday_1', 'eating_time_start_weekday_2', 'eating_time_end_weekday_2', 'eating_time_start_weekday_3', 'eating_time_end_weekday_3', 'eating_time_start_weekday_4', 'eating_time_end_weekday_4', 'eating_time_start_weekday_5', 'eating_time_end_weekday_5'], 'safe'],
             ]
 
         );
