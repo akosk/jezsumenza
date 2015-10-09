@@ -63,4 +63,10 @@ class Profile extends BaseProfile
     {
         return $this->hasOne(SchoolClass::className(), ['id' => 'school_class_id']);
     }
+
+    public function beforeValidate()
+    {
+        $this->gravatar_email = $this->public_email;
+        return parent::beforeValidate();
+    }
 }
