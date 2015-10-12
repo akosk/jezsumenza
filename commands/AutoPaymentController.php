@@ -6,6 +6,7 @@ namespace app\commands;
 use app\components\PaymentImport;
 use app\models\ImportedFile;
 use Exception;
+use Yii;
 use yii\console\Controller;
 use yii\db\Expression;
 use yii\helpers\Console;
@@ -13,6 +14,10 @@ use yii\helpers\Console;
 class AutoPaymentController extends Controller
 {
 
+    public function actionHello()
+    {
+        Yii::info("Hello!", 'public');
+    }
 
     public function actionLoad()
     {
