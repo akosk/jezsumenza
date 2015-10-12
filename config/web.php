@@ -51,7 +51,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'user'         => [
-            'loginUrl' => ['/user/login'],
+            'loginUrl'        => ['/user/login'],
             'identityClass'   => 'app\models\User',
             'enableAutoLogin' => true,
 
@@ -78,13 +78,13 @@ $config = [
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
             'useFileTransport' => false,
-            'transport' => [
-                'class' => 'Swift_SmtpTransport',
+            'transport'        => [
+                'class'      => 'Swift_SmtpTransport',
 
-                'host' => 'smtp.gmail.com',
-                'username' => 'smtp.akos.kiszely@gmail.com',
-                'password' => 'ssyaiwli22',
-                'port' => '587',
+                'host'       => 'smtp.gmail.com',
+                'username'   => 'smtp.akos.kiszely@gmail.com',
+                'password'   => 'ssyaiwli22',
+                'port'       => '587',
                 'encryption' => 'tls',
             ],
         ],
@@ -98,6 +98,7 @@ $config = [
                 [
                     'class'  => 'app\components\DbTarget',
                     'levels' => ['error', 'warning', 'info'],
+                    'except' => ['yii\db*']
                 ],
             ],
         ],

@@ -21,15 +21,18 @@ return [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning'],
+                    'levels' => ['error', 'warning','info'],
+                    'except' => ['yii\db*']
                 ],
 
                 [
                     'class' => 'yii\log\DbTarget',
                     'levels' => ['error', 'warning', 'info'],
+                    'except' => ['yii\db*']
                 ],
             ],
         ],
+
         'user' => [
             'class'=>'app\components\ConsoleUser',
 
