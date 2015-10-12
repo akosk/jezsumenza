@@ -12,6 +12,8 @@
     <h3><i class="fa fa-clock-o"></i> {{gateEvent.time}}</h3>
 
     <div style="font-size: 700%">
+        <span>{{gateEvent.lunch_menu}}</span>
+        <span ng-show="gateEvent.lunch_menu===undefined"><i class="fa fa-question"></i></span>
         <i ng-show="!gateEvent.within_eating_time" class="fa fa-clock-o faa-float animated" ></i>
         <span ng-show="gateEvent.user_name===undefined"><i class="fa fa-question"></i></span>
     </div>
