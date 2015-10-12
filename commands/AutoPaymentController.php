@@ -22,7 +22,7 @@ class AutoPaymentController extends Controller
     public function actionLoad()
     {
 
-
+        Yii::info("Befizetések autimatikus importálása...", 'public');
         $paymentController = new PaymentController('payment', $this->module);
 
         $dir=\Yii::$app->params['payment_import_dir'];
@@ -34,8 +34,10 @@ class AutoPaymentController extends Controller
                         ':filename' => $file
                     ])->count() > 0;
                 if ($alreadyImported) {
+                    Yii::info("{$file} már importálva van.", 'public');
                     echo "{$file} már importálva van. \n";
                 } else {
+                    Yii::info("{$file} még nincs importálva...", 'public');
                     echo "{$file} még nincs importálva... \n";
                     if ($paymentController->actionLoad($dir . $file) == 0) {
                         $importedFile = new ImportedFile();
@@ -46,6 +48,8 @@ class AutoPaymentController extends Controller
                 }
             }
         }
+
+        Yii::info("Befizetések autimatikus importálása vége.", 'public');
 
         return 0;
     }
