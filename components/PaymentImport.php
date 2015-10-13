@@ -99,6 +99,8 @@ class PaymentImport extends Component
         } catch (Exception $e) {
             Yii::info("Befizetések importálása sikertelen. " . $result['imported'] . " befizetés betöltve.",
                 ArChangeLoggerBehavior::LOG_CATEGORY);
+            Yii::info("Hiba: " . $e->getMessage(),
+                ArChangeLoggerBehavior::LOG_CATEGORY);
             throw $e;
         }
 
