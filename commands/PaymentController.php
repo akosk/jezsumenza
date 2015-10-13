@@ -5,6 +5,7 @@ namespace app\commands;
 
 use app\components\PaymentImport;
 use Exception;
+use Yii;
 use yii\console\Controller;
 use yii\helpers\Console;
 
