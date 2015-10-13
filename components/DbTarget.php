@@ -7,6 +7,7 @@
 
 namespace app\components;
 
+use yii\helpers\VarDumper;
 use yii\log\DbTarget as BaseDbTarget;
 
 class DbTarget extends BaseDbTarget
