@@ -13,6 +13,8 @@ class PaymentController extends Controller
 
     public function actionLoad($path)
     {
+        Yii::info("{$path} betöltése...", 'public');
+        Yii::getLogger()->flush(true);
         try {
             $json = file_get_contents($path);
             $json=iconv('ISO-8859-2', 'UTF-8', $json);

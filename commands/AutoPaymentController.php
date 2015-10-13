@@ -46,6 +46,7 @@ class AutoPaymentController extends Controller
                 } else {
                     Yii::info("{$file} még nincs importálva...", 'public');
                     echo "{$file} még nincs importálva... \n";
+                    Yii::getLogger()->flush(true);
                     if ($paymentController->actionLoad($dir . $file) == 0) {
                         $importedFile = new ImportedFile();
                         $importedFile->filename = $file;
