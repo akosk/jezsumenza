@@ -38,20 +38,13 @@ class PaymentImport extends Component
 
 
             foreach ($arr as $item) {
-                Yii::info("C 2.", 'public');
-                echo "C2.\n";
-                Yii::getLogger()->flush(false);
                 $profile = Profile::find()->where('yami_id=:id', [':id' => $item['kartyaszam']])->one();
-                Yii::info("C 3.", 'public');
-                Yii::getLogger()->flush(false);
                 if ($profile && strlen($profile->yami_id) > 0) {
                     $payment = Payment::find()->where('user_id=:user_id AND year=:year AND month=:month', [
                         ':user_id' => $profile->user_id,
                         ':year'    => $item['ev'],
                         ':month'   => $item['honap'],
                     ])->one();
-                    Yii::info("C 4.", 'public');
-                    Yii::getLogger()->flush(false);
                     if (!$payment) {
                         $payment = new Payment();
                     }
@@ -60,20 +53,12 @@ class PaymentImport extends Component
                     $payment->month = $item['honap'];
                     $payment->amount = $item['befizetes'];
                     $payment->create_time = new Expression('NOW()');
-                    Yii::info("C 5.", 'public');
-                    Yii::getLogger()->flush(false);
                     if ($payment->save()) {
-                        Yii::info("C 6.", 'public');
-                        Yii::getLogger()->flush(false);
                         $result['imported']++;
                     } else {
-                        Yii::info("C 7.", 'public');
-                        Yii::getLogger()->flush(false);
                         throw new Exception('A fizetés mentése nem sikerült.');
                     }
 
-                    Yii::info("C 8.", 'public');
-                    Yii::getLogger()->flush(false);
                     foreach ($item['jogosult_napok'] as $day) {
 
                         $lunchDate = "{$payment->year}-{$payment->month}-{$day['day']}";
@@ -83,16 +68,10 @@ class PaymentImport extends Component
                             ':lunchDate' => $lunchDate,
                         ])->one();
 
-                        Yii::info("C 9.", 'public');
-                        Yii::getLogger()->flush(false);
                         if ($day['statusz'] == 'nem') {
-                            Yii::info("C 10.", 'public');
-                            Yii::getLogger()->flush(false);
                             if ($lunchRight) {
                                 $lunchRight->delete();
                             }
-                            Yii::info("C 11.", 'public');
-                            Yii::getLogger()->flush(false);
                             continue;
                         }
 
@@ -109,11 +88,7 @@ class PaymentImport extends Component
                         $lunchRight->lunch_date = $lunchDate;
                         $lunchRight->status = LunchRight::STATUS_FULL;
                         $lunchRight->create_time = new Expression('NOW()');
-                        Yii::info("C 13.", 'public');
-                        Yii::getLogger()->flush(false);
                         if (!$lunchRight->save()) {
-                            Yii::info("C 14.", 'public');
-                            Yii::getLogger()->flush(false);
                             $errors = $lunchRight->getFirstErrors();
                             throw new Exception('Az ebédhez való jogosultság mentése nem sikerült. ' . implode(',', $errors));
                         }
