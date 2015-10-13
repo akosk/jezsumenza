@@ -31,12 +31,6 @@ class PaymentImport extends Component
                 'error'    => 0
             ];
 
-
-
-            Yii::info("C 1.", 'public');
-            Yii::getLogger()->flush(false);
-
-
             foreach ($arr as $item) {
                 $profile = Profile::find()->where('yami_id=:id', [':id' => $item['kartyaszam']])->one();
                 if ($profile && strlen($profile->yami_id) > 0) {
