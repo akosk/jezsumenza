@@ -22,10 +22,10 @@ class PaymentImport extends Component
     public static function processJson($json)
     {
         Yii::info("Befizetések importálásnak megkezdése.", ArChangeLoggerBehavior::LOG_CATEGORY);
-        Yii::getLogger()->flush(true);
+        Yii::getLogger()->flush(false);
         try {
             $arr = Json::decode($json);
-            Yii::getLogger()->flush(true);
+            Yii::getLogger()->flush(false);
             $result = [
                 'imported' => 0,
                 'error'    => 0
@@ -34,15 +34,16 @@ class PaymentImport extends Component
 
 
             Yii::info("C 1.", 'public');
-            Yii::getLogger()->flush(true);
+            Yii::getLogger()->flush(false);
 
 
             foreach ($arr as $item) {
                 Yii::info("C 2.", 'public');
-                Yii::getLogger()->flush(true);
+                echo "C2.\n";
+                Yii::getLogger()->flush(false);
                 $profile = Profile::find()->where('yami_id=:id', [':id' => $item['kartyaszam']])->one();
                 Yii::info("C 3.", 'public');
-                Yii::getLogger()->flush(true);
+                Yii::getLogger()->flush(false);
                 if ($profile && strlen($profile->yami_id) > 0) {
                     $payment = Payment::find()->where('user_id=:user_id AND year=:year AND month=:month', [
                         ':user_id' => $profile->user_id,
@@ -50,7 +51,7 @@ class PaymentImport extends Component
                         ':month'   => $item['honap'],
                     ])->one();
                     Yii::info("C 4.", 'public');
-                    Yii::getLogger()->flush(true);
+                    Yii::getLogger()->flush(false);
                     if (!$payment) {
                         $payment = new Payment();
                     }
@@ -60,19 +61,19 @@ class PaymentImport extends Component
                     $payment->amount = $item['befizetes'];
                     $payment->create_time = new Expression('NOW()');
                     Yii::info("C 5.", 'public');
-                    Yii::getLogger()->flush(true);
+                    Yii::getLogger()->flush(false);
                     if ($payment->save()) {
                         Yii::info("C 6.", 'public');
-                        Yii::getLogger()->flush(true);
+                        Yii::getLogger()->flush(false);
                         $result['imported']++;
                     } else {
                         Yii::info("C 7.", 'public');
-                        Yii::getLogger()->flush(true);
+                        Yii::getLogger()->flush(false);
                         throw new Exception('A fizetés mentése nem sikerült.');
                     }
 
                     Yii::info("C 8.", 'public');
-                    Yii::getLogger()->flush(true);
+                    Yii::getLogger()->flush(false);
                     foreach ($item['jogosult_napok'] as $day) {
 
                         $lunchDate = "{$payment->year}-{$payment->month}-{$day['day']}";
@@ -83,15 +84,15 @@ class PaymentImport extends Component
                         ])->one();
 
                         Yii::info("C 9.", 'public');
-                        Yii::getLogger()->flush(true);
+                        Yii::getLogger()->flush(false);
                         if ($day['statusz'] == 'nem') {
                             Yii::info("C 10.", 'public');
-                            Yii::getLogger()->flush(true);
+                            Yii::getLogger()->flush(false);
                             if ($lunchRight) {
                                 $lunchRight->delete();
                             }
                             Yii::info("C 11.", 'public');
-                            Yii::getLogger()->flush(true);
+                            Yii::getLogger()->flush(false);
                             continue;
                         }
 
@@ -109,10 +110,10 @@ class PaymentImport extends Component
                         $lunchRight->status = LunchRight::STATUS_FULL;
                         $lunchRight->create_time = new Expression('NOW()');
                         Yii::info("C 13.", 'public');
-                        Yii::getLogger()->flush(true);
+                        Yii::getLogger()->flush(false);
                         if (!$lunchRight->save()) {
                             Yii::info("C 14.", 'public');
-                            Yii::getLogger()->flush(true);
+                            Yii::getLogger()->flush(false);
                             $errors = $lunchRight->getFirstErrors();
                             throw new Exception('Az ebédhez való jogosultság mentése nem sikerült. ' . implode(',', $errors));
                         }
@@ -121,19 +122,19 @@ class PaymentImport extends Component
                     Yii::info("Befizetések importálása során nem található az alábbi tanuló:
                     {$item['nev']} (id:{$item['kartyaszam']}) ",
                         ArChangeLoggerBehavior::LOG_CATEGORY);
-                    Yii::getLogger()->flush(true);
+                    Yii::getLogger()->flush(false);
                 }
             }
 
             Yii::info("Befizetések importálása kész. " . $result['imported'] . " befizetés betöltve.",
                 ArChangeLoggerBehavior::LOG_CATEGORY);
-            Yii::getLogger()->flush(true);
+            Yii::getLogger()->flush(false);
         } catch (Exception $e) {
             Yii::info("Befizetések importálása sikertelen. " . $result['imported'] . " befizetés betöltve.",
                 ArChangeLoggerBehavior::LOG_CATEGORY);
             Yii::info("Hiba: " . $e->getMessage(),
                 ArChangeLoggerBehavior::LOG_CATEGORY);
-            Yii::getLogger()->flush(true);
+            Yii::getLogger()->flush(false);
             throw $e;
         }
 
