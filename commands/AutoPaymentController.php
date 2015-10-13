@@ -23,7 +23,7 @@ class AutoPaymentController extends Controller
     {
 
         Yii::info("Befizetések autimatikus importálása...", 'public');
-        Yii::getLogger()->flush();
+        Yii::getLogger()->flush(true);
 
         $paymentController = new PaymentController('payment', $this->module);
 
@@ -52,7 +52,7 @@ class AutoPaymentController extends Controller
         }
 
         Yii::info("Befizetések autimatikus importálása vége.", 'public');
-
+        Yii::getLogger()->flush(true);
         return 0;
     }
 }
