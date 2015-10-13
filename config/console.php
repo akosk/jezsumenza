@@ -19,14 +19,14 @@ return [
         ],
         'log' => [
             'targets' => [
-                [
-                    'class' => 'yii\log\FileTarget',
-                    'levels' => ['error', 'warning','info'],
-                    'except' => ['yii\db*']
-                ],
+//                [
+//                    'class' => 'yii\log\FileTarget',
+//                    'levels' => ['error', 'warning','info'],
+//                    'except' => ['yii\db*']
+//                ],
 
                 [
-                    'class' => 'yii\log\DbTarget',
+                    'class' => 'app\components\DbTarget',
                     'levels' => ['error', 'warning', 'info'],
                     'except' => ['yii\db*']
                 ],
