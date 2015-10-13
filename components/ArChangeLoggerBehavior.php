@@ -20,7 +20,7 @@ class ArChangeLoggerBehavior extends Behavior
 
     public $logClassName = 'object';
     public $logNameProperty = 'name';
-    public $primaryKey="id";
+    public $primaryKey = "id";
 
     const DELETED = '#DELETED#';
     private $attributes = [];
@@ -126,9 +126,9 @@ class ArChangeLoggerBehavior extends Behavior
         $owner = $this->owner;
         $change = new ArChangeLog();
         $change->action_hash = Yii::$app->getSecurity()->generateRandomString();
-        $change->editor_id = \Yii::$app->user->id;
+        $change->editor_id = $this->getUserId();
         $change->classname = get_class($owner);
-        $primaryKey=$this->primaryKey;
+        $primaryKey = $this->primaryKey;
         $change->item_id = $owner->$primaryKey;
         $change->property = self::DELETED;
         $change->create_time = new Expression('NOW()');
@@ -148,12 +148,12 @@ class ArChangeLoggerBehavior extends Behavior
 
         $action_hash = Yii::$app->getSecurity()->generateRandomString();
 
-        $primaryKey=$this->primaryKey;
+        $primaryKey = $this->primaryKey;
 
         foreach ($attributes_diff as $key => $item) {
             $change = new ArChangeLog();
             $change->action_hash = $action_hash;
-            $change->editor_id = \Yii::$app->user->id;
+            $change->editor_id = $this->getUserId();
             $change->classname = get_class($owner);
             $change->item_id = $owner->$primaryKey;
             $change->property = $key;
@@ -163,5 +163,10 @@ class ArChangeLoggerBehavior extends Behavior
             $change->create_time = new Expression('NOW()');
             $change->save();
         }
+    }
+
+    public function getUserId()
+    {
+        return Yii::$app->hasProperty('user') ? Yii::$app->user->id : null;
     }
 }

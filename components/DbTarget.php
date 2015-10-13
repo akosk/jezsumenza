@@ -7,6 +7,7 @@
 
 namespace app\components;
 
+use Exception;
 use yii\helpers\VarDumper;
 use yii\log\DbTarget as BaseDbTarget;
 
@@ -24,14 +25,26 @@ class DbTarget extends BaseDbTarget
             if (!is_string($text)) {
                 $text = VarDumper::export($text);
             }
-            $command->bindValues([
-                ':level'    => $level,
-                ':category' => $category,
-                ':log_time' => $timestamp,
-                ':prefix'   => $this->getMessagePrefix($message),
-                ':message'  => $text,
-                ':user_id'  => \Yii::$app->user->id,
-            ])->execute();
+
+            try {
+                if (\Yii::$app->hasProperty('user')) {
+                    $user = \Yii::$app->user;
+                }
+
+                $id = $user ? $user->id : '-';
+                $prefix = $user ? $this->getMessagePrefix($message) : '-';
+                $values = [
+                    ':level'    => $level,
+                    ':category' => $category,
+                    ':log_time' => $timestamp,
+                    ':prefix'   => $prefix,
+                    ':message'  => $text,
+                    ':user_id'  => $id,
+                ];
+                $result = $command->bindValues($values)->execute();
+            } catch (Exception $e) {
+                echo "Hiba a logolás során:" . $e->getMessage();
+            }
         }
     }
 }

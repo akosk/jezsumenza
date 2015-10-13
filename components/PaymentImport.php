@@ -70,6 +70,7 @@ class PaymentImport extends Component
 
                         if ($day['statusz'] == 'nem') {
                             if ($lunchRight) {
+                                $lunchRight->detachBehaviors();
                                 $lunchRight->delete();
                             }
                             continue;
@@ -82,6 +83,8 @@ class PaymentImport extends Component
                         if (!$lunchRight) {
                             $lunchRight = new LunchRight();
                         }
+
+                        $lunchRight->detachBehaviors();
 
                         $lunchRight->user_id = $profile->user_id;
 

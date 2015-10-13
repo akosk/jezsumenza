@@ -22,19 +22,13 @@ class AutoPaymentController extends Controller
     public function actionLoad()
     {
 
-        Yii::info("Befizetések autimatikus importálása...", 'public');
-        Yii::getLogger()->flush(false);
-        Yii::info("Befizetések autimatikus importálása... 2.", 'public');
+        Yii::info("Befizetések automatikus importálása...", 'public');
 
         $paymentController = new PaymentController('payment', $this->module);
-
-        Yii::info("Befizetések autimatikus importálása... 3.", 'public');
 
         $dir=\Yii::$app->params['payment_import_dir'];
         $files = array_diff(scandir($dir, 0), ['..', '.']);
 
-        Yii::info("Befizetések autimatikus importálása... 4.", 'public');
-        Yii::getLogger()->flush(false);
         foreach ($files as $file) {
             if (preg_match('/.json/', $file) == 1) {
                 $alreadyImported = ImportedFile::find()->where('filename=:filename', [
@@ -57,13 +51,11 @@ class AutoPaymentController extends Controller
             } else {
                 Yii::info("{$file} nem json file...", 'public');
             }
-            Yii::getLogger()->flush(false);
         }
 
-        echo "Befizetések autimatikus importálása vége.";
-        Yii::info("Befizetések autimatikus importálása vége.", 'public');
-        Yii::getLogger()->flush(true);
-        var_dump(Yii::getLogger()->messages);
+        echo "Befizetések automatikus importálása vége.";
+        Yii::info("Befizetések automatikus importálása vége.", 'public');
+//        Yii::getLogger()->flush(true);
         return 0;
     }
 }

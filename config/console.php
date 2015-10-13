@@ -19,12 +19,6 @@ return [
         ],
         'log' => [
             'targets' => [
-//                [
-//                    'class' => 'yii\log\FileTarget',
-//                    'levels' => ['error', 'warning','info'],
-//                    'except' => ['yii\db*']
-//                ],
-
                 [
                     'class' => 'app\components\DbTarget',
                     'levels' => ['error', 'warning', 'info'],
@@ -33,10 +27,6 @@ return [
             ],
         ],
 
-        'user' => [
-            'class'=>'app\components\ConsoleUser',
-
-        ],
         'authManager'          => [
             'class'        => 'yii\rbac\DbManager',
             'defaultRoles' => ['guest'],
