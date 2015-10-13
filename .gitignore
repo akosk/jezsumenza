@@ -31,3 +31,4 @@ config/db.php
 config/db_dina.php
 config/db_dinapic.php
 config/params.php
+web/index.php
