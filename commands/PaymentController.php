@@ -23,6 +23,8 @@ class PaymentController extends Controller
         } catch (Exception $e) {
             $this->stdout("Hiba történt az importálás során.\n", Console::BG_RED);
             $this->stdout($e->getMessage() . "\n");
+            Yii::info("Hiba történt az importálás során. ".$e->getMessage(), 'public');
+            Yii::getLogger()->flush(true);
             return 1;
         }
         $this->stdout($result['imported'], Console::BG_GREEN | Console::BOLD);

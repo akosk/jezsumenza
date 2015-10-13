@@ -22,10 +22,10 @@ class PaymentImport extends Component
     public static function processJson($json)
     {
         Yii::info("Befizetések importálásnak megkezdése.", ArChangeLoggerBehavior::LOG_CATEGORY);
-
+        Yii::getLogger()->flush(true);
         try {
             $arr = Json::decode($json);
-
+            Yii::getLogger()->flush(true);
             $result = [
                 'imported' => 0,
                 'error'    => 0
@@ -91,16 +91,19 @@ class PaymentImport extends Component
                     Yii::info("Befizetések importálása során nem található az alábbi tanuló:
                     {$item['nev']} (id:{$item['kartyaszam']}) ",
                         ArChangeLoggerBehavior::LOG_CATEGORY);
+                    Yii::getLogger()->flush(true);
                 }
             }
 
             Yii::info("Befizetések importálása kész. " . $result['imported'] . " befizetés betöltve.",
                 ArChangeLoggerBehavior::LOG_CATEGORY);
+            Yii::getLogger()->flush(true);
         } catch (Exception $e) {
             Yii::info("Befizetések importálása sikertelen. " . $result['imported'] . " befizetés betöltve.",
                 ArChangeLoggerBehavior::LOG_CATEGORY);
             Yii::info("Hiba: " . $e->getMessage(),
                 ArChangeLoggerBehavior::LOG_CATEGORY);
+            Yii::getLogger()->flush(true);
             throw $e;
         }
 
