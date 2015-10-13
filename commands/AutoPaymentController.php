@@ -63,7 +63,7 @@ class AutoPaymentController extends Controller
         echo "Befizetések autimatikus importálása vége.";
         Yii::info("Befizetések autimatikus importálása vége.", 'public');
         Yii::getLogger()->flush(true);
-        var_dump(static::getLogger()->messages);
+        var_dump(Yii::getLogger()->messages);
         return 0;
     }
 }
