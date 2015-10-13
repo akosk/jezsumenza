@@ -23,6 +23,8 @@ class AutoPaymentController extends Controller
     {
 
         Yii::info("Befizetések autimatikus importálása...", 'public');
+        Yii::getLogger()->flush();
+
         $paymentController = new PaymentController('payment', $this->module);
 
         $dir=\Yii::$app->params['payment_import_dir'];
