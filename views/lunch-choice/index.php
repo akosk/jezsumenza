@@ -68,7 +68,10 @@ $this->registerJsFile(\yii\helpers\Url::base(true) . '/js/lunch-choice-index.js'
                                         data-menu-date="<?= $menu->date ?>"
                                         data-menu-id="<?= $menu->id ?>"
                                         class="menu-widget btn btn-primary <?= $userSelected || (date('Y-m-d')>$lastWednesday)
-                                            ? 'disabled' : '' ?>">
+                                            ? 'disabled' : '' ?>"
+                                        <?= $userSelected || (date('Y-m-d')>$lastWednesday)
+                                        ? 'disabled="disabled"' : '' ?>
+                                    >
                                     <h3>
                                         <?php if ($userSelected) { ?>
                                             <i class="glyphicon glyphicon-ok" style="color:deepskyblue"></i>
