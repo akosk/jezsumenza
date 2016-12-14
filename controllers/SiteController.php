@@ -12,7 +12,7 @@ use yii\helpers\Url;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
-use app\models\ContactForm;
+use app\models\Contact;
 use yii\web\Response;
 
 class SiteController extends ControllerBase
@@ -33,13 +33,13 @@ class SiteController extends ControllerBase
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['dinapic','contact','captcha'],
+                        'actions' => ['dinapic'],
                         'allow'   => true,
 //                        'roles'   => ['@'],
                     ],
 
                     [
-                        'actions' => ['logout', 'index', 'dina'],
+                        'actions' => ['logout', 'contact','index', 'dina'],
                         'allow'   => true,
                         'roles'   => ['@'],
                     ],
@@ -131,8 +131,10 @@ class SiteController extends ControllerBase
 
     public function actionContact()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
+        $model = new Contact();
+        $model->user_id=Yii::$app->user->id;
+        $model->ip=Yii::$app->request->getUserIP();
+        if ($model->load(Yii::$app->request->post()) && $model->insert() && $model->contact(Yii::$app->params['adminEmail'])) {
             Yii::$app->session->setFlash('contactFormSubmitted');
 
             return $this->refresh();
