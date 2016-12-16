@@ -9,6 +9,7 @@ use Yii;
  *
  * @property integer $id
  * @property string $category
+ * @property string $image
  */
 class FoodBase extends \yii\db\ActiveRecord
 {
@@ -27,7 +28,8 @@ class FoodBase extends \yii\db\ActiveRecord
     {
         return [
             [['category'], 'required'],
-            [['category'], 'string']
+            [['category'], 'string'],
+            [['image'], 'string', 'max' => 255]
         ];
     }
 
@@ -39,6 +41,7 @@ class FoodBase extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'category' => 'Category',
+            'image' => 'Kép',
         ];
     }
 }

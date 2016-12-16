@@ -56,48 +56,20 @@ $this->registerJsFile(\yii\helpers\Url::base(true) . '/js/lunch-choice-index.js'
                 </div>
                 <div class="panel-body">
 
-                    <div class="row">
+                    <div style="display:flex;align-items:stretch;justify-content:space-around">
                         <?php
 
                         foreach ($daylyMenus as $menu) {
 
                             $userSelected = in_array($menu->id, $userChoices);
-                            ?>
-                            <div class="col-xs-6 col-sm-4  text-center">
-                                <button data-user-selected="<?= $userSelected ? 1 : 0 ?>"
-                                        data-menu-date="<?= $menu->date ?>"
-                                        data-menu-id="<?= $menu->id ?>"
-                                        class="menu-widget btn btn-primary <?= $userSelected || (date('Y-m-d')>$lastWednesday)
-                                            ? 'disabled' : '' ?>"
-                                        <?= $userSelected || (date('Y-m-d')>$lastWednesday)
-                                        ? 'disabled="disabled"' : '' ?>
-                                    >
-                                    <h3>
-                                        <?php if ($userSelected) { ?>
-                                            <i class="glyphicon glyphicon-ok" style="color:deepskyblue"></i>
-                                        <?php } ?>
-                                        <strong><?= $menu->letter ?></strong></h3>
-                                    <?php
-                                    $description = "";
-                                    foreach ($menu->foodsSorted as $food) {
-                                        $description .= "<h4>{$food->name}</h4> <em>{$food->description}</em>"
-                                        ?>
-                                        <h5><?= $food->translate(Yii::$app->language)->name ?></h5>
-                                    <?php } ?>
-                                    <a onclick="
-                                        event.preventDefault();
-                                        event.stopPropagation();
-                                        $('#modal-body').html('<?= $description ?>');
-                                        $('#myModal').modal({});"><h3
-                                            style="cursor:pointer;margin:0px;
-                                    padding:0px;">
-                                            <i class="glyphicon glyphicon-question-sign" style="color:white"></i>
-                                        </h3></a>
-                                </button>
 
-                                <div>
-                                </div>
-                            </div>
+                            ?>
+                                <?= $this->render('menucard', [
+                                    'userSelected'=>$userSelected,
+                                    'menu'=>$menu,
+                                    'lastWednesday'=>$lastWednesday
+                                ]) ?>
+
                         <?php } ?>
                     </div>
                 </div>

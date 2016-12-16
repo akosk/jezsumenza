@@ -42,7 +42,7 @@
 
 
                var $firstItem = null;
-               $('#w5').find('input').each(function (index, item) {
+               $('#w5').find('input').not(':input[type=file]').each(function (index, item) {
                   if (index == 0) {
                      $firstItem = $(item);
                   } else {

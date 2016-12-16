@@ -24,6 +24,7 @@ $this->params['breadcrumbs'][] = 'Módosítás';
                 'model' => $model,
             ]) ?>
 
+
         </div>
     </div>
 </div>

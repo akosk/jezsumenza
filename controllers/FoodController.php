@@ -8,6 +8,7 @@ use app\models\FoodSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * FoodController implements the CRUD actions for Food model.
@@ -62,12 +63,14 @@ class FoodController extends ControllerBase
     public function actionCreate()
     {
         $model = new Food();
+        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
 
         foreach (Yii::$app->request->post('FoodTranslation', []) as $language => $data) {
             foreach ($data as $attribute => $translation) {
                 $model->translate($language)->$attribute = $translation;
             }
         }
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -87,6 +90,7 @@ class FoodController extends ControllerBase
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
 
         if ($model === null) {
             throw new NotFoundHttpException('The requested page does not exist.');

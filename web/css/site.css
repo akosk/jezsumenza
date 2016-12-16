@@ -142,3 +142,7 @@ a.desc:after {
     width: 100%;
     height: auto;
 }
+
+.menucard li:hover {
+    font-weight: bold;
+}
