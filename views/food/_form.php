@@ -84,7 +84,9 @@ use kartik\widgets\FileInput;
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <img class='img-responsive img-thumbnail' src='/images/foods/<?= $model->image ?>'>
+                    <?php if ($model->image != '') { ?>
+                        <img class='img-responsive img-thumbnail' src='/images/foods/<?= $model->image ?>'>
+                    <?php } ?>
                 </div>
             </div>
 

@@ -58,11 +58,10 @@ $this->params['breadcrumbs'][] = $this->title;
                             'ajax'               => [
                                 'url'      => Url::toRoute(['/lunch-menu/search-users']),
                                 'dataType' => 'json',
-                                'data'     => new JsExpression('function(term,page) { return {q:term}; }'),
-                                'results'  => new JsExpression('function(data,page) { return {results:data}; }'),
+                                'data'     => new JsExpression('function(term,page) { console.log(term);return {q:term}; }'),
                             ],
-                            'formatResult'       => new JsExpression('function(repo) { return "<div><strong>"+repo.name+"</strong> ("+repo.username+")</div>"; }'),
-                            'formatSelection'    => new JsExpression('function(repo) { return repo.name; }'),
+                            'templateResult' => new JsExpression('function(user) {return user.name+" ("+user.username+")"; }'),
+                            'templateSelection' => new JsExpression('function (user) {  return user.name; }')
 //                    'initSelection' => new JsExpression($initScript)
                         ]
                     ]

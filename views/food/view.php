@@ -50,6 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label'=>'Kép',
                 'format' => 'raw',
                 'attribute' => 'image',
+                'visible'=>$model->image!='',
                 'value'     => "<img class='img-responsive' src='/images/foods/{$model->image}'>"
 
             ],

@@ -63,7 +63,13 @@ $this->params['breadcrumbs'][] = $this->title;
             'heading' => 'Tanulók',
         ],
         'columns'      => [
-            'name',
+            [
+                'attribute' => 'name',
+                'value'     => function ($data, $id, $index, $dataColumn) {
+                    return $data->htmlName();
+                },
+                'format'    => 'raw',
+            ],
         ],
     ]); ?>
 </div>

@@ -38,7 +38,14 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\CheckboxColumn'],
             ['class' => 'yii\grid\SerialColumn'],
             'user.username',
-            'user.profile.name',
+            [
+                'attribute' => 'user.profile.name',
+                'value'     => function ($data, $id, $index, $dataColumn) {
+                    return $data->user->profile->htmlName();
+                },
+                'format'=>'raw'
+            ],
+
             [
                 'attribute' => 'user_selected',
                 'label'     => "Kiválasztás módja",

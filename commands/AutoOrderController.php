@@ -42,7 +42,7 @@ class AutoOrderController extends Controller
             FROM lunch_menu t
             INNER JOIN user u
             LEFT JOIN lunch_choice lc ON lc.user_id=u.id AND lc.lunch_menu_id=t.id
-            WHERE t.`date`=:date
+            WHERE t.`date`=:date AND u.inactive<>1
             GROUP BY u.username
             HAVING choosed=0
             ";

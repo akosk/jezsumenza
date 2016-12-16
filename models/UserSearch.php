@@ -26,7 +26,7 @@ class UserSearch extends User
     {
         return [
             [['created_at'], 'integer'],
-            [['profile_name', 'role_name', 'profile_yami_id', 'profile_barcode'], 'string'],
+            [['profile_name', 'role_name', 'inactive','profile_yami_id', 'profile_barcode'], 'string'],
             [['username', 'email', 'registration_ip'], 'safe'],
         ];
     }
@@ -55,6 +55,7 @@ class UserSearch extends User
             'sort'       => [
                 'attributes' => [
                     'username',
+                    'inactive',
                     'profile_name' => [
                         'asc'  => ['profile.name' => SORT_ASC],
                         'desc' => ['profile.name' => SORT_DESC],
@@ -75,7 +76,9 @@ class UserSearch extends User
             ]
         ]);
 
+        $this->inactive=0;
         if (!($this->load($params) && $this->validate())) {
+            $query->andFilterWhere(['inactive'=> $this->inactive]);
             return $dataProvider;
         }
 
@@ -85,6 +88,7 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'profile.yami_id', $this->profile_yami_id])
             ->andFilterWhere(['like', 'profile.barcode', $this->profile_barcode])
             ->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['inactive'=> $this->inactive])
             ->andFilterWhere(['like', 'auth_assignment.item_name', $this->role_name])
             ->andFilterWhere(['registration_ip' => $this->registration_ip]);
 
@@ -111,6 +115,7 @@ class UserSearch extends User
                 'pageSize' => GridViewController::getPageSize($this->className()),
             ]
         ]);
+        $query->andOnCondition('inactive<>1');
         $query->andOnCondition('school_class_id IS NULL');
         $query->andOnCondition("auth_assignment.item_name='student'");
 

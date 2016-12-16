@@ -156,4 +156,15 @@ class User extends BaseUser
     {
         return $this->hasOne(AuthAssignment::className(), ['user_id' => 'id']);
     }
+
+    public function activate()
+    {
+        return (bool) $this->updateAttributes(['inactive' => 0]);
+    }
+
+    public function inactivate()
+    {
+        return (bool) $this->updateAttributes(['inactive' => 1]);
+    }
+
 }

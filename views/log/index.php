@@ -44,10 +44,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             [
                 'attribute' => 'user.profile.name',
-                'label' => 'Név',
-                'value' => function ($data, $id, $index, $dataColumn) {
-                    return $data->user->profile->name;
-                }
+                'value'     => function ($data, $id, $index, $dataColumn) {
+                    return isset($data->user) && isset($data->user->profile) ? $data->user->profile->htmlName() : '';
+                },
+                'format'=>'raw'
 
             ],
             'message:ntext',

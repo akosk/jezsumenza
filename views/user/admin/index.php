@@ -39,54 +39,84 @@ btn-success']) ?></h1>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
-    'filterModel'  => $searchModel,
-    'layout'       => "{items}\n{pager}",
-    'panel'        => [
-        'type'    => GridView::TYPE_PRIMARY,
+    'filterModel' => $searchModel,
+    'layout' => "{items}\n{pager}",
+    'panel' => [
+        'type' => GridView::TYPE_PRIMARY,
         'heading' => 'Felhasználók',
     ],
-    'columns'      => [
+    'columns' => [
         'username',
         [
-            'label'     => 'Név',
+            'label' => 'Név',
             'attribute' => 'profile_name',
-            'value'     => function ($model, $key, $index, $column) {
+            'value' => function ($model, $key, $index, $column) {
                 return $model->profile->name;
             }
         ],
         'email:email',
         [
-            'label'     => 'Yami id',
+            'label' => 'Yami id',
             'attribute' => 'profile_yami_id',
-            'value'     => function ($model, $key, $index, $column) {
+            'value' => function ($model, $key, $index, $column) {
                 return $model->profile->yami_id;
             }
         ],
         [
-            'label'     => 'Kártyaazonosító',
+            'label' => 'Kártyaazonosító',
             'attribute' => 'profile_barcode',
-            'value'     => function ($model, $key, $index, $column) {
+            'value' => function ($model, $key, $index, $column) {
                 return $model->profile->barcode;
             }
         ],
         [
-            'label'               => 'Szerepkör',
-            'attribute'           => 'role_name',
-            'filterType'          => GridView::FILTER_SELECT2,
+            'label' => 'Szerepkör',
+            'attribute' => 'role_name',
+            'filterType' => GridView::FILTER_SELECT2,
             'filterWidgetOptions' => [
-                'data'    => [
-                    ''          => 'Nincs szűrés',
-                    'admin'     => 'Adminisztrátor',
-                    'economic'  => 'Gazdasági csoport',
+                'data' => [
+                    '' => 'Nincs szűrés',
+                    'admin' => 'Adminisztrátor',
+                    'economic' => 'Gazdasági csoport',
                     'kitchener' => 'Konyhafőnök',
-                    'teacher'   => 'Tanár',
-                    'student'   => 'Tanuló',
+                    'teacher' => 'Tanár',
+                    'student' => 'Tanuló',
                 ],
                 'options' => ['multiple' => false]
             ],
-            'value'               => function ($model, $key, $index, $column) {
+            'value' => function ($model, $key, $index, $column) {
                 return Yii::t('app', $model->role->itemName->description);
             }
+        ],
+        [
+            'label' => 'Aktív',
+            'attribute' => 'inactive',
+            'filterType' => GridView::FILTER_SELECT2,
+            'filterWidgetOptions' => [
+                'data' => [
+                    '' => 'Nincs szűrés',
+                    '1' => 'Inaktív',
+                    '0' => 'Aktív',
+                ],
+                'options' => ['multiple' => false]
+            ],
+            'value' => function ($model) {
+                if ($model->inactive) {
+                    return Html::a('Aktiválás', ['inactive', 'id' => $model->id], [
+                        'class' => 'btn btn-xs btn-success btn-block',
+                        'data-method' => 'post',
+                        'data-confirm' => Yii::t('user', 'Biztosan aktiválni szeretnéd a felhasználót?')
+                    ]);
+                } else {
+                    return Html::a('Inaktiválás', ['inactive', 'id' => $model->id], [
+                        'class' => 'btn btn-xs btn-danger btn-block',
+                        'data-method' => 'post',
+                        'data-confirm' => Yii::t('user', 'Biztosan inaktiválni szeretnéd a felhasználót?')
+                    ]);
+                }
+            },
+            'format' => 'raw',
+            'visible' => Yii::$app->user->can('admin')
         ],
 
 //        [
@@ -105,49 +135,49 @@ btn-success']) ?></h1>
 //            }
 //        ],
         [
-            'header'  => Yii::t('user', 'Confirmation'),
-            'value'   => function ($model) {
+            'header' => Yii::t('user', 'Confirmation'),
+            'value' => function ($model) {
                 if ($model->isConfirmed) {
                     return '<div class="text-center"><span class="text-success">' . Yii::t('user', 'Confirmed') . '</span></div>';
                 } else {
                     return Html::a(Yii::t('user', 'Confirm'), ['confirm', 'id' => $model->id], [
-                        'class'        => 'btn btn-xs btn-success btn-block',
-                        'data-method'  => 'post',
+                        'class' => 'btn btn-xs btn-success btn-block',
+                        'data-method' => 'post',
                         'data-confirm' => Yii::t('user', 'Are you sure to confirm this user?'),
                     ]);
                 }
             },
-            'format'  => 'raw',
+            'format' => 'raw',
             'visible' => Yii::$app->getModule('user')->enableConfirmation
         ],
         [
-            'header'  => Yii::t('user', 'Block status'),
-            'value'   => function ($model) {
+            'header' => Yii::t('user', 'Block status'),
+            'value' => function ($model) {
                 if ($model->isBlocked) {
                     return Html::a(Yii::t('user', 'Unblock'), ['block', 'id' => $model->id], [
-                        'class'        => 'btn btn-xs btn-success btn-block',
-                        'data-method'  => 'post',
+                        'class' => 'btn btn-xs btn-success btn-block',
+                        'data-method' => 'post',
                         'data-confirm' => Yii::t('user', 'Are you sure to unblock this user?')
                     ]);
                 } else {
                     return Html::a('<i class="glyphicon glyphicon-ban-circle"></i> Tiltás', ['block', 'id' => $model->id], [
-                        'class'        => 'btn btn-xs btn-danger btn-block',
-                        'data-method'  => 'post',
+                        'class' => 'btn btn-xs btn-danger btn-block',
+                        'data-method' => 'post',
                         'data-confirm' => Yii::t('user', 'Are you sure to block this user?')
                     ]);
                 }
             },
-            'format'  => 'raw',
+            'format' => 'raw',
             'visible' => Yii::$app->user->can('admin')
         ],
         [
-            'class'    => 'yii\grid\ActionColumn',
+            'class' => 'yii\grid\ActionColumn',
             'contentOptions' => [
                 'style' => 'min-width:70px'
             ],
 
             'template' => Yii::$app->user->can('admin') ? '{payment} {update} {delete}' : '{payment}',
-            'buttons'  => [
+            'buttons' => [
                 'payment' => function ($url, $model, $key) {
                     return Html::a('<i class="glyphicon glyphicon-usd"></i>', $url, [
                         'title' => 'Befizetések',

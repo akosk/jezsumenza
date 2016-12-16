@@ -75,12 +75,14 @@ class LunchMenuController extends ControllerBase
 
     public function actionSearchUsers()
     {
+        $q=is_array($_GET['q'])?$_GET['q']['term']:$_GET['q'];
         $users = User::find()
             ->innerJoinWith(['profile'])
-            ->where('profile.name LIKE :q', [':q' => '%' . $_GET['q'] . '%'])
+            ->where('profile.name LIKE :q AND user.inactive<>1', [':q' => '%' . $q . '%'])
             ->limit(10)
             ->asArray()
             ->all();
+
         $data = array_reduce($users, function ($carry, $item) {
             $carry[] = [
                 'id'       => $item['id'],
@@ -89,7 +91,7 @@ class LunchMenuController extends ControllerBase
             ];
             return $carry;
         }, []);
-        $json = Json::encode($data);
+        $json = Json::encode(['results'=>$data]);
         echo $json;
     }
 

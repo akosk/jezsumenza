@@ -36,7 +36,7 @@ class AdminController extends BaseAdminController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'create', 'update', 'delete', 'block', 'confirm', 'payment','view'],
+                        'actions' => ['index', 'create', 'update', 'delete', 'block', 'inactive','confirm', 'payment','view'],
                         'allow'   => true,
                         'roles'   => ['admin', 'economic'],
                     ],
@@ -44,6 +44,25 @@ class AdminController extends BaseAdminController
             ]
         ];
     }
+
+    public function actionInactive($id, $back = 'index')
+    {
+        if ($id == \Yii::$app->user->getId()) {
+            \Yii::$app->getSession()->setFlash('danger', \Yii::t('user', 'Saját magad nem inkativálhatod'));
+        } else {
+            $user = $this->findModel($id);
+            if ($user->inactive==1) {
+                $user->activate();
+                \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'A felhasználó aktiválva'));
+            } else {
+                $user->inactivate();
+                \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'A felhasználó inaktiválva'));
+            }
+        }
+        $url = $back == 'index' ? ['index'] : ['update', 'id' => $id];
+        return $this->redirect($url);
+    }
+
 
     public function actionCreate()
     {

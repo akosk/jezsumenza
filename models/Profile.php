@@ -69,4 +69,12 @@ class Profile extends BaseProfile
         $this->gravatar_email = $this->public_email;
         return parent::beforeValidate();
     }
+
+    public function htmlName()
+    {
+        return $this->user->inactive?
+            "<span class='text-warning'> {$this->name}</span>":
+            $this->name;
+    }
+
 }
