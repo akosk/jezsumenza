@@ -56,7 +56,7 @@ $this->registerJsFile(\yii\helpers\Url::base(true) . '/js/lunch-choice-index.js'
                 </div>
                 <div class="panel-body">
 
-                    <div style="display:flex;align-items:stretch;justify-content:space-around">
+                    <div style="display:flex;flex-wrap: wrap;align-items:stretch;justify-content:space-around">
                         <?php
 
                         foreach ($daylyMenus as $menu) {
