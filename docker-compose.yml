@@ -36,10 +36,26 @@ services:
         - ./.docker/env/mysql.development.env        
       volumes:
         - ./.docker/mysql:/docker-entrypoint-initdb.d
+        - ./mysql:/var/lib/mysql
       networks:
         - jezsu-network
 
+    mssql:
+      container_name: mssql
+      privileged: true
+      build:
+        context: .
+        dockerfile: .docker/docker-mssql.dockerfile
+      ports:
+      - "1433:1433"
+      volumes:
+        - ./mssql:/var/opt/mssql/log
+      env_file:
+        - ./.docker/env/mssql.development.env        
+      networks:
+        - jezsu-network
 
+                   
 networks:
     jezsu-network:
       driver: bridge

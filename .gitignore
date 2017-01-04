@@ -33,3 +33,4 @@ config/db_dinapic.php
 config/params.php
 web/index.php
 web/images/foods
+/mysql
