@@ -47,7 +47,10 @@ class Food extends FoodBase
     {
         return ArrayHelper::merge(
             parent::rules(),
-            [[['imageFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg']]
+            [
+                [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+
+            ]
 
         );
     }
