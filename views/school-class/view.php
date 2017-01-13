@@ -70,6 +70,36 @@ $this->params['breadcrumbs'][] = $this->title;
                 },
                 'format'    => 'raw',
             ],
+            [
+                'label' => 'Aktív',
+                'attribute' => 'user_inactive',
+                'filterType' => GridView::FILTER_SELECT2,
+                'filterWidgetOptions' => [
+                    'data' => [
+                        '' => 'Nincs szűrés',
+                        '1' => 'Inaktív',
+                        '0' => 'Aktív',
+                    ],
+                    'options' => ['multiple' => false]
+                ],
+                'value' => function ($model) {
+                    if ($model->user->inactive) {
+                        return Html::a('Aktiválás', ['/user/admin/inactive', 'id' => $model->user->id, 'back'=>'schoolclass'], [
+                            'class' => 'btn btn-xs btn-success btn-block',
+                            'data-method' => 'post',
+                            'data-confirm' => Yii::t('user', 'Biztosan aktiválni szeretnéd a felhasználót?')
+                        ]);
+                    } else {
+                        return Html::a('Inaktiválás', ['/user/admin/inactive', 'id' => $model->user->id, 'back'=>'schoolclass'], [
+                            'class' => 'btn btn-xs btn-danger btn-block',
+                            'data-method' => 'post',
+                            'data-confirm' => Yii::t('user', 'Biztosan inaktiválni szeretnéd a felhasználót?')
+                        ]);
+                    }
+                },
+                'format' => 'raw',
+                'visible' => Yii::$app->user->can('admin')
+            ],
         ],
     ]); ?>
 </div>

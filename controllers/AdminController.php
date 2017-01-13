@@ -36,9 +36,9 @@ class AdminController extends BaseAdminController
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['index', 'create', 'update', 'delete', 'block', 'inactive','confirm', 'payment','view'],
-                        'allow'   => true,
-                        'roles'   => ['admin', 'economic'],
+                        'actions' => ['index', 'create', 'update', 'delete', 'block', 'inactive', 'confirm', 'payment', 'view'],
+                        'allow' => true,
+                        'roles' => ['admin', 'economic'],
                     ],
                 ]
             ]
@@ -51,7 +51,7 @@ class AdminController extends BaseAdminController
             \Yii::$app->getSession()->setFlash('danger', \Yii::t('user', 'Saját magad nem inkativálhatod'));
         } else {
             $user = $this->findModel($id);
-            if ($user->inactive==1) {
+            if ($user->inactive == 1) {
                 $user->activate();
                 \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'A felhasználó aktiválva'));
             } else {
@@ -59,7 +59,13 @@ class AdminController extends BaseAdminController
                 \Yii::$app->getSession()->setFlash('success', \Yii::t('user', 'A felhasználó inaktiválva'));
             }
         }
-        $url = $back == 'index' ? ['index'] : ['update', 'id' => $id];
+
+        $url = '';
+        if ($back == 'schoolclass') {
+            $url = ['/school-class/view', 'id' => $user->profile->school_class_id];
+        } else {
+            $url = $back == 'index' ? ['index'] : ['update', 'id' => $id];
+        }
         return $this->redirect($url);
     }
 
@@ -68,7 +74,7 @@ class AdminController extends BaseAdminController
     {
         /** @var User $user */
         $user = \Yii::createObject([
-            'class'    => User::className(),
+            'class' => User::className(),
             'scenario' => 'create',
         ]);
 
@@ -93,9 +99,9 @@ class AdminController extends BaseAdminController
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('payment', [
-            'searchModel'  => $searchModel,
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
-            'user'         => $user
+            'user' => $user
         ]);
     }
 
